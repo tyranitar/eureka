@@ -1,0 +1,13 @@
+.questionnaire-card {
+    width: 300px;
+    padding: 5px;
+}
+
+.questionnaire-card-actions {
+    padding: 15px !important;
+}
+
+.questionnaire-next-button {
+    float: right;
+    margin-right: 0px !important;
+}

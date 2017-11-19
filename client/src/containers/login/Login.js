@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import { TextField, IconButton, RaisedButton } from 'material-ui';
 import Fingerprint from 'material-ui/svg-icons/action/fingerprint';
 
@@ -28,25 +28,23 @@ const getIconButtonProps = (primaryColor) => {
 class Login extends Component {
     render() {
         return (
-            <div>
-                <Card className="login-card">
-                    <CardText>
-                        <IconButton { ...getIconButtonProps(this.props.muiTheme.palette.primary1Color) }>
-                            <Fingerprint />
-                        </IconButton>
-                    </CardText>
-                    <CardTitle className="login-card-title" style={{ color: this.props.muiTheme.palette.primary1Color }}>
-                        Capstone
-                    </CardTitle>
-                    <CardText>
-                        <TextField ref="email" hintText="Email" />
-                        <TextField ref="password" hintText="Password" type="password" />
-                    </CardText>
-                    <CardActions className="login-card-actions">
-                        <RaisedButton label="Login" primary={ true } fullWidth={ true } />
-                    </CardActions>
-                </Card>
-            </div>
+            <Card className="login-card">
+                <CardText>
+                    <IconButton { ...getIconButtonProps(this.props.muiTheme.palette.primary1Color) }>
+                        <Fingerprint />
+                    </IconButton>
+                </CardText>
+                <CardTitle className="login-card-title" style={{ color: this.props.muiTheme.palette.primary1Color }}>
+                    Capstone
+                </CardTitle>
+                <CardText>
+                    <TextField ref="email" hintText="Email" />
+                    <TextField ref="password" hintText="Password" type="password" />
+                </CardText>
+                <CardActions className="login-card-actions">
+                    <RaisedButton label="Login" primary={ true } fullWidth={ true } />
+                </CardActions>
+            </Card>
         );
     }
 }
