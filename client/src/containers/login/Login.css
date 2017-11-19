@@ -1,0 +1,13 @@
+.login-card {
+    width: 300px;
+}
+
+.login-card-title {
+    padding: 0px !important;
+    font-family: 'Ubuntu';
+    font-size: 25px;
+}
+
+.login-card-actions {
+    padding: 20px !important;
+}
