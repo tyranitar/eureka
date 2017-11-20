@@ -1,0 +1,17 @@
+.question-card {
+    width: 300px;
+    padding: 5px;
+}
+
+.question-radio:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.question-card-actions {
+    padding: 15px !important;
+}
+
+.question-next-button {
+    float: right;
+    margin-right: 0px !important;
+}

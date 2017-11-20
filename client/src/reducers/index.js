@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import questionnaire from './questionnaire';
+import questionnaire from './questionnaire-reducer';
 
 const reducers = combineReducers({
     questionnaire,

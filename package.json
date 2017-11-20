@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/tyron-j/capstone/issues"
   },
-  "homepage": "https://github.com/tyron-j/capstone#readme"
+  "homepage": "https://github.com/tyron-j/capstone#readme",
+  "dependencies": {}
 }

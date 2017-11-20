@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
-import { FlatButton, RaisedButton } from 'material-ui';
+import { connect } from 'react-redux';
 
-import './Questionnaire.css';
+import Question from '../../components/Question';
+import { selectAnswer, changeQuestion } from '../../actions/questionnaire-actions';
 
-class Questionnaire extends Component {
-    render() {
-        return (
-            <Card className="questionnaire-card">
-                <CardTitle>
-                    Question
-                </CardTitle>
-                <CardText>
-                    Answers
-                </CardText>
-                <CardActions className="questionnaire-card-actions">
-                    <FlatButton label="Previous" primary={ true } />
-                    <RaisedButton
-                        className="questionnaire-next-button"
-                        primary={ true }
-                        label="Next"
-                    />
-                </CardActions>
-            </Card>
-        );
-    }
-}
+const mapStateToProps = (state) => {
+    const { questionnaire } = state;
+
+    return {
+        questionIdx: questionnaire.questionIdx,
+        question: questionnaire.questions[questionnaire.questionIdx],
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSelectAnswer: (answer) => {
+            dispatch(selectAnswer(answer));
+        },
+
+        onChangeQuestion: (direction) => {
+            dispatch(changeQuestion(direction));
+        },
+    };
+};
+
+const Questionnaire = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Question);
 
 export default Questionnaire;
