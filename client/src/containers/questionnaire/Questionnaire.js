@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import Question from '../../components/Question';
+import Question from '../../components/question/Question';
 import { selectAnswer, changeQuestion } from '../../actions/questionnaire-actions';
 
 const mapStateToProps = (state) => {
