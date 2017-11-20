@@ -16,26 +16,34 @@ const updateAnswer = (question, answer) => {
     }
 };
 
+const handleSelectAnswer = (state, action) => {
+    const { questions, questionIdx } = state;
+
+    return Object.assign({}, state, {
+        questions: questions.map((question, idx) => {
+            if (idx === questionIdx) {
+                return Object.assign({}, question, {
+                    answer: updateAnswer(question, action.answer),
+                });
+            }
+
+            return question;
+        }),
+    });
+};
+
+const handleChangeQuestion = (state, action) => {
+    return Object.assign({}, state, {
+        questionIdx: Math.min(Math.max(0, state.questionIdx + action.direction), numQuestions - 1),
+    });
+};
+
 const questionnaireReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SELECT_ANSWER':
-            const { questions, questionIdx } = state;
-
-            return Object.assign({}, state, {
-                questions: questions.map((question, idx) => {
-                    if (idx === questionIdx) {
-                        return Object.assign({}, question, {
-                            answer: updateAnswer(question, action.answer),
-                        });
-                    }
-
-                    return question;
-                }),
-            });
+            return handleSelectAnswer(state, action);
         case 'CHANGE_QUESTION':
-            return Object.assign({}, state, {
-                questionIdx: Math.min(Math.max(0, state.questionIdx + action.direction), numQuestions - 1),
-            });
+            return handleChangeQuestion(state, action);
         default:
             return state;
     }

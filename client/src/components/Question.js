@@ -6,35 +6,38 @@ import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 import './Question.css';
 
-const renderOptions = ({
-    type,
+const renderRadioOptions = ({
     questionIdx,
     options,
     answer,
     onSelectAnswer,
 }) => {
+    const children = options.map((option, idx) => {
+        return (
+            <RadioButton
+                className='question-radio'
+                key={ idx }
+                value={ idx }
+                label={ option }
+                onClick={ onSelectAnswer.bind(null, idx) }
+            />
+        );
+    });
+
+    return (
+        <RadioButtonGroup
+            name={ questionIdx.toString() }
+            valueSelected={ answer }
+        >
+            { children }
+        </RadioButtonGroup>
+    );
+};
+
+const renderOptions = (type, params) => {
     switch (type) {
         case 'radio':
-            const children = options.map((option, idx) => {
-                return (
-                    <RadioButton
-                        className='question-radio'
-                        key={ idx }
-                        value={ idx }
-                        label={ option }
-                        onClick={ onSelectAnswer.bind(null, idx) }
-                    />
-                );
-            });
-
-            return (
-                <RadioButtonGroup
-                    name={ questionIdx.toString() }
-                    valueSelected={ answer }
-                >
-                    { children }
-                </RadioButtonGroup>
-            );
+            return renderRadioOptions(params);
         default:
             return [];
     }
@@ -59,8 +62,7 @@ const Question = ({
             { text }
         </CardTitle>
         <CardText>
-            { renderOptions({
-                type,
+            { renderOptions(type, {
                 questionIdx,
                 options,
                 answer,
