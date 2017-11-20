@@ -1,30 +1,30 @@
 export default [
     {
-        type: 'checkbox',
-        text: "First question",
+        type: 'radio',
+        text: "Are you male or female?",
 
         options: [
-            "A",
-            "B",
-            "C",
-        ],
-    }, {
-        type: 'checkbox',
-        text: "Second question",
-
-        options: [
-            "D",
-            "E",
-            "F",
+            "Male",
+            "Female",
+            "Other",
         ],
     }, {
         type: 'radio',
-        text: "Third question",
+        text: "What do you value most in a career?",
 
         options: [
-            "G",
-            "H",
-            "I",
+            "Personal interest",
+            "Benefits",
+            "Salary",
+        ],
+    }, {
+        type: 'checkbox',
+        text: "How would you describe yourself?",
+
+        options: [
+            "Creative and artistic",
+            "Clever problem solver",
+            "Excellent communicator",
         ],
     },
 ];

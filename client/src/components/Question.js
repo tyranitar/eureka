@@ -64,6 +64,20 @@ const renderOptions = (type, params) => {
     }
 };
 
+const isNextDisabled = ({
+    type,
+    answer,
+}) => {
+    switch (type) {
+        case 'radio':
+            return answer === undefined;
+        case 'checkbox':
+            return answer === undefined || answer.size === 0;
+        default:
+            return false;
+    }
+};
+
 const Question = ({
     questionIdx,
     isLastQuestion,
@@ -102,6 +116,7 @@ const Question = ({
                 className="question-next-button"
                 primary={ true }
                 label={ isLastQuestion ? 'Submit' : 'Next' }
+                disabled={ isNextDisabled({ type, answer }) }
                 onClick={ isLastQuestion ? onSubmit : onChangeQuestion.bind(null, 1) }
             />
         </CardActions>
