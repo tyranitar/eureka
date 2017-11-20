@@ -42,6 +42,7 @@ const renderOptions = ({
 
 const Question = ({
     questionIdx,
+    isLastQuestion,
 
     question: {
         type,
@@ -68,6 +69,7 @@ const Question = ({
         </CardText>
         <CardActions className="question-card-actions">
             <FlatButton
+                className={ questionIdx === 0 ? 'question-hidden-button' : '' }
                 label="Previous"
                 primary={ true }
                 onClick={ onChangeQuestion.bind(null, -1) }
@@ -75,7 +77,7 @@ const Question = ({
             <RaisedButton
                 className="question-next-button"
                 primary={ true }
-                label="Next"
+                label={ isLastQuestion ? 'Submit' : 'Next' }
                 onClick={ onChangeQuestion.bind(null, 1) }
             />
         </CardActions>
@@ -84,6 +86,7 @@ const Question = ({
 
 Question.propTypes = {
     questionIdx: PropTypes.number.isRequired,
+    isLastQuestion: PropTypes.bool.isRequired,
 
     question: PropTypes.shape({
         type: PropTypes.string.isRequired,

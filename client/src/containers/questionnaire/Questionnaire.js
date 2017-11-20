@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
 
     return {
         questionIdx: questionnaire.questionIdx,
+        isLastQuestion: questionnaire.questionIdx === questionnaire.questions.length - 1,
         question: questionnaire.questions[questionnaire.questionIdx],
     };
 };
