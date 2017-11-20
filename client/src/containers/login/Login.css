@@ -1,12 +1,24 @@
 .login-card {
     width: 300px;
+}
+
+.login-logo {
     text-align: center;
 }
 
 .login-card-title {
     padding: 0px !important;
     font-family: 'Ubuntu';
+    text-align: center;
     font-size: 25px;
+}
+
+.login-card-text {
+    padding: 20px !important;
+}
+
+.login-text-field {
+    width: 100% !important;
 }
 
 .login-card-actions {
