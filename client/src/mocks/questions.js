@@ -1,6 +1,6 @@
 export default [
     {
-        type: 'radio',
+        type: 'checkbox',
         text: "First question",
 
         options: [
@@ -9,7 +9,7 @@ export default [
             "C",
         ],
     }, {
-        type: 'radio',
+        type: 'checkbox',
         text: "Second question",
 
         options: [

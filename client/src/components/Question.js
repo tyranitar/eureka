@@ -3,8 +3,27 @@ import PropTypes from 'prop-types';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import { FlatButton, RaisedButton } from 'material-ui';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
 
 import './Question.css';
+
+const renderCheckboxOptions = ({
+    options,
+    answer,
+    onSelectAnswer,
+}) => {
+    return options.map((option, idx) => {
+        return (
+            <Checkbox
+                className="question-option"
+                key={ idx }
+                label={ option }
+                checked={ answer && answer.has(idx) }
+                onCheck={ onSelectAnswer.bind(null, idx) }
+            />
+        );
+    });
+};
 
 const renderRadioOptions = ({
     questionIdx,
@@ -15,7 +34,7 @@ const renderRadioOptions = ({
     const children = options.map((option, idx) => {
         return (
             <RadioButton
-                className='question-radio'
+                className="question-option"
                 key={ idx }
                 value={ idx }
                 label={ option }
@@ -36,6 +55,8 @@ const renderRadioOptions = ({
 
 const renderOptions = (type, params) => {
     switch (type) {
+        case 'checkbox':
+            return renderCheckboxOptions(params);
         case 'radio':
             return renderRadioOptions(params);
         default:

@@ -3,7 +3,7 @@
     padding: 5px;
 }
 
-.question-radio:not(:last-child) {
+.question-option:not(:last-child) {
     margin-bottom: 10px;
 }
 
