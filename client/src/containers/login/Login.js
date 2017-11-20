@@ -80,7 +80,7 @@ class Login extends Component {
                     <TextField
                         className="login-text-field"
                         ref="email"
-                        floatingLabelText="Email"
+                        hintText="Email"
                         errorText={ this.props.errorMessages.email }
                         onFocus={ this.props.onFocus.bind(null, 'email') }
                     />
@@ -88,7 +88,7 @@ class Login extends Component {
                         className="login-text-field"
                         ref="password"
                         type="password"
-                        floatingLabelText="Password"
+                        hintText="Password"
                         errorText={ this.props.errorMessages.password }
                         onFocus={ this.props.onFocus.bind(null, 'password') }
                     />
