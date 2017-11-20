@@ -93,34 +93,38 @@ const Question = ({
     onSelectAnswer,
     onSubmit,
 }) => (
-    <Card className="question-card">
-        <CardTitle>
-            { text }
-        </CardTitle>
-        <CardText>
-            { renderOptions(type, {
-                questionIdx,
-                options,
-                answer,
-                onSelectAnswer,
-            }) }
-        </CardText>
-        <CardActions className="question-card-actions">
-            <FlatButton
-                className={ questionIdx === 0 ? 'question-hidden-button' : '' }
-                label="Previous"
-                primary={ true }
-                onClick={ onChangeQuestion.bind(null, -1) }
-            />
-            <RaisedButton
-                className="question-next-button"
-                primary={ true }
-                label={ isLastQuestion ? 'Submit' : 'Next' }
-                disabled={ isNextDisabled({ type, answer }) }
-                onClick={ isLastQuestion ? onSubmit : onChangeQuestion.bind(null, 1) }
-            />
-        </CardActions>
-    </Card>
+    <div>
+        <Card className="question-card">
+            <CardTitle>
+                { text }
+            </CardTitle>
+            <CardText>
+                { renderOptions(type, {
+                    questionIdx,
+                    options,
+                    answer,
+                    onSelectAnswer,
+                }) }
+            </CardText>
+            <CardActions className="question-card-actions">
+                <FlatButton
+                    className={ questionIdx === 0 ? 'question-hidden-button' : '' }
+                    label="Previous"
+                    primary={ true }
+                    onClick={ onChangeQuestion.bind(null, -1) }
+                />
+                <RaisedButton
+                    className="question-next-button"
+                    primary={ true }
+                    label={ isLastQuestion ? 'Submit' : 'Next' }
+                    disabled={ isNextDisabled({ type, answer }) }
+                    onClick={ isLastQuestion ? onSubmit : onChangeQuestion.bind(null, 1) }
+                />
+            </CardActions>
+        </Card>
+        { /* FIXME */ }
+        <div className="background"></div>
+    </div>
 );
 
 Question.propTypes = {

@@ -39,7 +39,6 @@ class App extends Component {
                             <Route exact path="/" component={ Home } />
                             <Route path="/login" component={ Login } />
                             <Route path="/questionnaire" component={ Questionnaire } />
-                            <div className="background"></div>
                         </div>
                     </ConnectedRouter>
                 </Provider>

@@ -67,36 +67,40 @@ class Login extends Component {
 
     render() {
         return (
-            <Card className="login-card">
-                <CardText className="login-logo">
-                    <IconButton { ...getIconButtonProps(this.props.muiTheme.palette.primary1Color) }>
-                        <Fingerprint />
-                    </IconButton>
-                </CardText>
-                <CardTitle className="login-card-title" style={{ color: this.props.muiTheme.palette.primary1Color }}>
-                    Capstone
-                </CardTitle>
-                <CardText className="login-card-text">
-                    <TextField
-                        className="login-text-field"
-                        ref="email"
-                        hintText="Email"
-                        errorText={ this.props.errorMessages.email }
-                        onFocus={ this.props.onFocus.bind(null, 'email') }
-                    />
-                    <TextField
-                        className="login-text-field"
-                        ref="password"
-                        type="password"
-                        hintText="Password"
-                        errorText={ this.props.errorMessages.password }
-                        onFocus={ this.props.onFocus.bind(null, 'password') }
-                    />
-                </CardText>
-                <CardActions className="login-card-actions">
-                    <RaisedButton label="Login" primary={ true } fullWidth={ true } onClick={ this.login.bind(this) } />
-                </CardActions>
-            </Card>
+            <div>
+                <Card className="login-card">
+                    <CardText className="login-logo">
+                        <IconButton { ...getIconButtonProps(this.props.muiTheme.palette.primary1Color) }>
+                            <Fingerprint />
+                        </IconButton>
+                    </CardText>
+                    <CardTitle className="login-card-title" style={{ color: this.props.muiTheme.palette.primary1Color }}>
+                        Capstone
+                    </CardTitle>
+                    <CardText className="login-card-text">
+                        <TextField
+                            className="login-text-field"
+                            ref="email"
+                            hintText="Email"
+                            errorText={ this.props.errorMessages.email }
+                            onFocus={ this.props.onFocus.bind(null, 'email') }
+                        />
+                        <TextField
+                            className="login-text-field"
+                            ref="password"
+                            type="password"
+                            hintText="Password"
+                            errorText={ this.props.errorMessages.password }
+                            onFocus={ this.props.onFocus.bind(null, 'password') }
+                        />
+                    </CardText>
+                    <CardActions className="login-card-actions">
+                        <RaisedButton label="Login" primary={ true } fullWidth={ true } onClick={ this.login.bind(this) } />
+                    </CardActions>
+                </Card>
+                { /* FIXME */ }
+                <div className="background"></div>
+            </div>
         );
     }
 }
