@@ -11,6 +11,7 @@ import createHistory from 'history/createBrowserHistory';
 import Home from './containers/home/Home';
 import Login from './containers/login/Login';
 import Questionnaire from './containers/questionnaire/Questionnaire';
+import Search from './containers/search/Search';
 import reducers from './reducers';
 import './App.css';
 
@@ -35,10 +36,11 @@ class App extends Component {
             <MuiThemeProvider>
                 <Provider store={ store }>
                     <ConnectedRouter history={ history }>
-                        <div>
+                        <div className="container">
                             <Route exact path="/" component={ Home } />
                             <Route path="/login" component={ Login } />
                             <Route path="/questionnaire" component={ Questionnaire } />
+                            <Route path="/search" component={ Search } />
                         </div>
                     </ConnectedRouter>
                 </Provider>
