@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
 import Home from './containers/home/Home';
 import Login from './containers/login/Login';
@@ -12,7 +14,10 @@ import Questionnaire from './containers/questionnaire/Questionnaire';
 import reducers from './reducers';
 import './App.css';
 
+const history = createHistory();
+
 const loggerMiddleware = createLogger();
+const myRouterMiddleware = routerMiddleware(history);
 
 const store = createStore(
     reducers,
@@ -20,24 +25,25 @@ const store = createStore(
     applyMiddleware(
         thunkMiddleware,
         loggerMiddleware,
+        myRouterMiddleware,
     ),
 );
 
 class App extends Component {
     render() {
         return (
-            <Provider store={ store }>
-                <MuiThemeProvider>
-                    <Router>
+            <MuiThemeProvider>
+                <Provider store={ store }>
+                    <ConnectedRouter history={ history }>
                         <div>
                             <Route exact path="/" component={ Home } />
                             <Route path="/login" component={ Login } />
                             <Route path="/questionnaire" component={ Questionnaire } />
                             <div className="background"></div>
                         </div>
-                    </Router>
-                </MuiThemeProvider>
-            </Provider>
+                    </ConnectedRouter>
+                </Provider>
+            </MuiThemeProvider>
         );
     }
 }

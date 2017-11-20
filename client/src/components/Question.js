@@ -77,6 +77,7 @@ const Question = ({
 
     onChangeQuestion,
     onSelectAnswer,
+    onSubmit,
 }) => (
     <Card className="question-card">
         <CardTitle>
@@ -101,7 +102,7 @@ const Question = ({
                 className="question-next-button"
                 primary={ true }
                 label={ isLastQuestion ? 'Submit' : 'Next' }
-                onClick={ onChangeQuestion.bind(null, 1) }
+                onClick={ isLastQuestion ? onSubmit : onChangeQuestion.bind(null, 1) }
             />
         </CardActions>
     </Card>
@@ -124,6 +125,7 @@ Question.propTypes = {
 
     onChangeQuestion: PropTypes.func.isRequired,
     onSelectAnswer: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
 };
 
 export default Question;

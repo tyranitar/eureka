@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import Question from '../../components/Question';
 import { selectAnswer, changeQuestion } from '../../actions/questionnaire-actions';
@@ -21,6 +22,10 @@ const mapDispatchToProps = (dispatch) => {
 
         onChangeQuestion: (direction) => {
             dispatch(changeQuestion(direction));
+        },
+
+        onSubmit: () => {
+            dispatch(push('/login'));
         },
     };
 };
