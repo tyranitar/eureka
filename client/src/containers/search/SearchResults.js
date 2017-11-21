@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import SearchResult from '../../components/search/SearchResult';
 
 const mapStateToProps = (state) => {
-    const { firstSearchPerformed, results } = state.search;
+    const { firstSearchPerformed, searching, results } = state.search;
 
     return {
         firstSearchPerformed,
+        searching,
         results,
     };
 };
@@ -18,9 +19,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapResultsToSearchResults = (results) => {
-    return results.map((result) => {
+    return results.map((result, idx) => {
         return (
-            <SearchResult />
+            <SearchResult
+                result={ result }
+                key={ idx }
+            />
         );
     });
 };
@@ -41,7 +45,19 @@ const renderNoResults = () => {
     );
 };
 
-const renderResults = (results, firstSearchPerformed) => {
+const renderSpinner = () => {
+    return (
+        <div>
+            Searching...
+        </div>
+    );
+};
+
+const renderResults = ({ firstSearchPerformed, searching, results }) => {
+    if (searching) {
+        return renderSpinner();
+    }
+
     if (firstSearchPerformed) {
         return results.length ? mapResultsToSearchResults(results) : renderNoResults();
     }
@@ -51,10 +67,11 @@ const renderResults = (results, firstSearchPerformed) => {
 
 const SearchResults = ({
     firstSearchPerformed,
+    searching,
     results,
 }) => (
     <div>
-        { renderResults(results, firstSearchPerformed) }
+        { renderResults({ firstSearchPerformed, searching, results }) }
     </div>
 );
 

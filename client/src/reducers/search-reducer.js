@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 const initialState = {
     firstSearchPerformed: false,
+    searching: false,
     autoCompleteResults: [],
     filters: [],
     results: [],
@@ -19,8 +20,24 @@ const handleUpdateSearchQuery = (state, action) => {
 const handleSetAutoCompleteResults = (state, action) => {
     const { autoCompleteResults } = action;
 
-    return _.merge({}, state, {
+    return Object.assign({}, state, {
         autoCompleteResults,
+    });
+};
+
+const handleBeginSearch = (state, action) => {
+    return Object.assign({}, state, {
+        firstSearchPerformed: true,
+        searching: true,
+    });
+};
+
+const handleSetSearchResults = (state, action) => {
+    const { results } = action;
+
+    return Object.assign({}, state, {
+        searching: false,
+        results,
     });
 };
 
@@ -30,6 +47,10 @@ const reducer = (state = initialState, action) => {
             return handleUpdateSearchQuery(state, action);
         case 'SET_AUTO_COMPLETE_RESULTS':
             return handleSetAutoCompleteResults(state, action);
+        case 'BEGIN_SEARCH':
+            return handleBeginSearch(state, action);
+        case 'SET_SEARCH_RESULTS':
+            return handleSetSearchResults(state, action);
         default:
             return state;
     }

@@ -19,6 +19,19 @@ export const setAutoCompleteResults = (autoCompleteResults) => {
     };
 };
 
+export const beginSearch = () => {
+    return {
+        type: 'BEGIN_SEARCH',
+    };
+};
+
+export const setSearchResults = (results) => {
+    return {
+        type: 'SET_SEARCH_RESULTS',
+        results,
+    };
+};
+
 export const getAutoCompleteResults = (searchString) => {
     return (dispatch, getState) => {
         asyncGetAutoCompleteResults(searchString).then((results) => {
@@ -35,8 +48,10 @@ export const getSearchFilters = () => {
 
 export const getSearchResults = () => {
     return (dispatch, getState) => {
+        dispatch(beginSearch());
+
         asyncGetSearchResults(getState().search.query).then((results) => {
-            console.log(results);
+            dispatch(setSearchResults(results));
         });
     };
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './SearchPreview.css';
+
 const mapStateToProps = (state) => {
     return {
         //
@@ -16,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 const SearchPreview = ({
     //
 }) => (
-    <div>
+    <div className="search-preview">
         Placeholder
     </div>
 );

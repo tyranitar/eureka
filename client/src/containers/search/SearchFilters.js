@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './SearchFilters.css';
+
 const mapStateToProps = (state) => {
     return {
         //
@@ -16,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 const SearchFilters = ({
     //
 }) => (
-    <div>
+    <div className="search-filters">
         Placeholder
     </div>
 );

@@ -32,9 +32,25 @@ export const asyncGetSearchFilters = () => {
 };
 
 export const asyncGetSearchResults = (query) => {
-    console.log(query);
-
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
-        resolve(searchResults);
+        const results = [];
+
+        if (query.searchString) {
+            let count = 10;
+
+            searchResults.some((result) => {
+                if (result.title.includes(query.searchString)) {
+                    results.push(_.merge({}, result, {
+                        title: _.capitalize(result.title),
+                    }));
+
+                    count -= 1;
+                }
+
+                return !count;
+            });
+        }
+
+        resolve(results);
     }, 1000));
 };

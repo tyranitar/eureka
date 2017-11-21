@@ -23,7 +23,7 @@ class Search extends Component {
                     </Row>
 
                     <Row className="search-row" center="xs">
-                        <Col xs={3}>
+                        <Col xs={3} xl={2}>
                             <Paper>
                                 <SearchFilters />
                             </Paper>
@@ -31,7 +31,7 @@ class Search extends Component {
                         <Col xs={6} xl={4}>
                             <SearchResults />
                         </Col>
-                        <Col xs={3}>
+                        <Col xs={3} xl={2}>
                             <Paper>
                                 <SearchPreview />
                             </Paper>
