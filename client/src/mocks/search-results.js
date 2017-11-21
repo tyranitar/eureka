@@ -21,4 +21,5 @@ export default autoCompleteResults.map((title) => ({
     salary: _.random(5, 15) * 10000,
     outlook: outlooks[_.random(outlooks.length - 1)],
     education: educationLevels[_.random(educationLevels.length - 1)],
+    favorited: false,
 }));

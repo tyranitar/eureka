@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
+import Checkbox from 'material-ui/Checkbox';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import Favorite from 'material-ui/svg-icons/action/favorite';
+import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import EuroSymbol from 'material-ui/svg-icons/action/euro-symbol';
 import WbSunny from 'material-ui/svg-icons/image/wb-sunny';
 import Flare from 'material-ui/svg-icons/image/flare';
 import WbCloudy from 'material-ui/svg-icons/image/wb-cloudy';
 import School from 'material-ui/svg-icons/social/school';
-import { amber500, deepOrange500, blueGrey500, indigo500 } from 'material-ui/styles/colors';
+import { red500, amber500, deepOrange500, blueGrey500, indigo500 } from 'material-ui/styles/colors';
 
 import IconTag from '../icon-tag/IconTag';
 import './SearchResult.css';
@@ -32,6 +35,7 @@ const SearchResult = ({
         salary,
         outlook,
         education,
+        favorited, // TODO: Use this as `checked` property.
     },
 
     muiTheme: {
@@ -50,13 +54,20 @@ const SearchResult = ({
         <div className="search-result-title">
             { title }
         </div>
+        <div className="search-result-actions">
+            <Checkbox
+                iconStyle={{ margin: '0px', fill: red500 }}
+                checkedIcon={ <Favorite /> }
+                uncheckedIcon={ <FavoriteBorder /> }
+            />
+        </div>
         <div className="search-result-description" style={{ color: accent3Color }}>
             { description }
         </div>
         <div className="search-result-icon-tags">
             <IconTag
                 icon={ <EuroSymbol color={ accent1Color /* or lightGreen500 */ } /> }
-                label={ salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,') }
+                label={ (salary || 'N/A').toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,') }
             />
             <IconTag
                 icon={ getOutlookIcon(outlook) }

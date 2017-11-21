@@ -17,10 +17,18 @@
 }
 
 .search-result-title {
+    width: calc(100% - 32px);
     font-size: 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.search-result-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 16px;
 }
 
 .search-result-description {
