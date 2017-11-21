@@ -8,10 +8,10 @@ import thunkMiddleware from 'redux-thunk';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
-import Home from './containers/home/Home';
+import Home from './views/home/Home';
 import Login from './containers/login/Login';
 import Questionnaire from './containers/questionnaire/Questionnaire';
-import Search from './containers/search/Search';
+import Search from './views/search/Search';
 import reducers from './reducers';
 import './App.css';
 

@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 
-import Layout from '../layout/Layout';
-import SearchBox from './SearchBox';
+import Layout from '../../containers/layout/Layout';
+import SearchBox from '../../containers/search/SearchBox';
 import './Search.css'
 
-// TODO: Consider moving this under `views` (dumb > smart > dumb).
 class Search extends Component {
     render() {
         return (
