@@ -36,7 +36,7 @@ class App extends Component {
             <MuiThemeProvider>
                 <Provider store={ store }>
                     <ConnectedRouter history={ history }>
-                        <div className="container">
+                        <div className="router">
                             <Route exact path="/" component={ Home } />
                             <Route path="/login" component={ Login } />
                             <Route path="/questionnaire" component={ Questionnaire } />
