@@ -6,6 +6,7 @@ import Layout from '../layout/Layout';
 import SearchBox from './SearchBox';
 import './Search.css'
 
+// TODO: Consider moving this under `views` (dumb > smart > dumb).
 class Search extends Component {
     render() {
         return (
