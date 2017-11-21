@@ -1,0 +1,21 @@
+.icon-tag:not(:first-child) {
+    margin-left: 16px;
+}
+
+.icon-tag {
+    height: 24px;
+    display: inline-block;
+}
+
+.icon-tag-icon, .icon-tag-label {
+    display: inline-block;
+}
+
+.icon-tag-icon {
+    padding-top: 2px;
+}
+
+.icon-tag-label {
+    vertical-align: top;
+    line-height: 24px;
+}

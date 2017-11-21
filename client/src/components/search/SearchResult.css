@@ -3,6 +3,34 @@
 }
 
 .search-result {
+    position: relative;
     text-align: left;
     padding: 16px;
+}
+
+.search-result-band {
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.search-result-title {
+    font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.search-result-description {
+    margin-top: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.search-result-icon-tags {
+    margin-top: 8px;
+    height: 24px;
 }

@@ -16,7 +16,8 @@ const mapDispatchToProps = (dispatch) => {
 const Container = ({
     //
 }) => (
-    //
+    <div>
+    </div>
 );
 
 export default connect(
