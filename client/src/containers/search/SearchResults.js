@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchResult from '../../components/search/SearchResult';
+import SearchBanner from '../../components/search/SearchBanner';
 
 const mapStateToProps = (state) => {
     const { firstSearchPerformed, searching, results } = state.search;
@@ -17,6 +18,10 @@ const mapDispatchToProps = (dispatch) => {
         onClick: () => {
             console.log("clicked!");
         },
+
+        onBannerClick: () => {
+            console.log("banner clicked!");
+        },
     };
 };
 
@@ -32,11 +37,9 @@ const mapResultsToSearchResults = (results, onClick) => {
     });
 };
 
-const renderBanner = () => {
+const renderBanner = (onBannerClick) => {
     return (
-        <div>
-            Check out our featured careers!
-        </div>
+        <SearchBanner onClick={ onBannerClick } />
     );
 };
 
@@ -56,7 +59,7 @@ const renderSpinner = () => {
     );
 };
 
-const renderResults = ({ firstSearchPerformed, searching, results, onClick }) => {
+const renderResults = ({ firstSearchPerformed, searching, results, onClick, onBannerClick }) => {
     // TODO: Remove this.
     return mapResultsToSearchResults([{
         title: 'Software developers',
@@ -75,17 +78,12 @@ const renderResults = ({ firstSearchPerformed, searching, results, onClick }) =>
         return results.length ? mapResultsToSearchResults(results, onClick) : renderNoResults();
     }
 
-    return renderBanner();
+    return renderBanner(onBannerClick);
 };
 
-const SearchResults = ({
-    firstSearchPerformed,
-    searching,
-    results,
-    onClick,
-}) => (
+const SearchResults = (props) => (
     <div>
-        { renderResults({ firstSearchPerformed, searching, results, onClick }) }
+        { renderResults(props) }
     </div>
 );
 

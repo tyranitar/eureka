@@ -1,0 +1,19 @@
+.search-banner {
+    cursor: pointer;
+}
+
+.search-banner-image {
+    width: 100%;
+    padding-top: 60%;
+
+    background-image: url('../../images/career3.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.search-banner-text {
+    padding: 16px;
+    font-size: 20px;
+    text-align: left;
+}
