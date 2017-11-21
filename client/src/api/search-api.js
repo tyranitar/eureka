@@ -11,6 +11,8 @@ export const asyncGetAutoCompleteResults = (searchString) => {
         if (searchString) {
             let count = 5;
 
+            searchString = searchString.toLowerCase();
+
             autoCompleteResults.some((result) => {
                 if (result.includes(searchString)) {
                     results.push(_.capitalize(result));
@@ -36,10 +38,11 @@ export const asyncGetSearchResults = (query) => {
         const results = [];
 
         if (query.searchString) {
+            const searchString = query.searchString.toLowerCase();
             let count = 10;
 
             searchResults.some((result) => {
-                if (result.title.includes(query.searchString)) {
+                if (result.title.includes(searchString)) {
                     results.push(_.merge({}, result, {
                         title: _.capitalize(result.title),
                     }));
