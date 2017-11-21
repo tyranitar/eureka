@@ -10,15 +10,13 @@ const numQuestions = questions.length;
 const updateAnswer = (question, answer) => {
     switch (question.type) {
         case 'checkbox':
-            const set = new Set();
+            return (question.answer || new Array(question.options.length).fill(false)).map((val, idx) => {
+                if (idx === answer) {
+                    return !val;
+                }
 
-            (question.answer || []).forEach((item) => {
-                set.add(item);
+                return val;
             });
-
-            set.has(answer) ? set.delete(answer) : set.add(answer);
-
-            return set;
         case 'radio':
             return answer;
         default:

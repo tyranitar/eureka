@@ -18,7 +18,7 @@ const renderCheckboxOptions = ({
                 className="question-option"
                 key={ idx }
                 label={ option }
-                checked={ answer && answer.has(idx) }
+                checked={ answer && answer[idx] }
                 onCheck={ onSelectAnswer.bind(null, idx) }
             />
         );
@@ -72,7 +72,7 @@ const isNextDisabled = ({
         case 'radio':
             return answer === undefined;
         case 'checkbox':
-            return answer === undefined || answer.size === 0;
+            return answer === undefined || !answer.includes(true);
         default:
             return false;
     }
@@ -138,7 +138,7 @@ Question.propTypes = {
 
         answer: PropTypes.oneOfType([
             PropTypes.number.isRequired,
-            PropTypes.instanceOf(Set).isRequired,
+            PropTypes.arrayOf(PropTypes.bool.isRequired).isRequired,
         ]),
     }),
 
