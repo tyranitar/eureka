@@ -19,7 +19,7 @@ const SearchFilters = ({
     //
 }) => (
     <div className="search-filters">
-        Placeholder
+        Search Filters
     </div>
 );
 

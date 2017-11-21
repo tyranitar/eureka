@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './SearchPreview.css';
+import './SearchSuggestions.css';
 
 const mapStateToProps = (state) => {
     return {
@@ -15,15 +15,15 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const SearchPreview = ({
+const SearchSuggestions = ({
     //
 }) => (
-    <div className="search-preview">
-        Placeholder
+    <div className="search-suggestions">
+        Search Suggestions
     </div>
 );
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchPreview);
+)(SearchSuggestions);

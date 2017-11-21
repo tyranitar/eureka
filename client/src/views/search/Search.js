@@ -6,7 +6,7 @@ import Layout from '../../containers/layout/Layout';
 import SearchBox from '../../containers/search/SearchBox';
 import SearchFilters from '../../containers/search/SearchFilters';
 import SearchResults from '../../containers/search/SearchResults';
-import SearchPreview from '../../containers/search/SearchPreview';
+import SearchSuggestions from '../../containers/search/SearchSuggestions';
 import './Search.css'
 
 class Search extends Component {
@@ -33,7 +33,7 @@ class Search extends Component {
                         </Col>
                         <Col xs={3} xl={2}>
                             <Paper>
-                                <SearchPreview />
+                                <SearchSuggestions />
                             </Paper>
                         </Col>
                     </Row>
