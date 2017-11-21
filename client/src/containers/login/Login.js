@@ -4,9 +4,9 @@ import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import { TextField, IconButton, RaisedButton } from 'material-ui';
 import Fingerprint from 'material-ui/svg-icons/action/fingerprint';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import { setErrorMessage } from '../../actions/login-actions';
 
+import { login } from '../../actions/login-actions';
 import './Login.css';
 
 const getIconButtonProps = (primaryColor) => {
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch) => {
             }
 
             if (email && password) {
-                dispatch(push('/questionnaire'));
+                dispatch(login({ email, password }));
             }
         },
 
