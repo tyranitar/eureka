@@ -44,6 +44,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const menuProps = {
+    desktop: true,
+};
+
 const SearchBox = ({
     autoComplete,
     muiTheme,
@@ -62,6 +66,7 @@ const SearchBox = ({
             fullWidth={ true }
             onUpdateInput={ onUpdateInput }
             onKeyPress={ onKeyPress }
+            menuProps={ menuProps }
         />
 
         <RaisedButton

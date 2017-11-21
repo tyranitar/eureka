@@ -12,9 +12,18 @@ export const updateSearchQuery = (field, value) => {
     };
 };
 
+export const setAutoCompleteResults = (autoCompleteResults) => {
+    return {
+        type: 'SET_AUTO_COMPLETE_RESULTS',
+        autoCompleteResults,
+    };
+};
+
 export const getAutoCompleteResults = (searchString) => {
     return (dispatch, getState) => {
-        //
+        asyncGetAutoCompleteResults(searchString).then((results) => {
+            dispatch(setAutoCompleteResults(results));
+        });
     };
 };
 
