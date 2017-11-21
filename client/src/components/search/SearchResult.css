@@ -17,11 +17,13 @@
 }
 
 .search-result-title {
-    width: calc(100% - 32px);
+    display: inline-block;
+    max-width: calc(100% - 32px);
     font-size: 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .search-result-actions {
@@ -36,6 +38,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .search-result-icon-tags {

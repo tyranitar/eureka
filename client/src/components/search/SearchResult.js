@@ -48,10 +48,12 @@ const SearchResult = ({
             accent3Color,
         },
     },
+
+    onClick,
 }) => (
     <Paper className="search-result">
         <div className="search-result-band" style={{ backgroundColor: primary1Color }}></div>
-        <div className="search-result-title">
+        <div className="search-result-title" onClick={ onClick }>
             { title }
         </div>
         <div className="search-result-actions">
@@ -61,7 +63,10 @@ const SearchResult = ({
                 uncheckedIcon={ <FavoriteBorder /> }
             />
         </div>
-        <div className="search-result-description" style={{ color: accent3Color }}>
+        <div
+            className="search-result-description"
+            style={{ color: accent3Color }}
+            onClick={ onClick }>
             { description }
         </div>
         <div className="search-result-icon-tags">
