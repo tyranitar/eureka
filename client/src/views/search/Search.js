@@ -4,6 +4,9 @@ import Paper from 'material-ui/Paper';
 
 import Layout from '../../containers/layout/Layout';
 import SearchBox from '../../containers/search/SearchBox';
+import SearchFilters from '../../containers/search/SearchFilters';
+import SearchResults from '../../containers/search/SearchResults';
+import SearchPreview from '../../containers/search/SearchPreview';
 import './Search.css'
 
 class Search extends Component {
@@ -13,7 +16,7 @@ class Search extends Component {
                 <Grid fluid>
                     <Row className="search-row" center="xs">
                         <Col xs={6} xl={4}>
-                            <Paper className="search-paper">
+                            <Paper>
                                 <SearchBox />
                             </Paper>
                         </Col>
@@ -21,18 +24,16 @@ class Search extends Component {
 
                     <Row className="search-row" center="xs">
                         <Col xs={3}>
-                            <Paper className="search-paper">
-                                Hi
+                            <Paper>
+                                <SearchFilters />
                             </Paper>
                         </Col>
                         <Col xs={6} xl={4}>
-                            <Paper className="search-paper">
-                                Hi
-                            </Paper>
+                            <SearchResults />
                         </Col>
                         <Col xs={3}>
-                            <Paper className="search-paper">
-                                Hi
+                            <Paper>
+                                <SearchPreview />
                             </Paper>
                         </Col>
                     </Row>
