@@ -27,8 +27,6 @@ const mapResultsToSearchResults = (results, onClick) => {
                 result={ result }
                 key={ idx }
                 onClick={ onClick }
-                onMouseEnter={ console.log.bind(null, "mouse enter!") }
-                onMouseLeave={ console.log.bind(null, "mouse leave!") }
             />
         );
     });

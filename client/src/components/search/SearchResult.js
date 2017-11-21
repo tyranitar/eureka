@@ -50,13 +50,8 @@ const SearchResult = ({
     },
 
     onClick,
-    onMouseEnter,
-    onMouseLeave,
 }) => (
-    <Paper
-        className="search-result"
-        onMouseEnter={ onMouseEnter }
-        onMouseLeave={ onMouseLeave }>
+    <Paper className="search-result">
         <div className="search-result-band" style={{ backgroundColor: primary1Color }}></div>
         <div className="search-result-title" onClick={ onClick }>
             { title }
