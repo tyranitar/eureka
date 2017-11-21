@@ -28,6 +28,10 @@ const getOutlookIcon = (outlook) => {
     }
 };
 
+const truncateDescription = (description) => {
+    return `${description.slice(0, 500)}...`;
+};
+
 const SearchResult = ({
     result: {
         title,
@@ -83,6 +87,11 @@ const SearchResult = ({
                 label={ education }
             />
         </div>
+        <Paper className="search-result-preview">
+            <div>Preview</div>
+            <br />
+            <div>{ truncateDescription(description) }</div>
+        </Paper>
     </Paper>
 );
 

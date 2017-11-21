@@ -45,3 +45,18 @@
     margin-top: 8px;
     height: 24px;
 }
+
+.search-result-preview {
+    left: calc(100% + 8px);
+    position: absolute;
+    padding: 16px;
+    opacity: 0;
+    width: 50%;
+    top: 0px;
+    pointer-events: none;
+}
+
+.search-result:hover .search-result-preview {
+    animation: fadein 0.25s;
+    opacity: 1;
+}
