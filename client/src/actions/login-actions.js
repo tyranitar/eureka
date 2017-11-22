@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 
-import { asyncLogin } from '../api/login-api';
+import { asyncLogin, asyncLogout } from '../api/login-api';
 
 export const login = ({
     email,
@@ -15,6 +15,14 @@ export const login = ({
         });
     };
 };
+
+export const logout = () => {
+    return (dispatch, getState) => {
+        asyncLogout().then(() => {
+            dispatch(push('/login'));
+        });
+    };
+}
 
 export const setErrorMessage = (field, errorMessage) => {
     return {
