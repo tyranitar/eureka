@@ -14,9 +14,12 @@ import {
 import './SearchBox.css';
 
 const mapStateToProps = (state) => {
+    const { query, autoCompleteResults } = state.search;
+
     return {
         autoComplete: {
-            dataSource: state.search.autoCompleteResults,
+            searchText: query.searchString,
+            dataSource: autoCompleteResults,
         },
     };
 };

@@ -4,6 +4,8 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import HelpOutline from 'material-ui/svg-icons/action/help-outline';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
+import { updateSearchQuery, getSearchResults } from '../../actions/search-actions';
+import suggestions from '../../mocks/search-suggestions';
 import './SearchSuggestions.css';
 
 const mapStateToProps = (state) => {
@@ -14,62 +16,41 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        //
+        onClick: (search) => {
+            dispatch(updateSearchQuery('searchString', search));
+            dispatch(getSearchResults());
+        },
     };
 };
 
-const renderRecommendedSearches = (color) => {
-    return [
-        'Systems',
-        'Design',
-        'Engineering',
-    ].map((search, idx) => (
-        <div
-            key={ idx }
-            className="search-suggestion"
-            style={{
-                color,
-            }}>
-            <ChevronRight color={ color } />
-            { search }
-        </div>
-    ));
+const mapToSearchSuggestion = ({
+    search,
+    idx,
+    onClick,
+    color,
+}) => (
+    <div
+        key={ idx }
+        className="search-suggestion"
+        style={{
+            color,
+        }}
+        onClick={ onClick.bind(null, search) }>
+        <ChevronRight color={ color } />
+        { search }
+    </div>
+);
+
+const renderRecommendedSearches = (onClick, color) => {
+    return suggestions.recommendedSearches.map((search, idx) => (mapToSearchSuggestion({ search, idx, onClick, color })));
 };
 
-const renderRecentSearches = (color) => {
-    return [
-        'Computer',
-        'Architect',
-        'Analyst',
-    ].map((search, idx) => (
-        <div
-            key={ idx }
-            className="search-suggestion"
-            style={{
-                color,
-            }}>
-            <ChevronRight color={ color } />
-            { search }
-        </div>
-    ));
+const renderRecentSearches = (onClick, color) => {
+    return suggestions.recentSearches.map((search, idx) => (mapToSearchSuggestion({ search, idx, onClick, color })));
 };
 
-const renderTrendingSearches = (color) => {
-    return [
-        'Software',
-        'Manager',
-        'Science',
-    ].map((search, idx) => (
-        <div
-            key={ idx }
-            className="search-suggestion"
-            style={{
-                color,
-            }}>
-            <ChevronRight color={ color } />
-            { search }
-        </div>
-    ));
+const renderTrendingSearches = (onClick, color) => {
+    return suggestions.trendingSearches.map((search, idx) => (mapToSearchSuggestion({ search, idx, onClick, color })));
 };
 
 const SearchSuggestions = ({
@@ -79,6 +60,8 @@ const SearchSuggestions = ({
             alternateTextColor,
         },
     },
+
+    onClick,
 }) => (
     <div className="search-suggestions">
         <div className="search-suggestions-header">
@@ -91,17 +74,17 @@ const SearchSuggestions = ({
             <div className="search-suggestions-section-title">
                 { 'Recommended for You' }
             </div>
-            { renderRecommendedSearches(primary1Color) }
+            { renderRecommendedSearches(onClick, primary1Color) }
 
             <div className="search-suggestions-section-title">
                 Your Recent Searches
             </div>
-            { renderRecentSearches(primary1Color) }
+            { renderRecentSearches(onClick, primary1Color) }
 
             <div className="search-suggestions-section-title">
                 Trending Searches
             </div>
-            { renderTrendingSearches(primary1Color) }
+            { renderTrendingSearches(onClick, primary1Color) }
         </div>
     </div>
 );
