@@ -96,7 +96,7 @@ const SearchResult = ({
             />
         </div>
         <Paper className="search-result-preview">
-            <div>Preview</div>
+            <div>{ title }</div>
             <br />
             <div>{ truncateDescription(description) }</div>
         </Paper>

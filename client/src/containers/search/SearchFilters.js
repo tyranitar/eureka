@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import FilterList from 'material-ui/svg-icons/content/filter-list';
+import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
+import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward';
 
 import {
     SelectField,
@@ -57,6 +59,12 @@ const SearchFilters = ({
                 <MenuItem value={2} primaryText="Outlook" />
                 <MenuItem value={3} primaryText="Education" />
             </SelectField>
+            <Checkbox
+                iconStyle={{ fill: primary1Color }}
+                checkedIcon={ <ArrowDownward /> }
+                uncheckedIcon={ <ArrowUpward /> }
+                label={ 'Ascending' }
+            />
 
             <div className="search-filters-section-title">
                 Salary
