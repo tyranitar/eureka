@@ -36,23 +36,20 @@ export const asyncGetSearchFilters = () => {
 export const asyncGetSearchResults = (query) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         const results = [];
+        const searchString = query.searchString.toLowerCase();
+        let count = 10;
 
-        if (query.searchString) {
-            const searchString = query.searchString.toLowerCase();
-            let count = 10;
+        searchResults.some((result) => {
+            if (result.title.includes(searchString)) {
+                results.push(_.merge({}, result, {
+                    title: _.capitalize(result.title),
+                }));
 
-            searchResults.some((result) => {
-                if (result.title.includes(searchString)) {
-                    results.push(_.merge({}, result, {
-                        title: _.capitalize(result.title),
-                    }));
+                count -= 1;
+            }
 
-                    count -= 1;
-                }
-
-                return !count;
-            });
-        }
+            return !count;
+        });
 
         resolve(results);
     }, 1000));
