@@ -5,12 +5,20 @@ import Checkbox from 'material-ui/Checkbox';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Favorite from 'material-ui/svg-icons/action/favorite';
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import EuroSymbol from 'material-ui/svg-icons/action/euro-symbol';
+import AttachMoney from 'material-ui/svg-icons/editor/attach-money';
 import WbSunny from 'material-ui/svg-icons/image/wb-sunny';
 import Flare from 'material-ui/svg-icons/image/flare';
 import WbCloudy from 'material-ui/svg-icons/image/wb-cloudy';
 import School from 'material-ui/svg-icons/social/school';
-import { red500, amber500, deepOrange500, blueGrey500, indigo500 } from 'material-ui/styles/colors';
+
+import {
+    red500,
+    lightGreen500,
+    amber500,
+    deepOrange500,
+    blueGrey500,
+    indigo500,
+} from 'material-ui/styles/colors';
 
 import IconTag from '../icon-tag/IconTag';
 import './SearchResult.css';
@@ -75,7 +83,7 @@ const SearchResult = ({
         </div>
         <div className="search-result-icon-tags">
             <IconTag
-                icon={ <EuroSymbol color={ accent1Color /* or lightGreen500 */ } /> }
+                icon={ <AttachMoney color={ lightGreen500 } /> }
                 label={ (salary || 'N/A').toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,') }
             />
             <IconTag
