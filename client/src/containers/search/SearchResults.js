@@ -1,5 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+import {
+    LinearProgress,
+} from 'material-ui';
+
 import SearchResult from '../../components/search/SearchResult';
 import SearchBanner from '../../components/search/SearchBanner';
 
@@ -53,9 +58,7 @@ const renderNoResults = () => {
 
 const renderSpinner = () => {
     return (
-        <div>
-            Searching...
-        </div>
+        <LinearProgress mode="indeterminate" />
     );
 };
 
