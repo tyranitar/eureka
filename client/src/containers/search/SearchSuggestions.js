@@ -23,8 +23,11 @@ const renderRecommendedSearches = (color) => {
         'Systems',
         'Design',
         'Engineering',
-    ].map((search) => (
-        <div className="search-suggestion" style={{
+    ].map((search, idx) => (
+        <div
+            key={ idx }
+            className="search-suggestion"
+            style={{
                 color,
             }}>
             <ChevronRight color={ color } />
@@ -38,8 +41,11 @@ const renderRecentSearches = (color) => {
         'Computer',
         'Architect',
         'Analyst',
-    ].map((search) => (
-        <div className="search-suggestion" style={{
+    ].map((search, idx) => (
+        <div
+            key={ idx }
+            className="search-suggestion"
+            style={{
                 color,
             }}>
             <ChevronRight color={ color } />
@@ -53,8 +59,11 @@ const renderTrendingSearches = (color) => {
         'Software',
         'Manager',
         'Science',
-    ].map((search) => (
-        <div className="search-suggestion" style={{
+    ].map((search, idx) => (
+        <div
+            key={ idx }
+            className="search-suggestion"
+            style={{
                 color,
             }}>
             <ChevronRight color={ color } />
