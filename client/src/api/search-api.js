@@ -33,14 +33,38 @@ export const asyncGetSearchFilters = () => {
     }, 1000));
 };
 
-export const asyncGetSearchResults = (query) => {
+export const asyncGetSearchResults = ({
+    searchString,
+    sortBy,
+    descending,
+    minSalary,
+    outlook,
+    education,
+}) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         const results = [];
-        const searchString = query.searchString.toLowerCase();
+        const multiplier = descending ? -1 : 1;
         let count = 10;
 
+        searchString = searchString.toLowerCase();
+
+        searchResults.sort((a, b) => {
+            let ret = 0;
+
+            if (a[sortBy] < b[sortBy]) {
+                ret =  -1;
+            } else if (a[sortBy] > b[sortBy]) {
+                ret = 1;
+            }
+
+            return ret * multiplier;
+        });
+
         searchResults.some((result) => {
-            if (result.title.includes(searchString)) {
+            if (result.title.includes(searchString) &&
+                result.salary >= minSalary &&
+                outlook[result.outlook] &&
+                education[result.education]) {
                 results.push(_.merge({}, result, {
                     title: _.capitalize(result.title),
                 }));

@@ -11,18 +11,18 @@ const initialState = {
         searchString: '',
         sortBy: 'title',
         descending: false,
-        minSalary: 75000,
+        minSalary: 50000,
 
         outlook: {
-            'Good Outlook': false,
-            'Okay Outlook': false,
-            'Poor Outlook': false,
+            'Good Outlook': true,
+            'Okay Outlook': true,
+            'Poor Outlook': true,
         },
 
         education: {
-            'Bachelor\'s': false,
-            'Master\'s': false,
-            'PhD': false,
+            'Bachelor\'s': true,
+            'Master\'s': true,
+            'PhD': true,
         },
     },
 };
