@@ -1,0 +1,15 @@
+.no-results {
+    padding: 16px;
+}
+
+.no-results-message {
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-results-text {
+    margin-right: 8px;
+}

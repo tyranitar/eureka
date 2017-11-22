@@ -7,6 +7,7 @@ import {
 
 import SearchResult from '../../components/search/SearchResult';
 import SearchBanner from '../../components/search/SearchBanner';
+import NoResults from '../../components/search/NoResults';
 
 const mapStateToProps = (state) => {
     const { firstSearchPerformed, searching, results } = state.search;
@@ -50,9 +51,7 @@ const renderBanner = (onBannerClick) => {
 
 const renderNoResults = () => {
     return (
-        <div>
-            No results...
-        </div>
+        <NoResults />
     );
 };
 
