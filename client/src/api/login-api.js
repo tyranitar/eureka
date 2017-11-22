@@ -12,3 +12,9 @@ export const asyncLogout = () => {
         resolve();
     }, 1000));
 };
+
+export const asyncSignup = () => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 1000));
+};

@@ -39,10 +39,11 @@ class App extends Component {
                     <ConnectedRouter history={ history }>
                         <div className="router">
                             <Route exact path="/" component={ Home } />
-                            <Route path="/search" component={ Search } />
-                            <Route path="/career/:careerId?" component={ Career } />
-                            <Route path="/login" component={ Login } />
-                            <Route path="/questionnaire" component={ Questionnaire } />
+                            <Route exact path="/search" component={ Search } />
+                            <Route exact path="/career/:careerId?" component={ Career } />
+                            <Route exact path="/login" component={ Login } />
+                            <Route exact path="/signup" component={ Login } />
+                            <Route exact path="/questionnaire" component={ Questionnaire } />
                         </div>
                     </ConnectedRouter>
                 </Provider>

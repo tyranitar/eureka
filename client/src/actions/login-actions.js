@@ -1,17 +1,14 @@
 import { push } from 'react-router-redux';
 
-import { asyncLogin, asyncLogout } from '../api/login-api';
+import { asyncLogin, asyncLogout, asyncSignup } from '../api/login-api';
 
 export const login = ({
     email,
     password,
 }) => {
-    // TODO: Add validation.
-
     return (dispatch, getState) => {
         asyncLogin({ email, password }).then(() => {
-            // TODO: Change this.
-            dispatch(push('/questionnaire'));
+            dispatch(push('/'));
         });
     };
 };
@@ -22,7 +19,18 @@ export const logout = () => {
             dispatch(push('/login'));
         });
     };
-}
+};
+
+export const signup = ({
+    email,
+    password,
+}) => {
+    return (dispatch, getState) => {
+        asyncSignup({ email, password }).then(() => {
+            dispatch(push('/questionnaire'));
+        });
+    };
+};
 
 export const setErrorMessage = (field, errorMessage) => {
     return {

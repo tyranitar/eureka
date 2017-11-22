@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         onSubmit: () => {
-            dispatch(push('/search'));
+            dispatch(push('/'));
         },
     };
 };
