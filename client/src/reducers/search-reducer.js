@@ -6,13 +6,51 @@ const initialState = {
     autoCompleteResults: [],
     filters: [],
     results: [],
-    query: {},
+
+    query: {
+        searchString: '',
+        sortBy: 'title',
+        descending: false,
+        minSalary: 75000,
+
+        outlook: {
+            'Good Outlook': false,
+            'Okay Outlook': false,
+            'Poor Outlook': false,
+        },
+
+        education: {
+            'Bachelor\'s': false,
+            'Master\'s': false,
+            'PhD': false,
+        },
+    },
 };
 
 const handleUpdateSearchQuery = (state, action) => {
     return _.merge({}, state, {
         query: {
             [action.field]: action.value,
+        },
+    });
+};
+
+const handleUpdateSearchQueryOutlook = (state, action) => {
+    return _.merge({}, state, {
+        query: {
+            outlook: {
+                [action.field]: action.value,
+            },
+        },
+    });
+};
+
+const handleUpdateSearchQueryEducation = (state, action) => {
+    return _.merge({}, state, {
+        query: {
+            education: {
+                [action.field]: action.value,
+            },
         },
     });
 };
@@ -45,6 +83,10 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_SEARCH_QUERY':
             return handleUpdateSearchQuery(state, action);
+        case 'UPDATE_SEARCH_QUERY_OUTLOOK':
+            return handleUpdateSearchQueryOutlook(state, action);
+        case 'UPDATE_SEARCH_QUERY_EDUCATION':
+            return handleUpdateSearchQueryEducation(state, action);
         case 'SET_AUTO_COMPLETE_RESULTS':
             return handleSetAutoCompleteResults(state, action);
         case 'BEGIN_SEARCH':

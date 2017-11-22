@@ -12,6 +12,22 @@ export const updateSearchQuery = (field, value) => {
     };
 };
 
+export const updateSearchQueryOutlook = (field, value) => {
+    return {
+        type: 'UPDATE_SEARCH_QUERY_OUTLOOK',
+        field,
+        value,
+    };
+};
+
+export const updateSearchQueryEducation = (field, value) => {
+    return {
+        type: 'UPDATE_SEARCH_QUERY_EDUCATION',
+        field,
+        value,
+    };
+};
+
 export const setAutoCompleteResults = (autoCompleteResults) => {
     return {
         type: 'SET_AUTO_COMPLETE_RESULTS',
