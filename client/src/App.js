@@ -9,9 +9,10 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import Home from './views/home/Home';
+import Search from './views/search/Search';
+import Career from './views/career/Career';
 import Login from './containers/login/Login';
 import Questionnaire from './containers/questionnaire/Questionnaire';
-import Search from './views/search/Search';
 import reducers from './reducers';
 import './App.css';
 
@@ -38,9 +39,10 @@ class App extends Component {
                     <ConnectedRouter history={ history }>
                         <div className="router">
                             <Route exact path="/" component={ Home } />
+                            <Route path="/search" component={ Search } />
+                            <Route path="/career/:careerId?" component={ Career } />
                             <Route path="/login" component={ Login } />
                             <Route path="/questionnaire" component={ Questionnaire } />
-                            <Route path="/search" component={ Search } />
                         </div>
                     </ConnectedRouter>
                 </Provider>
