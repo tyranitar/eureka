@@ -1,4 +1,31 @@
 .search-filters {
     text-align: left;
+}
+
+.search-filters-header {
     padding: 16px;
+
+    display: flex;
+    align-items: center;
+}
+
+.search-filters-title {
+    margin-left: 16px;
+}
+
+.search-filters-body {
+    padding: 16px;
+    padding-top: 0px;
+}
+
+.search-filters-section-title:not(:first-child) {
+    margin-top: 16px;
+}
+
+.search-filters-slider-label {
+    text-align: center;
+}
+
+.search-filters-checkbox {
+    margin-top: 8px;
 }

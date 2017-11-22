@@ -10,12 +10,12 @@ export default [
         ],
     }, {
         type: 'radio',
-        text: "What do you value most in a career?",
+        text: "What is the most important factor in pursuing a career?",
 
         options: [
-            "Personal interest",
-            "Benefits",
             "Salary",
+            "Outlook",
+            "Education",
         ],
     }, {
         type: 'checkbox',
