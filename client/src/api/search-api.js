@@ -41,8 +41,15 @@ export const asyncGetSearchResults = ({
     minSalary,
     outlook,
     education,
+
+    featured, // NOTE: `featured` is not part of the query state.
 }) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        if (featured) {
+            resolve(searchResults.filter((result) => (result.featured)));
+            return;
+        }
+
         const results = [];
         const multiplier = descending ? -1 : 1;
         let count = 10;

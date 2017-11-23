@@ -13,6 +13,8 @@ const NoResults = ({
             accent3Color,
         },
     },
+
+    onClick,
 }) => (
     <Paper className="no-results" style={{
             color: accent3Color,
@@ -31,7 +33,8 @@ const NoResults = ({
             <span style={{
                     color: primary1Color,
                     cursor: 'pointer',
-                }}>
+                }}
+                onClick={ onClick }>
                 Featured Careers!
             </span>
         </div>

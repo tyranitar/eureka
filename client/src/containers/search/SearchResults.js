@@ -5,6 +5,7 @@ import {
     LinearProgress,
 } from 'material-ui';
 
+import { getSearchResults } from '../../actions/search-actions';
 import SearchResult from '../../components/search/SearchResult';
 import SearchBanner from '../../components/search/SearchBanner';
 import NoResults from '../../components/search/NoResults';
@@ -25,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
             console.log("clicked!");
         },
 
-        onBannerClick: () => {
-            console.log("banner clicked!");
+        showFeaturedCareers: () => {
+            dispatch(getSearchResults({ featured: true }));
         },
     };
 };
@@ -43,15 +44,15 @@ const mapResultsToSearchResults = (results, onClick) => {
     });
 };
 
-const renderBanner = (onBannerClick) => {
+const renderBanner = (showFeaturedCareers) => {
     return (
-        <SearchBanner onClick={ onBannerClick } />
+        <SearchBanner onClick={ showFeaturedCareers } />
     );
 };
 
-const renderNoResults = () => {
+const renderNoResults = (showFeaturedCareers) => {
     return (
-        <NoResults />
+        <NoResults onClick={ showFeaturedCareers } />
     );
 };
 
@@ -61,7 +62,7 @@ const renderSpinner = () => {
     );
 };
 
-const renderResults = ({ firstSearchPerformed, searching, results, onClick, onBannerClick }) => {
+const renderResults = ({ firstSearchPerformed, searching, results, onClick, showFeaturedCareers }) => {
     // TODO: Remove this.
     // return mapResultsToSearchResults([{
     //     title: 'Software developers',
@@ -77,10 +78,10 @@ const renderResults = ({ firstSearchPerformed, searching, results, onClick, onBa
     }
 
     if (firstSearchPerformed) {
-        return results.length ? mapResultsToSearchResults(results, onClick) : renderNoResults();
+        return results.length ? mapResultsToSearchResults(results, onClick) : renderNoResults(showFeaturedCareers);
     }
 
-    return renderBanner(onBannerClick);
+    return renderBanner(showFeaturedCareers);
 };
 
 const SearchResults = (props) => (

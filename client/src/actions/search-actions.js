@@ -62,11 +62,11 @@ export const getSearchFilters = () => {
     };
 };
 
-export const getSearchResults = () => {
+export const getSearchResults = (query) => {
     return (dispatch, getState) => {
         dispatch(beginSearch());
 
-        asyncGetSearchResults(getState().search.query).then((results) => {
+        asyncGetSearchResults(query || getState().search.query).then((results) => {
             dispatch(setSearchResults(results));
         });
     };

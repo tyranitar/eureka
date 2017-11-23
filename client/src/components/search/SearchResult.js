@@ -48,6 +48,8 @@ const SearchResult = ({
         outlook,
         education,
         favorited, // TODO: Use this as `checked` property.
+        featured,
+        id,
     },
 
     muiTheme: {
@@ -64,7 +66,9 @@ const SearchResult = ({
     onClick,
 }) => (
     <Paper className="search-result">
-        <div className="search-result-band" style={{ backgroundColor: primary1Color }}></div>
+        <div className="search-result-band" style={{
+            backgroundColor: featured ? accent1Color : primary1Color,
+        }}></div>
         <div className="search-result-title" onClick={ onClick }>
             { title }
         </div>
