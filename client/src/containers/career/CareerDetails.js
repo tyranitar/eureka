@@ -26,10 +26,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const renderDescription = (description) => {
-    return [description, description, description].join('\n\n');
-};
-
 class CareerDetails extends Component {
     componentDidMount() {
         const { careerId, getCareerDetails } = this.props;
@@ -69,7 +65,7 @@ class CareerDetails extends Component {
                 <Row className="career-details-row">
                     <Col xs={8} xl={6}>
                         <div className="career-details-description">
-                            { renderDescription(description) }
+                            { description }
                         </div>
                     </Col>
                 </Row>
