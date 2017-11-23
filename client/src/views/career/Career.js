@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import {
@@ -9,9 +8,7 @@ import {
 import Layout from '../../containers/layout/Layout';
 import './Career.css';
 
-const Career = ({
-    //
-}) => (
+const Career = () => (
     <Layout>
         <Grid fluid>
             <Row className="career-row" center="xs">
@@ -31,9 +28,5 @@ const Career = ({
         </Grid>
     </Layout>
 );
-
-Career.propTypes = {
-    //
-};
 
 export default Career;
