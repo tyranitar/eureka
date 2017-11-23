@@ -2,7 +2,7 @@ export default {
     recommendedSearches: [
         'Systems',
         'Design',
-        'Engineering',
+        'Engineer',
 
     ],
 
@@ -15,6 +15,6 @@ export default {
     trendingSearches: [
         'Software',
         'Manager',
-        'Science',
+        'Scientist',
     ],
 };

@@ -1,8 +1,11 @@
+import AutoComplete from 'material-ui/AutoComplete';
 import _ from 'lodash';
 
 import autoCompleteResults from '../mocks/auto-complete-results';
 import searchFilters from '../mocks/search-filters';
 import searchResults from '../mocks/search-results';
+
+const filter = AutoComplete.fuzzyFilter;
 
 export const asyncGetAutoCompleteResults = (searchString) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
@@ -11,11 +14,9 @@ export const asyncGetAutoCompleteResults = (searchString) => {
         if (searchString) {
             let count = 5;
 
-            searchString = searchString.toLowerCase();
-
             autoCompleteResults.some((result) => {
-                if (result.includes(searchString)) {
-                    results.push(_.capitalize(result));
+                if (filter(searchString, result)) {
+                    results.push(result);
                     count -= 1;
                 }
 
@@ -46,8 +47,6 @@ export const asyncGetSearchResults = ({
         const multiplier = descending ? -1 : 1;
         let count = 10;
 
-        searchString = searchString.toLowerCase();
-
         searchResults.sort((a, b) => {
             let ret = 0;
 
@@ -61,12 +60,12 @@ export const asyncGetSearchResults = ({
         });
 
         searchResults.some((result) => {
-            if (result.title.includes(searchString) &&
+            if (filter(searchString, result.title) &&
                 result.salary >= minSalary &&
                 outlook[result.outlook] &&
                 education[result.education]) {
                 results.push(_.merge({}, result, {
-                    title: _.capitalize(result.title),
+                    title: result.title,
                 }));
 
                 count -= 1;

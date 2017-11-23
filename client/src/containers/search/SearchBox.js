@@ -70,6 +70,7 @@ const SearchBox = ({
             onUpdateInput={ onUpdateInput }
             onKeyPress={ onKeyPress }
             menuProps={ menuProps }
+            filter={ () => (true) }
         />
 
         <RaisedButton

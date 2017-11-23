@@ -138,7 +138,7 @@ const SearchFilters = ({
             <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Poor Outlook" checked={ outlook['Poor Outlook'] } onCheck={ updateQueryOutlookCurry('Poor Outlook', !outlook['Poor Outlook']) } />
 
             <div className="search-filters-section-title">
-                Education
+                Required Education
             </div>
             <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Bachelor's" checked={ education['Bachelor\'s'] } onCheck={ updateQueryEducationCurry('Bachelor\'s', !education['Bachelor\'s']) } />
             <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Master's" checked={ education['Master\'s'] } onCheck={ updateQueryEducationCurry('Master\'s', !education['Master\'s']) } />
