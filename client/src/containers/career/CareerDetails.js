@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Row, Col } from 'react-flexbox-grid';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import { getCareerDetails, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
@@ -24,6 +26,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const renderDescription = (description) => {
+    return [description, description, description].join('\n\n');
+};
+
 class CareerDetails extends Component {
     componentDidMount() {
         const { careerId, getCareerDetails } = this.props;
@@ -34,7 +40,7 @@ class CareerDetails extends Component {
     render() {
         const {
             title,
-            // description,
+            description,
             // salary,
             // outlook,
             // education,
@@ -43,9 +49,30 @@ class CareerDetails extends Component {
             // id,
         } = this.props.details;
 
+        const {
+            palette: {
+                primary1Color,
+            },
+        } = this.props.muiTheme;
+
         return (
             <div>
-                { title }
+                <Row className="career-details-row">
+                    <Col xs={6}>
+                        <div className="career-details-title" style={{
+                                color: primary1Color,
+                            }}>
+                            { title }
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="career-details-row">
+                    <Col xs={8} xl={6}>
+                        <div className="career-details-description">
+                            { renderDescription(description) }
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }
@@ -55,7 +82,7 @@ class CareerDetails extends Component {
     }
 }
 
-export default connect(
+export default muiThemeable()(connect(
     mapStateToProps,
     mapDispatchToProps
-)(CareerDetails);
+)(CareerDetails));
