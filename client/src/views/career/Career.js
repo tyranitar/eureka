@@ -5,23 +5,31 @@ import {
     Paper,
 } from 'material-ui';
 
+import CareerDetails from '../../containers/career/CareerDetails';
+import CareerComments from '../../containers/career/CareerComments';
 import Layout from '../../containers/layout/Layout';
 import './Career.css';
 
-const Career = () => (
+const getCareerId = (pathname) => {
+    return pathname.split('/').pop();
+};
+
+const Career = ({
+    location,
+}) => (
     <Layout>
         <Grid fluid>
             <Row className="career-row" center="xs">
                 <Col xs={12} xl={8}>
                     <Paper className="career-paper">
-                        Career
+                        <CareerDetails careerId={ getCareerId(location.pathname) } />
                     </Paper>
                 </Col>
             </Row>
             <Row className="career-row" center="xs">
                 <Col xs={12} xl={8}>
                     <Paper className="career-paper">
-                        Comments
+                        <CareerComments careerId={ getCareerId(location.pathname) } />
                     </Paper>
                 </Col>
             </Row>
