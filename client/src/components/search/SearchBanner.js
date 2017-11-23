@@ -30,7 +30,7 @@ const SearchBanner = ({
 );
 
 SearchBanner.propTypes = {
-    //
+    onClick: PropTypes.func.isRequired,
 };
 
 export default muiThemeable()(SearchBanner);

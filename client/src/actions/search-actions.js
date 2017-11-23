@@ -58,7 +58,9 @@ export const getAutoCompleteResults = (searchString) => {
 
 export const getSearchFilters = () => {
     return (dispatch, getState) => {
-        //
+        asyncGetSearchFilters().then(() => {
+            //
+        });
     };
 };
 

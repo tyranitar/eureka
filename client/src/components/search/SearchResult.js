@@ -108,7 +108,18 @@ const SearchResult = ({
 );
 
 SearchResult.propTypes = {
-    //
+    result: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        salary: PropTypes.number.isRequired,
+        outlook: PropTypes.string.isRequired,
+        education: PropTypes.string.isRequired,
+        favorited: PropTypes.bool.isRequired,
+        featured: PropTypes.bool.isRequired,
+        id: PropTypes.number.isRequired,
+    }),
+
+    onClick: PropTypes.func.isRequired,
 };
 
 export default muiThemeable()(SearchResult);

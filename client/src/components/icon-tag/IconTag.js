@@ -18,7 +18,8 @@ const IconTag = ({
 );
 
 IconTag.propTypes = {
-    //
+    icon: PropTypes.element.isRequired,
+    label: PropTypes.string.isRequired,
 };
 
 export default IconTag;

@@ -42,7 +42,7 @@ const NoResults = ({
 );
 
 NoResults.propTypes = {
-    //
+    onClick: PropTypes.func.isRequired,
 };
 
 export default muiThemeable()(NoResults);

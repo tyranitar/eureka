@@ -30,7 +30,7 @@ const featuredCareers = new Set();
 const numFeaturedCareers = 5;
 
 if (numFeaturedCareers > searchResults.length) {
-    throw "number of featured careers exceeds number of search results";
+    throw new Error("number of featured careers exceeds number of search results");
 }
 
 while (featuredCareers.size < numFeaturedCareers) {
