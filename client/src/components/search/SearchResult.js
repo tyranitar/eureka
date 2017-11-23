@@ -69,7 +69,7 @@ const SearchResult = ({
         <div className="search-result-band" style={{
             backgroundColor: featured ? accent1Color : primary1Color,
         }}></div>
-        <div className="search-result-title" onClick={ onClick }>
+        <div className="search-result-title" onClick={ onClick.bind(null, id) }>
             { title }
         </div>
         <div className="search-result-actions">
@@ -82,7 +82,7 @@ const SearchResult = ({
         <div
             className="search-result-description"
             style={{ color: accent3Color }}
-            onClick={ onClick }>
+            onClick={ onClick.bind(null, id) }>
             { description }
         </div>
         <div className="search-result-icon-tags">

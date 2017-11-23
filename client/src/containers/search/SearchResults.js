@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import {
     LinearProgress,
@@ -22,8 +23,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: () => {
-            console.log("clicked!");
+        onClick: (careerId) => {
+            dispatch(push(`/career/${ careerId }`));
         },
 
         showFeaturedCareers: () => {
