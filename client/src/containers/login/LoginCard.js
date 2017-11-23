@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { setErrorMessage } from '../../actions/login-actions';
 
 import { login, signup } from '../../actions/login-actions';
-import './Login.css';
+import './LoginCard.css';
 
 const getIconButtonProps = (primaryColor) => {
     return {
@@ -58,9 +58,9 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-class Login extends Component {
+class LoginCard extends Component {
     isLogin() {
-        return this.props.location.pathname.includes('login');
+        return this.props.isLogin;
     }
 
     onClick() {
@@ -104,13 +104,11 @@ class Login extends Component {
                         <RaisedButton label={ isLogin ? 'Login' : 'Signup' } primary={ true } fullWidth={ true } onClick={ this.onClick.bind(this) } />
                     </CardActions>
                 </Card>
-                { /* FIXME */ }
-                <div className="background"></div>
             </div>
         );
     }
 }
 
-Login = connect(mapStateToProps, mapDispatchToProps)(Login);
+LoginCard = connect(mapStateToProps, mapDispatchToProps)(LoginCard);
 
-export default muiThemeable()(Login);
+export default muiThemeable()(LoginCard);

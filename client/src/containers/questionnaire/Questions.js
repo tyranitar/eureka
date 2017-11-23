@@ -30,9 +30,9 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const Questionnaire = connect(
+const Questions = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(Question);
 
-export default Questionnaire;
+export default Questions;

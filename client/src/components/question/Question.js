@@ -122,8 +122,6 @@ const Question = ({
                 />
             </CardActions>
         </Card>
-        { /* FIXME */ }
-        <div className="background"></div>
     </div>
 );
 

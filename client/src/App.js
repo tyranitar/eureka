@@ -11,8 +11,8 @@ import createHistory from 'history/createBrowserHistory';
 import Home from './views/home/Home';
 import Search from './views/search/Search';
 import Career from './views/career/Career';
-import Login from './containers/login/Login';
-import Questionnaire from './containers/questionnaire/Questionnaire';
+import Login from './views/login/Login';
+import Questionnaire from './views/questionnaire/Questionnaire';
 import reducers from './reducers';
 import './App.css';
 
