@@ -112,7 +112,7 @@ const SearchFilters = ({
             />
 
             <div className="search-filters-section-title">
-                Salary
+                Expected Salary
             </div>
             <Slider
                 sliderStyle={{
@@ -131,7 +131,7 @@ const SearchFilters = ({
             </div>
 
             <div className="search-filters-section-title">
-                Outlook
+                Employment Outlook
             </div>
             <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Good Outlook" checked={ outlook['Good Outlook'] } onCheck={ updateQueryOutlookCurry('Good Outlook', !outlook['Good Outlook']) } />
             <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Okay Outlook" checked={ outlook['Okay Outlook'] } onCheck={ updateQueryOutlookCurry('Okay Outlook', !outlook['Okay Outlook']) } />
