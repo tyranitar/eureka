@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
+import LineChart from '../../components/common/LineChart';
 import { getCareerDetails, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
 
