@@ -9,3 +9,7 @@
 .career-details-description {
     white-space: pre-wrap;
 }
+
+.career-details-charts {
+    margin-top: 100px;
+}

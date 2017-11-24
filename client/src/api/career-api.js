@@ -199,6 +199,7 @@ export const asyncGetCareerDetails = (careerId) => {
                 },
             }, {
                 type: 'bar',
+                hidden: true,
 
                 data: {
                     labels: ['Female', 'Male'],
@@ -227,6 +228,7 @@ export const asyncGetCareerDetails = (careerId) => {
                 },
             }, {
                 type: 'bubble',
+                hidden: true,
 
                 data: {
                     datasets: countries.map((country, idx) => ({
@@ -269,7 +271,7 @@ export const asyncGetCareerDetails = (careerId) => {
                         }],
                     },
                 },
-            }],
+            }].filter((chart) => (!chart.hidden)),
         });
 
         resolve(careerDetails);

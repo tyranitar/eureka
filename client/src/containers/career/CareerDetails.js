@@ -58,7 +58,7 @@ class CareerDetails extends Component {
     render() {
         const {
             title,
-            // description,
+            description,
             charts,
             // favorited,
             // featured,
@@ -85,11 +85,13 @@ class CareerDetails extends Component {
                 <Row className="career-details-row">
                     <Col xs={8} xl={6}>
                         <div className="career-details-description">
-                            { /* description */ }
+                            { description }
                         </div>
                     </Col>
                 </Row>
-                { renderCharts(charts, 3) }
+                <div className="career-details-charts">
+                    { renderCharts(charts, 2) }
+                </div>
             </div>
         );
     }
