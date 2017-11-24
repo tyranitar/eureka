@@ -1,6 +1,17 @@
 import careers from '../mocks/search-results';
 import _ from 'lodash';
 
+import {
+    red500,
+    pink400,
+    indigo500,
+    lightBlue500,
+    cyan500,
+    amber400,
+} from 'material-ui/styles/colors';
+
+import { fade } from 'material-ui/utils/colorManipulator';
+
 const outlookMap = {
     'Good Outlook': 5,
     'Okay Outlook': 3,
@@ -29,7 +40,16 @@ const countries = [
     'United States',
     'Canada',
     'Japan',
+    'China',
     'South Korea',
+];
+
+const countryColors = [
+    lightBlue500,
+    red500,
+    pink400,
+    amber400,
+    indigo500,
 ];
 
 export const asyncGetCareerDetails = (careerId) => {
@@ -54,6 +74,7 @@ export const asyncGetCareerDetails = (careerId) => {
 
                     datasets: [{
                         label: 'Salary by Percentile',
+                        backgroundColor: lightBlue500,
 
                         data: [
                             salary * 0.5,
@@ -84,6 +105,8 @@ export const asyncGetCareerDetails = (careerId) => {
 
                     datasets: [{
                         label: '# of Hires by Year',
+                        borderColor: cyan500,
+                        backgroundColor: fade(cyan500, 0.5),
 
                         data: [
                             ...(Array(6).fill(0)).map(() => {
@@ -112,6 +135,8 @@ export const asyncGetCareerDetails = (careerId) => {
                     labels: ['Bachelor\'s', 'Master\'s', 'PhD'],
 
                     datasets: [{
+                        backgroundColor: [pink400, lightBlue500, amber400],
+
                         data: (() => {
                             const ret = [0, 0, 0];
                             let remainder = 100;
@@ -152,10 +177,14 @@ export const asyncGetCareerDetails = (careerId) => {
 
                     datasets: [{
                         label: 'Required Skill Levels',
+                        borderColor: pink400,
+                        backgroundColor: fade(pink400, 0.5),
 
                         data: (Array(6).fill(0)).map(() => (_.random(1, 5))),
                     }, {
                         label: 'My Projected Skill Levels',
+                        borderColor: lightBlue500,
+                        backgroundColor: fade(lightBlue500, 0.5),
 
                         data: (Array(6).fill(0)).map(() => (_.random(1, 5))),
                     }],
@@ -176,6 +205,7 @@ export const asyncGetCareerDetails = (careerId) => {
 
                     datasets: [{
                         label: 'Gender Distribution',
+                        backgroundColor: [pink400, lightBlue500],
 
                         data: (() => {
                             const numFemales = _.random(0, 100);
@@ -199,8 +229,10 @@ export const asyncGetCareerDetails = (careerId) => {
                 type: 'bubble',
 
                 data: {
-                    datasets: countries.map((country) => ({
+                    datasets: countries.map((country, idx) => ({
                         label: country,
+                        borderColor: countryColors[idx],
+                        backgroundColor: fade(countryColors[idx], 0.5),
 
                         data: [{
                             x: _.random(1, 10),
