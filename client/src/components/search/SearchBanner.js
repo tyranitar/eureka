@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
+import { getPublicUrl } from '../../utils/common';
 import './SearchBanner.css';
 
 const SearchBanner = ({
@@ -16,7 +17,9 @@ const SearchBanner = ({
     onClick,
 }) => (
     <Paper className="search-banner" onClick={ onClick }>
-        <div className="search-banner-image"></div>
+        <div className="search-banner-image" style={{
+            backgroundImage: `url('${ getPublicUrl('/images/career5.jpg') }')`,
+        }}></div>
         <div
             className="search-banner-text"
 
