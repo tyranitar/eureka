@@ -10,7 +10,7 @@ const numQuestions = questions.length;
 const updateAnswer = (question, answer) => {
     switch (question.type) {
         case 'checkbox':
-            return (question.answer || new Array(question.options.length).fill(false)).map((val, idx) => {
+            return (question.answer || Array(question.options.length).fill(false)).map((val, idx) => {
                 if (idx === answer) {
                     return !val;
                 }

@@ -2,9 +2,7 @@ const initialState = {
     details: {
         title: '',
         description: '',
-        salary: 0,
-        outlook: '',
-        education: '',
+        charts: [],
         favorited: false,
         featured: false,
         id: 0,

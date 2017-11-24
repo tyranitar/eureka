@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-import LineChart from '../../components/common/LineChart';
+import AnyChart from '../../components/common/AnyChart';
 import { getCareerDetails, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
 
@@ -27,6 +27,27 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const renderCharts = (charts, chartsPerRow) => {
+    const len = charts.length;
+    const ret = [];
+
+    for (let i = 0; i < len; i += chartsPerRow) {
+        ret.push((
+            <Row key={ i } className="career-details-row">
+                { charts.slice(i, i + chartsPerRow).map((chart, idx) => {
+                    return (
+                        <Col key={ idx } xs={4}>
+                            <AnyChart { ...chart } />
+                        </Col>
+                    );
+                }) }
+            </Row>
+        ));
+    }
+
+    return ret;
+};
+
 class CareerDetails extends Component {
     componentDidMount() {
         const { careerId, getCareerDetails } = this.props;
@@ -37,10 +58,8 @@ class CareerDetails extends Component {
     render() {
         const {
             title,
-            description,
-            // salary,
-            // outlook,
-            // education,
+            // description,
+            charts,
             // favorited,
             // featured,
             // id,
@@ -66,10 +85,11 @@ class CareerDetails extends Component {
                 <Row className="career-details-row">
                     <Col xs={8} xl={6}>
                         <div className="career-details-description">
-                            { description }
+                            { /* description */ }
                         </div>
                     </Col>
                 </Row>
+                { renderCharts(charts, 3) }
             </div>
         );
     }
