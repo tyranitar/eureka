@@ -12,6 +12,8 @@ import {
 
 import { fade } from 'material-ui/utils/colorManipulator';
 
+import loremIpsum from '../mocks/lorem-ipsum';
+
 const outlookMap = {
     'Good Outlook': 5,
     'Okay Outlook': 3,
@@ -63,8 +65,17 @@ export const asyncGetCareerDetails = (careerId) => {
             education,
         } = career;
 
+        const loremIpsumCopy = loremIpsum.slice();
+
+        if (loremIpsumCopy.includes(description)) {
+            loremIpsumCopy.splice(loremIpsumCopy.indexOf(description), 1);
+        }
+
         const careerDetails = Object.assign({}, career, {
-            description: [description, description, description].join('\n\n'),
+            description: [
+                description,
+                ..._.sampleSize(loremIpsumCopy, 2),
+            ].join('\n\n'),
 
             charts: [{
                 type: 'bar',
