@@ -82,5 +82,5 @@ export const asyncGetSearchResults = ({
         });
 
         resolve(results);
-    }, 0));
+    }, 1000));
 };
