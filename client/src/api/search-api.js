@@ -31,7 +31,7 @@ export const asyncGetAutoCompleteResults = (searchString) => {
 export const asyncGetSearchFilters = () => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(searchFilters);
-    }, 1000));
+    }, 0));
 };
 
 export const asyncGetSearchResults = ({
@@ -82,5 +82,5 @@ export const asyncGetSearchResults = ({
         });
 
         resolve(results);
-    }, 1000));
+    }, 0));
 };

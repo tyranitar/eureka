@@ -4,17 +4,17 @@ export const asyncLogin = ({
 }) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve();
-    }, 1000));
+    }, 0));
 };
 
 export const asyncLogout = () => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve();
-    }, 1000));
+    }, 0));
 };
 
 export const asyncSignup = () => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve();
-    }, 1000));
+    }, 0));
 };
