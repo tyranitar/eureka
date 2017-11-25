@@ -20,14 +20,14 @@ const Career = ({
     <Layout>
         <Grid fluid>
             <Row className="career-row" center="xs">
-                <Col xs={12} xl={8}>
+                <Col xs={12} xl={6}>
                     <Paper className="career-paper">
                         <CareerDetails careerId={ getCareerId(location.pathname) } />
                     </Paper>
                 </Col>
             </Row>
             <Row className="career-row" center="xs">
-                <Col xs={12} xl={8}>
+                <Col xs={12} xl={6}>
                     <Paper className="career-paper">
                         <CareerComments careerId={ getCareerId(location.pathname) } />
                     </Paper>

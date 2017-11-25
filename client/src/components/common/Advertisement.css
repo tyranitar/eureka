@@ -1,0 +1,29 @@
+.advertisement {
+    padding-top: 100%;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Could use this for other things. */
+.advertisement:visited {
+    color: inherit;
+}
+
+.advertisement-image {
+    margin-top: -100%;
+    padding-top: 62%;
+
+    border-style: solid;
+    border-width: 4px;
+    border-bottom-width: 0px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.advertisement-description {
+    font-size: 14px;
+    padding: 8px;
+}

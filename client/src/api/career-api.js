@@ -17,7 +17,7 @@ import loremIpsum from '../mocks/lorem-ipsum';
 const outlookMap = {
     'Good Outlook': 5,
     'Okay Outlook': 3,
-    'Poor Outlook': 1,
+    'Poor Outlook': 2,
 };
 
 const educationMap = {
@@ -124,7 +124,7 @@ export const asyncGetCareerDetails = (careerId) => {
                                 return _.random(100000, 500000);
                             }),
 
-                            outlookMap[outlook] * 100000,
+                            _.random((outlookMap[outlook] - 1) * 100000, outlookMap[outlook] * 100000),
                         ],
                     }],
                 },
@@ -146,7 +146,7 @@ export const asyncGetCareerDetails = (careerId) => {
                     labels: ['Bachelor\'s', 'Master\'s', 'PhD'],
 
                     datasets: [{
-                        backgroundColor: [pink400, lightBlue500, amber400],
+                        backgroundColor: [lightBlue500, pink400, amber400],
 
                         data: (() => {
                             const ret = [0, 0, 0];
@@ -187,15 +187,15 @@ export const asyncGetCareerDetails = (careerId) => {
                     labels: _.sampleSize(skills, 6),
 
                     datasets: [{
-                        label: 'Required Skill Levels',
-                        borderColor: pink400,
-                        backgroundColor: fade(pink400, 0.5),
-
-                        data: (Array(6).fill(0)).map(() => (_.random(1, 5))),
-                    }, {
                         label: 'My Projected Skill Levels',
                         borderColor: lightBlue500,
                         backgroundColor: fade(lightBlue500, 0.5),
+
+                        data: (Array(6).fill(0)).map(() => (_.random(1, 5))),
+                    }, {
+                        label: 'Required Skill Levels',
+                        borderColor: pink400,
+                        backgroundColor: fade(pink400, 0.5),
 
                         data: (Array(6).fill(0)).map(() => (_.random(1, 5))),
                     }],
@@ -210,14 +210,14 @@ export const asyncGetCareerDetails = (careerId) => {
                 },
             }, {
                 type: 'bar',
-                hidden: true,
+                // hidden: true,
 
                 data: {
-                    labels: ['Female', 'Male'],
+                    labels: ['Male', 'Female'],
 
                     datasets: [{
                         label: 'Gender Distribution',
-                        backgroundColor: [pink400, lightBlue500],
+                        backgroundColor: [lightBlue500, pink400],
 
                         data: (() => {
                             const numFemales = _.random(0, 100);
@@ -229,6 +229,15 @@ export const asyncGetCareerDetails = (careerId) => {
                 },
 
                 options: {
+                    title: {
+                        display: true,
+                        text: 'Gender Distribution',
+                    },
+
+                    legend: {
+                        display: false,
+                    },
+
                     scales: {
                         yAxes: [{
                             ticks: {

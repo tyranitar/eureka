@@ -4,6 +4,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import AnyChart from '../../components/common/AnyChart';
+import Advertisement from '../../components/common/Advertisement';
+import { getPublicUrl } from '../../utils/common';
 import { getCareerDetails, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
 
@@ -33,7 +35,7 @@ const renderCharts = (charts, chartsPerRow) => {
 
     for (let i = 0; i < len; i += chartsPerRow) {
         ret.push((
-            <Row key={ i } className="career-details-row">
+            <Row key={ i } className="career-details-charts">
                 { charts.slice(i, i + chartsPerRow).map((chart, idx) => {
                     return (
                         <Col key={ idx } xs={4}>
@@ -74,23 +76,33 @@ class CareerDetails extends Component {
         return (
             <div>
                 <Row className="career-details-row">
-                    <Col xs={6}>
+                    <Col xs={8}>
                         <div className="career-details-title" style={{
                                 color: primary1Color,
                             }}>
                             { title }
                         </div>
                     </Col>
+                    <Col xsOffset={1} xs={3}>
+                        Actions
+                    </Col>
                 </Row>
                 <Row className="career-details-row">
-                    <Col xs={8} xl={6}>
+                    <Col xs={8}>
                         <div className="career-details-description">
                             { description }
                         </div>
                     </Col>
+                    <Col xsOffset={1} xs={3}>
+                        <Advertisement
+                            href='http://localhost:3000/search'
+                            imageUrl={ getPublicUrl('/images/career6.jpg') }
+                            description={ 'Test' }
+                        />
+                    </Col>
                 </Row>
-                <div className="career-details-charts">
-                    { renderCharts(charts, 2) }
+                <div>
+                    { renderCharts(charts, 3) }
                 </div>
             </div>
         );
