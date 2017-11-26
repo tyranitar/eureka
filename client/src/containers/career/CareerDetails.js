@@ -82,25 +82,21 @@ const renderAdvertisements = () => {
     );
 };
 
-const renderCharts = (charts, chartsPerRow) => {
+const renderCharts = (charts) => {
     const len = charts.length;
     const ret = [];
 
-    for (let i = 0; i < len; i += chartsPerRow) {
-        ret.push((
-            <Row key={ i } className="career-details-charts">
-                { charts.slice(i, i + chartsPerRow).map((chart, idx) => {
-                    return (
-                        <Col key={ idx } xs={4}>
-                            <AnyChart { ...chart } />
-                        </Col>
-                    );
-                }) }
-            </Row>
-        ));
-    }
-
-    return ret;
+    return (
+        <Row className="career-details-charts">
+            { charts.map((chart, idx) => {
+                return (
+                    <Col key={ idx } xs={4}>
+                        <AnyChart { ...chart } />
+                    </Col>
+                );
+            }) }
+        </Row>
+    );
 };
 
 class CareerDetails extends Component {
@@ -151,9 +147,8 @@ class CareerDetails extends Component {
                         { renderAdvertisements() }
                     </Col>
                 </Row>
-                <div>
-                    { renderCharts(charts, 3) }
-                </div>
+                { renderCharts(charts.slice(0, 3)) }
+                { renderCharts(charts.slice(3, 5)) }
             </div>
         );
     }
