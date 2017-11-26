@@ -9,7 +9,7 @@ import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Share from 'material-ui/svg-icons/social/share';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Equalizer from 'material-ui/svg-icons/av/equalizer';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 
 import {
     Checkbox,
@@ -86,9 +86,6 @@ const renderAdvertisements = () => {
 };
 
 const renderCharts = ({ title, charts, icon }) => {
-    const len = charts.length;
-    const ret = [];
-
     return (
         <Card className="career-details-charts-card">
             <CardHeader

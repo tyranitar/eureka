@@ -41,7 +41,8 @@ const PointOfContact = ({
 );
 
 PointOfContact.propTypes = {
-    //
+    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default PointOfContact;
