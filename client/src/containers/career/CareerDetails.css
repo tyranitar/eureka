@@ -1,8 +1,21 @@
+.career-details-row:not(:first-child) {
+    margin-top: 16px;
+}
+
 .career-details-title {
     font-size: 24px;
 }
 
-.career-details-row:not(:first-child) {
+.career-details-actions {
+    float: right;
+}
+
+.career-details-action {
+    display: inline-block !important;
+    width: auto !important;
+}
+
+.career-details-advertisement {
     margin-top: 16px;
 }
 
