@@ -23,6 +23,16 @@
     white-space: pre-wrap;
 }
 
+.career-details-charts-card {
+    margin-top: 16px;
+}
+
+.career-details-charts-title {
+    vertical-align: top;
+    line-height: 26px;
+    margin-left: 16px;
+}
+
 .career-details-charts {
-    margin-top: 64px;
+    padding: 16px;
 }

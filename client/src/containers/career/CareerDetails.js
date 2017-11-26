@@ -7,6 +7,9 @@ import GpsNotFixed from 'material-ui/svg-icons/device/gps-not-fixed';
 import Favorite from 'material-ui/svg-icons/action/favorite';
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Share from 'material-ui/svg-icons/social/share';
+import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+import Equalizer from 'material-ui/svg-icons/av/equalizer';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 import {
     Checkbox,
@@ -82,20 +85,32 @@ const renderAdvertisements = () => {
     );
 };
 
-const renderCharts = (charts) => {
+const renderCharts = ({ title, charts, icon }) => {
     const len = charts.length;
     const ret = [];
 
     return (
-        <Row className="career-details-charts">
-            { charts.map((chart, idx) => {
-                return (
-                    <Col key={ idx } xs={4}>
-                        <AnyChart { ...chart } />
-                    </Col>
-                );
-            }) }
-        </Row>
+        <Card className="career-details-charts-card">
+            <CardHeader
+                title={ <div>
+                    { icon }
+                    <span className="career-details-charts-title">{ title }</span>
+                </div> }
+                actAsExpander={ true }
+                showExpandableButton={ true }
+            />
+            <CardMedia expandable={ true } className="career-details-charts">
+                <Row>
+                    { charts.map((chart, idx) => {
+                        return (
+                            <Col key={ idx } xs={4}>
+                                <AnyChart { ...chart } />
+                            </Col>
+                        );
+                    }) }
+                </Row>
+            </CardMedia>
+        </Card>
     );
 };
 
@@ -147,8 +162,16 @@ class CareerDetails extends Component {
                         { renderAdvertisements() }
                     </Col>
                 </Row>
-                { renderCharts(charts.slice(0, 3)) }
-                { renderCharts(charts.slice(3, 5)) }
+                { renderCharts({
+                    title: 'Career Information',
+                    charts: charts.slice(0, 3),
+                    icon: <Equalizer color={ primary1Color } />,
+                }) }
+                { renderCharts({
+                    title: 'Alignment with Your Profile',
+                    charts: charts.slice(3, 5),
+                    icon: <AccountCircle color={ primary1Color } />,
+                }) }
             </div>
         );
     }
