@@ -2,6 +2,7 @@ import careers from '../mocks/search-results';
 import _ from 'lodash';
 
 import { getCharts } from '../mocks/career-details';
+import careerEducationPaths from '../mocks/career-education-paths';
 import loremIpsum from '../mocks/lorem-ipsum';
 
 export const asyncGetCareerDetails = (careerId) => {
@@ -26,5 +27,11 @@ export const asyncGetCareerDetails = (careerId) => {
         });
 
         resolve(careerDetails);
+    }, 0));
+};
+
+export const asyncGetCareerEducationPaths = (careerId) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve(careerEducationPaths);
     }, 0));
 };

@@ -22,18 +22,20 @@ import {
     cyan500,
 } from 'material-ui/styles/colors'
 
+import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
 import Advertisement from '../../components/common/Advertisement';
 import { getPublicUrl } from '../../utils/common';
-import { getCareerDetails, resetCareerDetails } from '../../actions/career-actions';
+import { getCareerDetails, getCareerEducationPaths, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
 
 const mapStateToProps = (state) => {
-    const { details } = state.career;
+    const { details, educationPaths } = state.career;
 
     return {
         details,
+        educationPaths,
     };
 };
 
@@ -41,6 +43,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getCareerDetails: (careerId) => {
             dispatch(getCareerDetails(careerId));
+        },
+
+        getCareerEducationPaths: (careerId) => {
+            dispatch(getCareerEducationPaths(careerId));
         },
 
         resetCareerDetails: () => {
@@ -111,11 +117,35 @@ const renderCharts = ({ title, charts, icon }) => {
     );
 };
 
+const renderEducationPaths = (educationPaths) => {
+    return (
+        <div className="career-details-education">
+            <div className="career-details-education-title">
+                Suggested Education Paths
+            </div>
+            <div>
+                <Row>
+                    { educationPaths.map((educationPath, idx) => (
+                        <Col key={ idx } xs={6} className="career-details-education-path">
+                            <EducationPath { ...educationPath } />
+                        </Col>
+                    )) }
+                </Row>
+            </div>
+        </div>
+    );
+};
+
 class CareerDetails extends Component {
     componentDidMount() {
-        const { careerId, getCareerDetails } = this.props;
+        const {
+            careerId,
+            getCareerDetails,
+            getCareerEducationPaths,
+        } = this.props;
 
         getCareerDetails(careerId);
+        getCareerEducationPaths(careerId);
     }
 
     render() {
@@ -159,16 +189,19 @@ class CareerDetails extends Component {
                         { renderAdvertisements() }
                     </Col>
                 </Row>
-                { renderCharts({
-                    title: 'Career Information',
-                    charts: charts.slice(0, 3),
-                    icon: <Equalizer color={ primary1Color } />,
-                }) }
-                { renderCharts({
-                    title: 'Alignment with Your Profile',
-                    charts: charts.slice(3, 5),
-                    icon: <AccountCircle color={ primary1Color } />,
-                }) }
+                <div className="career-details-charts-container">
+                    { renderCharts({
+                        title: 'Career Information',
+                        charts: charts.slice(0, 3),
+                        icon: <Equalizer color={ primary1Color } />,
+                    }) }
+                    { renderCharts({
+                        title: 'Alignment with Your Profile',
+                        charts: charts.slice(3, 5),
+                        icon: <AccountCircle color={ primary1Color } />,
+                    }) }
+                </div>
+                { renderEducationPaths(this.props.educationPaths) }
             </div>
         );
     }

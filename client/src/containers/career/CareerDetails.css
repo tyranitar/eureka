@@ -23,6 +23,10 @@
     white-space: pre-wrap;
 }
 
+.career-details-charts-container {
+    margin-top: 32px;
+}
+
 .career-details-charts-card {
     margin-top: 16px;
 }
@@ -35,4 +39,13 @@
 
 .career-details-charts {
     padding: 16px;
+    padding-top: 0px;
+}
+
+.career-details-education {
+    margin-top: 32px;
+}
+
+.career-details-education-path {
+    margin-top: 16px;
 }
