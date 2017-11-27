@@ -122,7 +122,7 @@ const renderEducationPaths = (educationPaths) => {
     const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
 
     const educationPathMapper = (educationPath, idx) => (
-        <div className="career-details-education-path">
+        <div key={ idx } className="career-details-education-path">
             <EducationPath { ...educationPath } />
         </div>
     );
