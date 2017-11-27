@@ -118,6 +118,15 @@ const renderCharts = ({ title, charts, icon }) => {
 };
 
 const renderEducationPaths = (educationPaths) => {
+    const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
+    const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
+
+    const educationPathMapper = (educationPath, idx) => (
+        <div className="career-details-education-path">
+            <EducationPath { ...educationPath } />
+        </div>
+    );
+
     return (
         <div className="career-details-education">
             <div className="career-details-education-title">
@@ -125,11 +134,12 @@ const renderEducationPaths = (educationPaths) => {
             </div>
             <div>
                 <Row>
-                    { educationPaths.map((educationPath, idx) => (
-                        <Col key={ idx } xs={6} className="career-details-education-path">
-                            <EducationPath { ...educationPath } />
-                        </Col>
-                    )) }
+                    <Col xs={6}>
+                        { evenEducationPaths.map(educationPathMapper) }
+                    </Col>
+                    <Col xs={6}>
+                        { oddEducationPaths.map(educationPathMapper) }
+                    </Col>
                 </Row>
             </div>
         </div>
