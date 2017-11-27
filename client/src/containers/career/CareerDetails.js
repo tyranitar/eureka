@@ -22,12 +22,17 @@ import {
     cyan500,
 } from 'material-ui/styles/colors'
 
+import {
+    getCareerDetails,
+    resetCareerDetails,
+    getCareerEducationPaths,
+} from '../../actions/career-actions';
+
 import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
 import Advertisement from '../../components/common/Advertisement';
 import { getPublicUrl } from '../../utils/common';
-import { getCareerDetails, getCareerEducationPaths, resetCareerDetails } from '../../actions/career-actions';
 import './CareerDetails.css';
 
 const mapStateToProps = (state) => {
@@ -45,12 +50,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getCareerDetails(careerId));
         },
 
-        getCareerEducationPaths: (careerId) => {
-            dispatch(getCareerEducationPaths(careerId));
-        },
-
         resetCareerDetails: () => {
             dispatch(resetCareerDetails());
+        },
+
+        getCareerEducationPaths: (careerId) => {
+            dispatch(getCareerEducationPaths(careerId));
         },
     };
 };
@@ -218,6 +223,7 @@ class CareerDetails extends Component {
 
     componentWillUnmount() {
         this.props.resetCareerDetails();
+        // TODO: Also reset education paths.
     }
 }
 

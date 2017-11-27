@@ -9,6 +9,7 @@ const initialState = {
     },
 
     educationPaths: [],
+    comments: [],
 };
 
 const handleSetCareerDetails = (state, action) => {
@@ -29,6 +30,12 @@ const handleSetCareerEducationPaths = (state, action) => {
     });
 };
 
+const handleSetCareerComments = (state, action) => {
+    return Object.assign({}, state, {
+        comments: action.careerComments,
+    });
+};
+
 const careerReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_CAREER_DETAILS':
@@ -37,6 +44,8 @@ const careerReducer = (state = initialState, action) => {
             return handleResetCareerDetails(state, action);
         case 'SET_CAREER_EDUCATION_PATHS':
             return handleSetCareerEducationPaths(state, action);
+        case 'SET_CAREER_COMMENTS':
+            return handleSetCareerComments(state, action);
         default:
             return state;
     }

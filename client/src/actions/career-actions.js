@@ -1,4 +1,8 @@
-import { asyncGetCareerDetails, asyncGetCareerEducationPaths } from '../api/career-api';
+import {
+    asyncGetCareerDetails,
+    asyncGetCareerEducationPaths,
+    asyncGetCareerComments,
+} from '../api/career-api';
 
 export const getCareerDetails = (careerId) => {
     return (dispatch, getState) => {
@@ -12,6 +16,14 @@ export const getCareerEducationPaths = (careerId) => {
     return (dispatch, getState) => {
         asyncGetCareerEducationPaths(careerId).then((careerEducationPaths) => {
             dispatch(setCareerEducationPaths(careerEducationPaths));
+        });
+    };
+};
+
+export const getCareerComments = (careerId) => {
+    return (dispatch, getState) => {
+        asyncGetCareerComments(careerId).then((careerComments) => {
+            dispatch(setCareerComments(careerComments));
         });
     };
 };
@@ -33,5 +45,12 @@ export const setCareerEducationPaths = (careerEducationPaths) => {
     return {
         type: 'SET_CAREER_EDUCATION_PATHS',
         careerEducationPaths,
+    };
+};
+
+export const setCareerComments = (careerComments) => {
+    return {
+        type: 'SET_CAREER_COMMENTS',
+        careerComments,
     };
 };
