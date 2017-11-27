@@ -11,4 +11,16 @@ export default [{
 
     createdAt: new Date(),
     content: _.sample(loremIpsum),
-}];
+}, {
+    user: {
+        name: 'Jane Doe',
+        imageUrl: getPublicUrl('/images/jane.jpg'),
+    },
+
+    createdAt: new Date(),
+    content: _.sample(loremIpsum),
+}].map((comment, idx) => (
+    Object.assign({}, comment, {
+        id: idx,
+    })
+));

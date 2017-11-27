@@ -2,6 +2,7 @@ import {
     asyncGetCareerDetails,
     asyncGetCareerEducationPaths,
     asyncGetCareerComments,
+    asyncToggleCareerCommentLike,
 } from '../api/career-api';
 
 export const getCareerDetails = (careerId) => {
@@ -27,6 +28,22 @@ export const getCareerComments = (careerId) => {
         });
     };
 };
+
+export const toggleCareerCommentLike = (commentId) => {
+    return (dispatch, getState) => {
+        asyncToggleCareerCommentLike(commentId).then(() => {
+            dispatch(setCareerComments(getState().career.comments.map((comment) => {
+                if (comment.id === commentId) {
+                    return Object.assign({}, comment, {
+                        liked: !comment.liked,
+                    });
+                }
+
+                return comment;
+            })));
+        });
+    }
+}
 
 export const setCareerDetails = (careerDetails) => {
     return {
