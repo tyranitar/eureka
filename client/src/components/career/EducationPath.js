@@ -44,9 +44,9 @@ const renderInstitutions = ({
                 <Row>
                     <Col xs={3}>
                         <div className="education-path-institution-image" style={{
-                            backgroundImage: `url(${ imageUrl })`,
-                            backgroundColor,
-                        }}>
+                                backgroundImage: `url(${ imageUrl })`,
+                                backgroundColor,
+                            }}>
                             { !imageUrl ? <div className="education-path-institution-icon">
                                 <Business color={ color } />
                             </div> : null }
