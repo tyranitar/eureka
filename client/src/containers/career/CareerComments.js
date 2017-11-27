@@ -3,15 +3,23 @@ import { connect } from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import Share from 'material-ui/svg-icons/social/share';
+import Person from 'material-ui/svg-icons/social/person';
 import { blue500, grey300, cyan500, } from 'material-ui/styles/colors';
 
 import {
     ListItem,
     Avatar,
     IconButton,
+    TextField,
+    RaisedButton,
 } from 'material-ui';
 
-import { getCareerComments, toggleCareerCommentLike } from '../../actions/career-actions';
+import {
+    getCareerComments,
+    toggleCareerCommentLike,
+    addCareerComment,
+} from '../../actions/career-actions';
+
 import './CareerComments.css';
 
 const mapStateToProps = (state) => {
@@ -31,29 +39,43 @@ const mapDispatchToProps = (dispatch) => {
         onLikeButtonClick: (commentId) => {
             dispatch(toggleCareerCommentLike(commentId));
         },
+
+        addCareerComment: (careerId, comment) => {
+            dispatch(addCareerComment(careerId, comment));
+        },
     };
 };
 
 const renderComments = ({
     comments,
-    usernameColor,
-    createdAtColor,
     onLikeButtonClick,
+
+    palette: {
+        primary1Color,
+        accent3Color,
+        alternateTextColor,
+    },
 }) => {
     return comments.map((comment, idx) => (
         <div key={ idx }>
             <ListItem leftAvatar={
-                    <Avatar src={ comment.user.imageUrl } style={{
-                        marginTop: '12px',
-                    }} />
+                    <Avatar
+                        icon={ <Person /> }
+                        backgroundColor={ primary1Color }
+                        color={ alternateTextColor }
+                        src={ comment.user.imageUrl }
+                        style={{
+                            marginTop: '12px',
+                        }}
+                    />
             } disabled={ true }>
                 <div className="career-comment-username" style={{
-                        color: usernameColor,
+                        color: primary1Color,
                     }}>
                     { comment.user.name }
                 </div>
                 <div className="career-comment-created-at" style={{
-                        color: createdAtColor,
+                        color: accent3Color,
                     }}>
                     { comment.createdAt.toLocaleDateString() }
                 </div>
@@ -74,6 +96,14 @@ const renderComments = ({
 };
 
 class CareerComments extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            commentFieldValue: '',
+        };
+    }
+
     componentDidMount() {
         const {
             careerId,
@@ -81,6 +111,25 @@ class CareerComments extends Component {
         } = this.props;
 
         getCareerComments(careerId);
+    }
+
+    onCommentFieldChange = (evt) => {
+        this.setState({
+            commentFieldValue: evt.target.value,
+        });
+    }
+
+    onCommentButtonClick() {
+        const {
+            careerId,
+            addCareerComment,
+        } = this.props;
+
+        addCareerComment(careerId, this.state.commentFieldValue);
+
+        this.setState({
+            commentFieldValue: '',
+        });
     }
 
     render() {
@@ -93,6 +142,7 @@ class CareerComments extends Component {
             palette: {
                 primary1Color,
                 accent3Color,
+                alternateTextColor,
             },
         } = this.props.muiTheme;
 
@@ -109,11 +159,36 @@ class CareerComments extends Component {
                 <div className="career-comments">
                     { renderComments({
                         comments,
-                        usernameColor: primary1Color,
-                        createdAtColor: accent3Color,
                         onLikeButtonClick,
+                        palette: this.props.muiTheme.palette,
                     }) }
                 </div>
+                <ListItem
+                    leftAvatar={
+                        <Avatar
+                            icon={ <Person /> }
+                            backgroundColor={ primary1Color }
+                            color={ alternateTextColor }
+                        />
+                    }
+                    disabled={ true }>
+                    <TextField
+                        hintText="Share your thoughts!"
+                        fullWidth={ true }
+                        style={{
+                            marginTop: '-16px',
+                        }}
+                        value={ this.state.commentFieldValue }
+                        onChange={ this.onCommentFieldChange }
+                    />
+                    <div className="career-comments-comment-button">
+                        <RaisedButton
+                            label="Comment"
+                            primary={ true }
+                            onClick={ this.onCommentButtonClick.bind(this) }
+                        />
+                    </div>
+                </ListItem>
             </div>
         );
     }

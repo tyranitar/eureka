@@ -3,6 +3,7 @@ import {
     asyncGetCareerEducationPaths,
     asyncGetCareerComments,
     asyncToggleCareerCommentLike,
+    asyncAddCareerComment,
 } from '../api/career-api';
 
 export const getCareerDetails = (careerId) => {
@@ -42,8 +43,26 @@ export const toggleCareerCommentLike = (commentId) => {
                 return comment;
             })));
         });
-    }
-}
+    };
+};
+
+export const addCareerComment = (careerId, comment) => {
+    return (dispatch, getState) => {
+        asyncAddCareerComment(careerId, comment).then(() => {
+            const { comments } = getState().career;
+
+            dispatch(setCareerComments(comments.concat({
+                user: {
+                    name: 'You',
+                },
+
+                createdAt: new Date(),
+                id: comments.length,
+                content: comment,
+            })));
+        });
+    };
+};
 
 export const setCareerDetails = (careerDetails) => {
     return {

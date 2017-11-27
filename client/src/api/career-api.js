@@ -48,3 +48,9 @@ export const asyncToggleCareerCommentLike = (commentId) => {
         resolve();
     }, 0));
 };
+
+export const asyncAddCareerComment = (careerId, comment) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
