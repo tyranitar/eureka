@@ -9,7 +9,7 @@ const Login = ({
     <div>
         <LoginCard isLogin={ location.pathname.includes('login') } />
         <div className="background" style={{
-            backgroundImage: `url('${ getPublicUrl('/images/background0.jpg') }')`,
+            backgroundImage: `url('${ getPublicUrl('/images/background.jpg') }')`,
         }}></div>
     </div>
 );

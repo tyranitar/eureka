@@ -18,7 +18,7 @@ const SearchBanner = ({
 }) => (
     <Paper className="search-banner" onClick={ onClick }>
         <div className="search-banner-image" style={{
-            backgroundImage: `url('${ getPublicUrl('/images/career5.jpg') }')`,
+            backgroundImage: `url('${ getPublicUrl('/images/search_banner.jpg') }')`,
         }}></div>
         <div
             className="search-banner-text"

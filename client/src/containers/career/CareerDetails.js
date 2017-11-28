@@ -27,13 +27,13 @@ import {
     resetCareerDetails,
     getCareerEducationPaths,
     getCareerPointOfContact,
+    getCareerAdvertisements,
 } from '../../actions/career-actions';
 
 import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
 import Advertisement from '../../components/common/Advertisement';
-import { getPublicUrl } from '../../utils/common';
 import './CareerDetails.css';
 
 const mapStateToProps = (state) => {
@@ -41,12 +41,14 @@ const mapStateToProps = (state) => {
         details,
         educationPaths,
         pointOfContact,
+        advertisements,
     } = state.career;
 
     return {
         details,
         educationPaths,
         pointOfContact,
+        advertisements,
     };
 };
 
@@ -66,6 +68,10 @@ const mapDispatchToProps = (dispatch) => {
 
         getCareerPointOfContact: (careerId) => {
             dispatch(getCareerPointOfContact(careerId));
+        },
+
+        getCareerAdvertisements: (careerId) => {
+            dispatch(getCareerAdvertisements(careerId));
         },
     };
 };
@@ -94,17 +100,13 @@ const renderActions = () => {
     );
 };
 
-const renderAdvertisements = () => {
-    return (
-        <div className="career-details-advertisement">
-            <Advertisement
-                href='/search'
-                imageUrl={ getPublicUrl('/images/career6.jpg') }
-                description={ 'Relevant Advertisement' }
-            />
+const renderAdvertisements = (advertisements) => (
+    advertisements.map((advertisement, idx) => (
+        <div key={ idx } className="career-details-advertisement">
+            <Advertisement { ...advertisement } />
         </div>
-    );
-};
+    ))
+);
 
 const renderCharts = ({ title, charts, icon }) => {
     return (
@@ -168,28 +170,36 @@ class CareerDetails extends Component {
             getCareerDetails,
             getCareerEducationPaths,
             getCareerPointOfContact,
+            getCareerAdvertisements,
         } = this.props;
 
         getCareerDetails(careerId);
         getCareerEducationPaths(careerId);
         getCareerPointOfContact(careerId);
+        getCareerAdvertisements(careerId);
     }
 
     render() {
         const {
-            title,
-            description,
-            charts,
-            // favorited,
-            // featured,
-            // id,
-        } = this.props.details;
-
-        const {
-            palette: {
-                primary1Color,
+            details: {
+                title,
+                description,
+                charts,
+                // favorited,
+                // featured,
+                // id,
             },
-        } = this.props.muiTheme;
+
+            pointOfContact,
+            advertisements,
+            educationPaths,
+
+            muiTheme: {
+                palette: {
+                    primary1Color,
+                },
+            },
+        } = this.props;
 
         return (
             <div>
@@ -212,8 +222,8 @@ class CareerDetails extends Component {
                         </div>
                     </Col>
                     <Col xsOffset={1} xs={3}>
-                        <PointOfContact title={ title } { ...this.props.pointOfContact } />
-                        { renderAdvertisements() }
+                        <PointOfContact title={ title } { ...pointOfContact } />
+                        { renderAdvertisements(advertisements) }
                     </Col>
                 </Row>
                 <div className="career-details-charts-container">
@@ -228,14 +238,14 @@ class CareerDetails extends Component {
                         icon: <AccountCircle color={ primary1Color } />,
                     }) }
                 </div>
-                { renderEducationPaths(this.props.educationPaths) }
+                { renderEducationPaths(educationPaths) }
             </div>
         );
     }
 
     componentWillUnmount() {
         this.props.resetCareerDetails();
-        // TODO: Also reset education paths.
+        // TODO: Also reset other stuff; or just don't reset anything.
     }
 }
 

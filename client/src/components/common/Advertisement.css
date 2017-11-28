@@ -3,12 +3,11 @@
     display: block;
     cursor: pointer;
     text-decoration: none;
+    color: inherit;
 }
 
 /* Could use this for other things. */
-.advertisement:visited {
-    color: inherit;
-}
+.advertisement:visited {}
 
 .advertisement-image {
     margin-top: -100%;

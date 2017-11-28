@@ -1,4 +1,8 @@
 const initialState = {
+    advertisements: [],
+    educationPaths: [],
+    comments: [],
+
     details: {
         title: '',
         description: '',
@@ -8,8 +12,9 @@ const initialState = {
         id: 0,
     },
 
-    educationPaths: [],
-    comments: [],
+    pointOfContact: {
+        name: '',
+    },
 };
 
 const handleSetCareerDetails = (state, action) => {
@@ -42,6 +47,12 @@ const handleSetCareerPointOfContact = (state, action) => {
     });
 };
 
+const handleSetCareerAdvertisements = (state, action) => {
+    return Object.assign({}, state, {
+        advertisements: action.careerAdvertisements,
+    });
+};
+
 const careerReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_CAREER_DETAILS':
@@ -54,6 +65,8 @@ const careerReducer = (state = initialState, action) => {
             return handleSetCareerComments(state, action);
         case 'SET_CAREER_POINT_OF_CONTACT':
             return handleSetCareerPointOfContact(state, action);
+        case 'SET_CAREER_ADVERTISEMENTS':
+            return handleSetCareerAdvertisements(state, action);
         default:
             return state;
     }

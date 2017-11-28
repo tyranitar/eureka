@@ -1,9 +1,10 @@
 import careers from '../mocks/search-results';
 import _ from 'lodash';
 
-import { getCharts } from '../mocks/career-details';
 import careerEducationPaths from '../mocks/career-education-paths';
 import { getCareerComments } from '../mocks/career-comments';
+import { getCharts } from '../mocks/career-details';
+import advertisements from '../mocks/advertisements';
 import loremIpsum from '../mocks/lorem-ipsum';
 import users from '../mocks/users';
 
@@ -47,6 +48,12 @@ export const asyncGetCareerComments = (careerId) => {
 export const asyncGetCareerPointOfContact = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(_.sample(users));
+    }, 0));
+};
+
+export const asyncGetCareerAdvertisements = (careerId) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve(_.sampleSize(advertisements, 2));
     }, 0));
 };
 

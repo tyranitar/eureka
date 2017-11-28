@@ -45,6 +45,7 @@ const PointOfContact = ({
 PointOfContact.propTypes = {
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string,
 };
 
 export default PointOfContact;

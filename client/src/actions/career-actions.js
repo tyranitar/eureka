@@ -3,6 +3,7 @@ import {
     asyncGetCareerEducationPaths,
     asyncGetCareerComments,
     asyncGetCareerPointOfContact,
+    asyncGetCareerAdvertisements,
     asyncToggleCareerCommentLike,
     asyncAddCareerComment,
 } from '../api/career-api';
@@ -35,6 +36,14 @@ export const getCareerPointOfContact = (careerId) => {
     return (dispatch, getState) => {
         asyncGetCareerPointOfContact(careerId).then((careerPointOfContact) => {
             dispatch(setCareerPointOfContact(careerPointOfContact));
+        });
+    };
+};
+
+export const getCareerAdvertisements = (careerId) => {
+    return (dispatch, getState) => {
+        asyncGetCareerAdvertisements(careerId).then((careerAdvertisements) => {
+            dispatch(setCareerAdvertisements(careerAdvertisements));
         });
     };
 };
@@ -104,5 +113,12 @@ export const setCareerPointOfContact = (careerPointOfContact) => {
     return {
         type: 'SET_CAREER_POINT_OF_CONTACT',
         careerPointOfContact,
+    };
+};
+
+export const setCareerAdvertisements = (careerAdvertisements) => {
+    return {
+        type: 'SET_CAREER_ADVERTISEMENTS',
+        careerAdvertisements,
     };
 };
