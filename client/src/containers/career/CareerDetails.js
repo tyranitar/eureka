@@ -26,6 +26,7 @@ import {
     getCareerDetails,
     resetCareerDetails,
     getCareerEducationPaths,
+    getPointOfContact,
 } from '../../actions/career-actions';
 
 import EducationPath from '../../components/career/EducationPath';
@@ -36,11 +37,16 @@ import { getPublicUrl } from '../../utils/common';
 import './CareerDetails.css';
 
 const mapStateToProps = (state) => {
-    const { details, educationPaths } = state.career;
+    const {
+        details,
+        educationPaths,
+        pointOfContact,
+    } = state.career;
 
     return {
         details,
         educationPaths,
+        pointOfContact,
     };
 };
 
@@ -56,6 +62,10 @@ const mapDispatchToProps = (dispatch) => {
 
         getCareerEducationPaths: (careerId) => {
             dispatch(getCareerEducationPaths(careerId));
+        },
+
+        getPointOfContact: (careerId) => {
+            dispatch(getPointOfContact(careerId));
         },
     };
 };
@@ -157,10 +167,12 @@ class CareerDetails extends Component {
             careerId,
             getCareerDetails,
             getCareerEducationPaths,
+            getPointOfContact,
         } = this.props;
 
         getCareerDetails(careerId);
         getCareerEducationPaths(careerId);
+        getPointOfContact(careerId);
     }
 
     render() {
@@ -200,7 +212,7 @@ class CareerDetails extends Component {
                         </div>
                     </Col>
                     <Col xsOffset={1} xs={3}>
-                        <PointOfContact title={ title } name={ 'John' } />
+                        <PointOfContact title={ title } { ...this.props.pointOfContact } />
                         { renderAdvertisements() }
                     </Col>
                 </Row>

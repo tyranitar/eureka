@@ -5,6 +5,7 @@ import { getCharts } from '../mocks/career-details';
 import careerEducationPaths from '../mocks/career-education-paths';
 import { getCareerComments } from '../mocks/career-comments';
 import loremIpsum from '../mocks/lorem-ipsum';
+import users from '../mocks/users';
 
 export const asyncGetCareerDetails = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
@@ -40,6 +41,12 @@ export const asyncGetCareerEducationPaths = (careerId) => {
 export const asyncGetCareerComments = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(getCareerComments());
+    }, 0));
+};
+
+export const asyncGetPointOfContact = (careerId) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve(_.sample(users));
     }, 0));
 };
 

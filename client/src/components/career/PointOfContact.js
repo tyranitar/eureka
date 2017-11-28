@@ -15,9 +15,10 @@ import {
 
 import './PointOfContact.css';
 
-const renderAvatar = () => {
+const renderAvatar = (imageUrl) => {
     return (
         <Avatar
+            src={ imageUrl }
             icon={ <Person /> }
             backgroundColor={ cyan500 }
         />
@@ -27,6 +28,7 @@ const renderAvatar = () => {
 const PointOfContact = ({
     title,
     name,
+    imageUrl,
 }) => (
     <Paper>
         <div className="point-of-contact-text" style={{
@@ -34,7 +36,7 @@ const PointOfContact = ({
             }}>
             { `Got questions? Talk to a real ${ title }!` }
         </div>
-        <ListItem leftAvatar={ renderAvatar() }>
+        <ListItem leftAvatar={ renderAvatar(imageUrl) }>
             { name }
         </ListItem>
     </Paper>
