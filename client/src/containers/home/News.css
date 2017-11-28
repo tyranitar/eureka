@@ -1,0 +1,7 @@
+.news-container {
+    padding: 16px;
+}
+
+.news-row:not(:first-child) {
+    margin-top: 16px;
+}

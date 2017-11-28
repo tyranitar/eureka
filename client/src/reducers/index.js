@@ -5,6 +5,7 @@ import questionnaire from './questionnaire-reducer';
 import career from './career-reducer';
 import search from './search-reducer';
 import login from './login-reducer';
+import news from './news-reducer';
 
 const reducers = combineReducers({
     router: routerReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
     career,
     search,
     login,
+    news,
 });
 
 export default reducers;
