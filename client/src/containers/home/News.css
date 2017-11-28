@@ -2,6 +2,18 @@
     padding: 16px;
 }
 
+.news-row-title:not(:first-child) {
+    margin-top: 32px;
+}
+
+.news-row-title {
+    font-size: 24px;
+}
+
 .news-row:not(:first-child) {
     margin-top: 16px;
+}
+
+.news-row {
+    text-align: left;
 }

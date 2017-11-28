@@ -88,7 +88,7 @@ const renderAdvertisements = () => {
     return (
         <div className="career-details-advertisement">
             <Advertisement
-                href='http://localhost:3000/search'
+                href='/search'
                 imageUrl={ getPublicUrl('/images/career6.jpg') }
                 description={ 'Relevant Advertisement' }
             />

@@ -12,18 +12,19 @@ import './NewsItem.css';
 
 const NewsItem = ({
     href,
-    type,
     title,
-    content,
+    subtitle,
     imageUrl,
 }) => (
-    <a className="news-item" href={ href }>
+    <a className="news-item" href={ href } target="_blank">
         <Card >
             <CardMedia>
-                <img src={ imageUrl } alt="" />
+                <div className="news-item-image" style={{
+                    backgroundImage: `url('${ imageUrl }')`,
+                }}></div>
             </CardMedia>
             <div>
-                <CardTitle title={ title } subtitle={ type } />
+                <CardTitle title={ title } subtitle={ subtitle } />
             </div>
         </Card>
     </a>
@@ -31,9 +32,8 @@ const NewsItem = ({
 
 NewsItem.propTypes = {
     href: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
 };
 

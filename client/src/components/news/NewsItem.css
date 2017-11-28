@@ -1,5 +1,12 @@
 .news-item {
     display: block;
-    text-align: left;
     text-decoration: none;
+}
+
+.news-item-image {
+    padding-top: 75%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
