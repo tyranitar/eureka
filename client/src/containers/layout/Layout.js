@@ -55,9 +55,9 @@ const Layout = ({
 
             iconElementRight={
                 <IconMenu
-                    iconButtonElement={ <IconButton><Menu /></IconButton> }
-                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                        iconButtonElement={ <IconButton><Menu /></IconButton> }
+                        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
                     <MenuItem primaryText="Home" leftIcon={ <Home /> } onClick={ pushPath('/') } />
                     <MenuItem primaryText="Search" leftIcon={ <Search /> } onClick={ pushPath('/search') } />
                     <Divider />
