@@ -2,7 +2,7 @@ import {
     asyncGetCareerDetails,
     asyncGetCareerEducationPaths,
     asyncGetCareerComments,
-    asyncGetPointOfContact,
+    asyncGetCareerPointOfContact,
     asyncToggleCareerCommentLike,
     asyncAddCareerComment,
 } from '../api/career-api';
@@ -31,9 +31,9 @@ export const getCareerComments = (careerId) => {
     };
 };
 
-export const getPointOfContact = (careerId) => {
+export const getCareerPointOfContact = (careerId) => {
     return (dispatch, getState) => {
-        asyncGetPointOfContact(careerId).then((careerPointOfContact) => {
+        asyncGetCareerPointOfContact(careerId).then((careerPointOfContact) => {
             dispatch(setCareerPointOfContact(careerPointOfContact));
         });
     };

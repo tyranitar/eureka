@@ -36,7 +36,7 @@ const handleSetCareerComments = (state, action) => {
     });
 };
 
-const handleSetPointOfContact = (state, action) => {
+const handleSetCareerPointOfContact = (state, action) => {
     return Object.assign({}, state, {
         pointOfContact: action.careerPointOfContact,
     });
@@ -53,7 +53,7 @@ const careerReducer = (state = initialState, action) => {
         case 'SET_CAREER_COMMENTS':
             return handleSetCareerComments(state, action);
         case 'SET_CAREER_POINT_OF_CONTACT':
-            return handleSetPointOfContact(state, action);
+            return handleSetCareerPointOfContact(state, action);
         default:
             return state;
     }

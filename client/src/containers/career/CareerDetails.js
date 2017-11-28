@@ -26,7 +26,7 @@ import {
     getCareerDetails,
     resetCareerDetails,
     getCareerEducationPaths,
-    getPointOfContact,
+    getCareerPointOfContact,
 } from '../../actions/career-actions';
 
 import EducationPath from '../../components/career/EducationPath';
@@ -64,8 +64,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getCareerEducationPaths(careerId));
         },
 
-        getPointOfContact: (careerId) => {
-            dispatch(getPointOfContact(careerId));
+        getCareerPointOfContact: (careerId) => {
+            dispatch(getCareerPointOfContact(careerId));
         },
     };
 };
@@ -167,12 +167,12 @@ class CareerDetails extends Component {
             careerId,
             getCareerDetails,
             getCareerEducationPaths,
-            getPointOfContact,
+            getCareerPointOfContact,
         } = this.props;
 
         getCareerDetails(careerId);
         getCareerEducationPaths(careerId);
-        getPointOfContact(careerId);
+        getCareerPointOfContact(careerId);
     }
 
     render() {

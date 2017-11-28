@@ -44,7 +44,7 @@ export const asyncGetCareerComments = (careerId) => {
     }, 0));
 };
 
-export const asyncGetPointOfContact = (careerId) => {
+export const asyncGetCareerPointOfContact = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(_.sample(users));
     }, 0));
