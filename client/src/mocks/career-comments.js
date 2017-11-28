@@ -1,26 +1,11 @@
 import _ from 'lodash';
 
-import { getPublicUrl } from '../utils/common';
 import loremIpsum from './lorem-ipsum';
+import users from './users';
 
-export default [{
-    user: {
-        name: 'John Doe',
-        imageUrl: getPublicUrl('/images/john.jpg'),
-    },
-
-    createdAt: new Date(),
+export const getCareerComments = () => (_.sampleSize(users, _.random(1, 3)).map((user, idx) => ({
+    user,
     content: _.sample(loremIpsum),
-}, {
-    user: {
-        name: 'Jane Doe',
-        imageUrl: getPublicUrl('/images/jane.jpg'),
-    },
-
     createdAt: new Date(),
-    content: _.sample(loremIpsum),
-}].map((comment, idx) => (
-    Object.assign({}, comment, {
-        id: idx,
-    })
-));
+    id: idx,
+})));

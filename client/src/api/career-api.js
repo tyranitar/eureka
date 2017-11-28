@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { getCharts } from '../mocks/career-details';
 import careerEducationPaths from '../mocks/career-education-paths';
-import careerComments from '../mocks/career-comments';
+import { getCareerComments } from '../mocks/career-comments';
 import loremIpsum from '../mocks/lorem-ipsum';
 
 export const asyncGetCareerDetails = (careerId) => {
@@ -39,7 +39,7 @@ export const asyncGetCareerEducationPaths = (careerId) => {
 
 export const asyncGetCareerComments = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
-        resolve(careerComments);
+        resolve(getCareerComments());
     }, 0));
 };
 
