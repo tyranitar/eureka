@@ -106,6 +106,10 @@ class Roadmap extends Component {
             closeDialog,
         } = this.props;
 
+        this.setState({
+            addTodoTextFieldValue: '',
+        });
+
         openDialog({
             title: 'Add Todo',
             width: '300px',

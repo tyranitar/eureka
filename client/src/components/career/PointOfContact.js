@@ -29,6 +29,7 @@ const PointOfContact = ({
     title,
     name,
     imageUrl,
+    onClick,
 }) => (
     <Paper>
         <div className="point-of-contact-text" style={{
@@ -36,7 +37,9 @@ const PointOfContact = ({
             }}>
             { `Got questions? Talk to a real ${ title }!` }
         </div>
-        <ListItem leftAvatar={ renderAvatar(imageUrl) }>
+        <ListItem
+            leftAvatar={ renderAvatar(imageUrl) }
+            onClick={ onClick }>
             { name }
         </ListItem>
     </Paper>
@@ -46,6 +49,7 @@ PointOfContact.propTypes = {
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 export default PointOfContact;

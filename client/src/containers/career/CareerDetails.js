@@ -14,6 +14,9 @@ import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 import {
     Checkbox,
     IconButton,
+    FlatButton,
+    RaisedButton,
+    TextField,
 } from 'material-ui';
 
 import {
@@ -30,7 +33,9 @@ import {
     getCareerAdvertisements,
 } from '../../actions/career-actions';
 
+import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import { openSnackbar } from '../../actions/snackbar-actions';
+import { sendMessageToUser } from '../../actions/user-actions';
 import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
@@ -75,6 +80,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getCareerAdvertisements(careerId));
         },
 
+        sendMessageToUser: (user, message) => {
+            dispatch(sendMessageToUser(user, message));
+        },
+
         // TODO: Implement this.
         onInstitutionClick: () => {
             dispatch(openSnackbar({
@@ -87,6 +96,18 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(openSnackbar({
                 message: "Share Career has not been implemented yet!",
             }));
+        },
+
+        openDialog: (props) => {
+            dispatch(openDialog(props));
+        },
+
+        closeDialog: () => {
+            dispatch(closeDialog());
+        },
+
+        openSnackbar: (props) => {
+            dispatch(openSnackbar(props));
         },
     };
 };
@@ -181,6 +202,14 @@ const renderEducationPaths = (educationPaths, onInstitutionClick) => {
 };
 
 class CareerDetails extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sendMessageTextFieldValue: "",
+        };
+    }
+
     componentDidMount() {
         const {
             careerId,
@@ -194,6 +223,73 @@ class CareerDetails extends Component {
         getCareerEducationPaths(careerId);
         getCareerPointOfContact(careerId);
         getCareerAdvertisements(careerId);
+    }
+
+    updateSendMessageTextFieldValue = (evt, sendMessageTextFieldValue) => {
+        this.setState({
+            sendMessageTextFieldValue,
+        });
+    }
+
+    onSendMessageButtonClick = () => {
+        const message = this.state.sendMessageTextFieldValue;
+
+        const {
+            closeDialog,
+            openSnackbar,
+            pointOfContact,
+            sendMessageToUser,
+        } = this.props;
+
+        if (message) {
+            sendMessageToUser(pointOfContact, message);
+            closeDialog();
+        } else {
+            openSnackbar({
+                message: "You may not send a blank message",
+            });
+        }
+    }
+
+    onPointOfContactClick = () => {
+        const {
+            openDialog,
+            closeDialog,
+            pointOfContact,
+        } = this.props;
+
+        this.setState({
+            sendMessageTextFieldValue: "",
+        });
+
+        openDialog({
+            title: `Message ${ pointOfContact.name }`,
+            width: '500px',
+
+            actions: [
+                <FlatButton
+                    label="Cancel"
+                    primary={ true }
+                    onClick={ closeDialog }
+                />,
+
+                <RaisedButton
+                    style={{ marginLeft: '8px' }}
+                    label="Send"
+                    primary={ true }
+                    onClick={ this.onSendMessageButtonClick }
+                />,
+            ],
+
+            children: (
+                <TextField
+                    onChange={ this.updateSendMessageTextFieldValue }
+                    hintText="Type your message here."
+                    fullWidth={ true }
+                    multiLine={ true }
+                />
+            )
+        });
     }
 
     render() {
@@ -241,7 +337,11 @@ class CareerDetails extends Component {
                         </div>
                     </Col>
                     <Col xsOffset={1} xs={3}>
-                        <PointOfContact title={ title } { ...pointOfContact } />
+                        <PointOfContact
+                            title={ title }
+                            { ...pointOfContact }
+                            onClick={ this.onPointOfContactClick }
+                        />
                         { renderAdvertisements(advertisements) }
                     </Col>
                 </Row>
