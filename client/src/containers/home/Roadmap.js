@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import Add from 'material-ui/svg-icons/content/add';
 
 import {
     Checkbox,
@@ -159,6 +160,11 @@ class Roadmap extends Component {
                                     toggleTodo,
                                     primaryColor: primary1Color,
                                 }) }
+                                <Step>
+                                    <StepButton icon={ <Add color={ primary1Color } /> }>
+                                        Add Milestone
+                                    </StepButton>
+                                </Step>
                             </Stepper>
                         </div>
                     </Col>
