@@ -53,7 +53,7 @@ export const asyncGetCareerPointOfContact = (careerId) => {
 
 export const asyncGetCareerAdvertisements = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
-        resolve(_.sampleSize(advertisements, 2));
+        resolve(_.sampleSize(advertisements, 1));
     }, 0));
 };
 

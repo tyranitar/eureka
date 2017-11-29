@@ -39,5 +39,5 @@ export default {
         subtitle: `${ _.sample(loremIpsum).slice(0, 64) }...`,
     }],
 
-    advertisements,
+    advertisements: _.sampleSize(advertisements, 4),
 };
