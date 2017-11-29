@@ -26,8 +26,9 @@ const getIcon = (type, color) => {
 }
 
 const renderInstitutions = ({
-    institutions,
     title,
+    institutions,
+    onInstitutionClick,
     backgroundColor,
     descriptionColor,
     color,
@@ -38,9 +39,12 @@ const renderInstitutions = ({
             name,
             description,
         }, idx) => (
-            <ListItem key={ idx } innerDivStyle={{
+            <ListItem
+                key={ idx }
+                innerDivStyle={{
                     padding: '8px',
-                }}>
+                }}
+                onClick={ onInstitutionClick }>
                 <Row>
                     <Col xs={3}>
                         <div className="education-path-institution-image" style={{
@@ -74,6 +78,7 @@ const EducationPath = ({
     type,
     title,
     institutions,
+    onInstitutionClick,
 
     muiTheme: {
         palette: {
@@ -94,8 +99,9 @@ const EducationPath = ({
         />
         <CardMedia expandable={ true }>
             { renderInstitutions({
-                institutions,
                 title,
+                institutions,
+                onInstitutionClick,
                 backgroundColor: primary1Color,
                 descriptionColor: accent3Color,
                 color: alternateTextColor,

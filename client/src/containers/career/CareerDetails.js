@@ -30,6 +30,7 @@ import {
     getCareerAdvertisements,
 } from '../../actions/career-actions';
 
+import { openSnackbar } from '../../actions/snackbar-actions';
 import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
@@ -73,10 +74,24 @@ const mapDispatchToProps = (dispatch) => {
         getCareerAdvertisements: (careerId) => {
             dispatch(getCareerAdvertisements(careerId));
         },
+
+        // TODO: Implement this.
+        onInstitutionClick: () => {
+            dispatch(openSnackbar({
+                message: "Institution Page has not been implemented yet!",
+            }));
+        },
+
+        // TODO: Implement this.
+        onShareButtonClick: () => {
+            dispatch(openSnackbar({
+                message: "Share Career has not been implemented yet!",
+            }));
+        },
     };
 };
 
-const renderActions = () => {
+const renderActions = (onShareButtonClick) => {
     return (
         <div className="career-details-actions">
             <Checkbox
@@ -91,9 +106,11 @@ const renderActions = () => {
                 uncheckedIcon={ <GpsNotFixed /> }
                 iconStyle={{ fill: blue500 }}
             />
-            <IconButton style={{
-                marginLeft: '-12px',
-            }}>
+            <IconButton
+                style={{
+                    marginLeft: '-12px',
+                }}
+                onClick={ onShareButtonClick }>
                 <Share color={ cyan500 } />
             </IconButton>
         </div>
@@ -134,13 +151,13 @@ const renderCharts = ({ title, charts, icon }) => {
     );
 };
 
-const renderEducationPaths = (educationPaths) => {
+const renderEducationPaths = (educationPaths, onInstitutionClick) => {
     const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
     const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
 
     const educationPathMapper = (educationPath, idx) => (
         <div key={ idx } className="career-details-education-path">
-            <EducationPath { ...educationPath } />
+            <EducationPath { ...educationPath } onInstitutionClick={ onInstitutionClick } />
         </div>
     );
 
@@ -193,6 +210,8 @@ class CareerDetails extends Component {
             pointOfContact,
             advertisements,
             educationPaths,
+            onInstitutionClick,
+            onShareButtonClick,
 
             muiTheme: {
                 palette: {
@@ -212,7 +231,7 @@ class CareerDetails extends Component {
                         </div>
                     </Col>
                     <Col xsOffset={1} xs={3}>
-                        { renderActions() }
+                        { renderActions(onShareButtonClick) }
                     </Col>
                 </Row>
                 <Row className="career-details-row">
@@ -238,7 +257,7 @@ class CareerDetails extends Component {
                         icon: <AccountCircle color={ primary1Color } />,
                     }) }
                 </div>
-                { renderEducationPaths(educationPaths) }
+                { renderEducationPaths(educationPaths, onInstitutionClick) }
             </div>
         );
     }

@@ -20,6 +20,7 @@ import {
     addCareerComment,
 } from '../../actions/career-actions';
 
+import { openSnackbar } from '../../actions/snackbar-actions';
 import './CareerComments.css';
 
 const mapStateToProps = (state) => {
@@ -43,12 +44,20 @@ const mapDispatchToProps = (dispatch) => {
         addCareerComment: (careerId, comment) => {
             dispatch(addCareerComment(careerId, comment));
         },
+
+        // TODO: Implement this.
+        onShareButtonClick: () => {
+            dispatch(openSnackbar({
+                message: "Share Comment has not been implemented yet!",
+            }));
+        },
     };
 };
 
 const renderComments = ({
     comments,
     onLikeButtonClick,
+    onShareButtonClick,
 
     palette: {
         primary1Color,
@@ -86,7 +95,7 @@ const renderComments = ({
                     <IconButton onClick={ onLikeButtonClick.bind(null, comment.id) }>
                         { comment.liked ? <ThumbUp color={ blue500 } /> : <ThumbUp color={ grey300 } /> }
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={ onShareButtonClick }>
                         <Share color={ cyan500 } />
                     </IconButton>
                 </div>
@@ -136,6 +145,7 @@ class CareerComments extends Component {
         const {
             comments,
             onLikeButtonClick,
+            onShareButtonClick,
         } = this.props;
 
         const {
@@ -160,6 +170,7 @@ class CareerComments extends Component {
                     { renderComments({
                         comments,
                         onLikeButtonClick,
+                        onShareButtonClick,
                         palette: this.props.muiTheme.palette,
                     }) }
                 </div>
