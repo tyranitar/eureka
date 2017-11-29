@@ -47,163 +47,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getRoadmap: () => {
-            dispatch(getRoadmap());
-        },
-
-        setActiveStep: (activeStep) => {
-            dispatch(setActiveStep(activeStep));
-        },
-
-        completeStep: (completedStep) => {
-            dispatch(completeStep(completedStep));
-        },
-
-        toggleTodo: (activeStep, toggledTodo) => {
-            dispatch(toggleTodo(activeStep, toggledTodo));
-        },
-
-        addTodo: (activeStep, todoTitle) => {
-            dispatch(addTodo(activeStep, todoTitle));
-        },
-
-        openDialog: (props) => {
-            dispatch(openDialog(props));
-        },
-
-        closeDialog: () => {
-            dispatch(closeDialog());
-        },
-
-        openSnackbar: (props) => {
-            dispatch(openSnackbar(props));
-        },
+        getRoadmap: () => dispatch(getRoadmap()),
+        setActiveStep: (activeStep) => dispatch(setActiveStep(activeStep)),
+        completeStep: (completedStep) => dispatch(completeStep(completedStep)),
+        toggleTodo: (activeStep,toggledTodo) => dispatch(toggleTodo(activeStep,toggledTodo)),
+        addTodo: (activeStep,todoTitle) => dispatch(addTodo(activeStep,todoTitle)),
+        openDialog: (props) => dispatch(openDialog(props)),
+        closeDialog: () => dispatch(closeDialog()),
+        openSnackbar: (props) => dispatch(openSnackbar(props)),
     };
 };
-
-const renderStepTodos = ({
-    activeStep,
-    todos,
-    toggleTodo,
-    disabled,
-}) => (
-    todos.map(({
-        title,
-        completed,
-    }, idx) => (
-        <Checkbox
-            className="roadmap-step-checkbox"
-            key={ idx }
-            label={ title }
-            checked={ completed }
-            onCheck={ toggleTodo.bind(null, activeStep, idx) }
-            disabled={ disabled }
-        />
-    ))
-);
-
-const isCompleteButtonDisabled = (todos) => {
-    let ret = false;
-
-    todos.some((todo) => {
-        ret = !todo.completed;
-        return ret;
-    });
-
-    return ret;
-};
-
-const onAddTodoCurry = ({
-    activeStep,
-
-    addTodoProps: {
-        openDialog,
-        closeDialog,
-        updateTextFieldValue,
-        onAddButtonClick,
-    },
-}) => () => {
-    openDialog({
-        title: 'Add Todo',
-        width: '300px',
-
-        actions: [
-            <FlatButton
-                primary={ true }
-                label="Cancel"
-                onClick={ closeDialog }
-            />,
-
-            <RaisedButton
-                style={{ marginLeft: '8px' }}
-                primary={ true }
-                label="Add"
-                onClick={ () => { onAddButtonClick(activeStep) } }
-            />
-        ],
-
-        children: (
-            <TextField
-                onChange={ updateTextFieldValue }
-                hintText="Todo Title"
-                fullWidth={ true }
-            />
-        ),
-    });
-};
-
-const renderSteps = ({
-    steps,
-    setActiveStep,
-    completeStep,
-    toggleTodo,
-    addTodoProps,
-    primaryColor,
-}) => (
-    steps.map(({
-        title,
-        description,
-        completed,
-        todos,
-    }, idx) => (
-        <Step
-            key={ idx }
-            completed={ completed }>
-            <StepButton onClick={ setActiveStep.bind(null, idx) }>
-                { title }
-            </StepButton>
-            <StepContent>
-                <p>{ description }</p>
-                { todos.length ? <p style={{ color: primaryColor }}>{ 'Todos:' }</p> : null }
-                { renderStepTodos({
-                    activeStep: idx,
-                    todos,
-                    toggleTodo,
-                    disabled: completed,
-                }) }
-                <FlatButton
-                    disabled={ completed }
-                    className="roadmap-step-add-todo-button"
-                    label="Add Todo"
-                    primary={ true }
-                    icon={ <Add /> }
-                    onClick={ onAddTodoCurry({
-                        activeStep: idx,
-                        addTodoProps,
-                    }) }
-                />
-                <div className="roadmap-step-buttons">
-                    <RaisedButton
-                        disabled={ completed || isCompleteButtonDisabled(todos) }
-                        label="Complete"
-                        primary={ true }
-                        onClick={ completeStep.bind(null, idx) }
-                    />
-                </div>
-            </StepContent>
-        </Step>
-    ))
-);
 
 class Roadmap extends Component {
     constructor(props) {
@@ -212,6 +65,14 @@ class Roadmap extends Component {
         this.state = {
             addTodoTextFieldValue: '',
         };
+    }
+
+    componentDidMount() {
+        const {
+            getRoadmap,
+        } = this.props;
+
+        getRoadmap();
     }
 
     updateAddTodoTextFieldValue = (evt, addTodoTextFieldValue) => {
@@ -239,23 +100,120 @@ class Roadmap extends Component {
         }
     }
 
-    componentDidMount() {
+    onAddTodoCurry = (step) => () => {
         const {
-            getRoadmap,
+            openDialog,
+            closeDialog,
         } = this.props;
 
-        getRoadmap();
+        openDialog({
+            title: 'Add Todo',
+            width: '300px',
+
+            actions: [
+                <FlatButton
+                    primary={ true }
+                    label="Cancel"
+                    onClick={ closeDialog }
+                />,
+
+                <RaisedButton
+                    style={{ marginLeft: '8px' }}
+                    primary={ true }
+                    label="Add"
+                    onClick={ () => { this.onDialogAddTodoButtonClick(step) } }
+                />
+            ],
+
+            children: (
+                <TextField
+                    onChange={ this.updateAddTodoTextFieldValue }
+                    hintText="Todo Title"
+                    fullWidth={ true }
+                />
+            ),
+        });
+    }
+
+    isCompleteButtonDisabled = (todos) => {
+        let ret = false;
+
+        todos.some((todo) => {
+            ret = !todo.completed;
+            return ret;
+        });
+
+        return ret;
+    }
+
+    renderStepTodos = (step, todos, disabled) => (
+        todos.map(({
+            title,
+            completed,
+        }, idx) => (
+            <Checkbox
+                className="roadmap-step-checkbox"
+                key={ idx }
+                label={ title }
+                checked={ completed }
+                onCheck={ () => { this.props.toggleTodo(step, idx) } }
+                disabled={ disabled }
+            />
+        ))
+    )
+
+    renderSteps = () => {
+        const {
+            steps,
+            setActiveStep,
+            completeStep,
+            muiTheme: {
+                palette: {
+                    primary1Color,
+                },
+            },
+        } = this.props;
+
+        return steps.map(({
+            title,
+            description,
+            completed,
+            todos,
+        }, idx) => (
+            <Step
+                key={ idx }
+                completed={ completed }>
+                <StepButton onClick={ setActiveStep.bind(null, idx) }>
+                    { title }
+                </StepButton>
+                <StepContent>
+                    <p>{ description }</p>
+                    { todos.length ? <p style={{ color: primary1Color }}>{ 'Todos:' }</p> : null }
+                    { this.renderStepTodos(idx, todos, completed) }
+                    <FlatButton
+                        disabled={ completed }
+                        className="roadmap-step-add-todo-button"
+                        label="Add Todo"
+                        primary={ true }
+                        icon={ <Add /> }
+                        onClick={ this.onAddTodoCurry(idx) }
+                    />
+                    <div className="roadmap-step-buttons">
+                        <RaisedButton
+                            disabled={ completed || this.isCompleteButtonDisabled(todos) }
+                            label="Complete"
+                            primary={ true }
+                            onClick={ completeStep.bind(null, idx) }
+                        />
+                    </div>
+                </StepContent>
+            </Step>
+        ));
     }
 
     render() {
         const {
-            steps,
             activeStep,
-            setActiveStep,
-            completeStep,
-            toggleTodo,
-            openDialog,
-            closeDialog,
             muiTheme: {
                 palette: {
                     primary1Color,
@@ -272,20 +230,7 @@ class Roadmap extends Component {
                                 activeStep={ activeStep }
                                 linear={ false }
                                 orientation="vertical">
-                                { renderSteps({
-                                    steps,
-                                    setActiveStep,
-                                    completeStep,
-                                    toggleTodo,
-                                    primaryColor: primary1Color,
-
-                                    addTodoProps: {
-                                        updateTextFieldValue: this.updateAddTodoTextFieldValue,
-                                        onAddButtonClick: this.onDialogAddTodoButtonClick,
-                                        openDialog,
-                                        closeDialog,
-                                    },
-                                }) }
+                                { this.renderSteps() }
                                 <Step>
                                     <StepButton icon={ <Add color={ primary1Color } /> }>
                                         Add Milestone
