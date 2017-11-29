@@ -65,6 +65,7 @@ const renderStepTodos = ({
     activeStep,
     todos,
     toggleTodo,
+    disabled,
 }) => (
     todos.map(({
         title,
@@ -76,9 +77,21 @@ const renderStepTodos = ({
             label={ title }
             checked={ completed }
             onCheck={ toggleTodo.bind(null, activeStep, idx) }
+            disabled={ disabled }
         />
     ))
 );
+
+const isCompleteButtonDisabled = (todos) => {
+    let ret = false;
+
+    todos.some((todo) => {
+        ret = !todo.completed;
+        return ret;
+    });
+
+    return ret;
+};
 
 const renderSteps = ({
     steps,
@@ -101,15 +114,16 @@ const renderSteps = ({
             </StepButton>
             <StepContent>
                 <p>{ description }</p>
-                <p style={{ color: primaryColor }}>{ 'Todos:' }</p>
+                { todos.length ? <p style={{ color: primaryColor }}>{ 'Todos:' }</p> : null }
                 { renderStepTodos({
                     activeStep: idx,
                     todos,
                     toggleTodo,
+                    disabled: completed,
                 }) }
                 <div className="roadmap-step-buttons">
                     <RaisedButton
-                        disabled={ completed }
+                        disabled={ completed || isCompleteButtonDisabled(todos) }
                         label="Complete"
                         primary={ true }
                         onClick={ completeStep.bind(null, idx) }
