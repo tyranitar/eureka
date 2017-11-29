@@ -5,6 +5,7 @@ import questionnaire from './questionnaire-reducer';
 import favorites from './favorites-reducer';
 import roadmap from './roadmap-reducer';
 import career from './career-reducer';
+import dialog from './dialog-reducer';
 import search from './search-reducer';
 import login from './login-reducer';
 import news from './news-reducer';
@@ -15,6 +16,7 @@ const reducers = combineReducers({
     favorites,
     roadmap,
     career,
+    dialog,
     search,
     login,
     news,

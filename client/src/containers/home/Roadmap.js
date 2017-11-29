@@ -24,6 +24,7 @@ import {
     toggleTodo,
 } from '../../actions/roadmap-actions';
 
+import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import './Roadmap.css';
 
 // TODO: Add roadmap milestone functionality (as final step with custom icon).
@@ -58,6 +59,14 @@ const mapDispatchToProps = (dispatch) => {
 
         toggleTodo: (activeStep, toggledTodo) => {
             dispatch(toggleTodo(activeStep, toggledTodo));
+        },
+
+        openDialog: (props) => {
+            dispatch(openDialog(props));
+        },
+
+        closeDialog: () => {
+            dispatch(closeDialog());
         },
     };
 };
@@ -94,11 +103,18 @@ const isCompleteButtonDisabled = (todos) => {
     return ret;
 };
 
+const onAddTodoCurry = ({
+    dialogActions,
+}) => () => {
+    dialogActions.openDialog({});
+};
+
 const renderSteps = ({
     steps,
     setActiveStep,
     completeStep,
     toggleTodo,
+    dialogActions,
     primaryColor,
 }) => (
     steps.map(({
@@ -127,6 +143,9 @@ const renderSteps = ({
                     label="Add Todo"
                     primary={ true }
                     icon={ <Add /> }
+                    onClick={ onAddTodoCurry({
+                        dialogActions,
+                    }) }
                 />
                 <div className="roadmap-step-buttons">
                     <RaisedButton
@@ -157,7 +176,8 @@ class Roadmap extends Component {
             setActiveStep,
             completeStep,
             toggleTodo,
-
+            openDialog,
+            closeDialog,
             muiTheme: {
                 palette: {
                     primary1Color,
@@ -180,6 +200,11 @@ class Roadmap extends Component {
                                     completeStep,
                                     toggleTodo,
                                     primaryColor: primary1Color,
+
+                                    dialogActions: {
+                                        openDialog,
+                                        closeDialog,
+                                    },
                                 }) }
                                 <Step>
                                     <StepButton icon={ <Add color={ primary1Color } /> }>

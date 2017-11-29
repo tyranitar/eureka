@@ -13,14 +13,16 @@ import {
     IconMenu,
     MenuItem,
     Divider,
+    Dialog,
 } from 'material-ui';
 
+import { closeDialog } from '../../actions/dialog-actions';
 import { logout } from '../../actions/login-actions';
 import './Layout.css';
 
 const mapStateToProps = (state) => {
     return {
-        //
+        dialog: state.dialog,
     };
 };
 
@@ -35,6 +37,10 @@ const mapDispatchToProps = (dispatch) => {
         logout: () => {
             dispatch(logout());
         },
+
+        closeDialog: () => {
+            dispatch(closeDialog());
+        },
     };
 };
 
@@ -42,6 +48,8 @@ const Layout = ({
     children,
     pushPath,
     logout,
+    dialog,
+    closeDialog,
 }) => (
     <div className="layout">
         <AppBar
@@ -66,6 +74,14 @@ const Layout = ({
             }
         />
         { children }
+        <Dialog
+            open={ dialog.open }
+            title={ dialog.title }
+            actions={ dialog.actions }
+            contentStyle={{ width: dialog.width }}
+            onRequestClose={ closeDialog }>
+            { dialog.children }
+        </Dialog>
     </div>
 );
 
