@@ -8,6 +8,7 @@ import {
     Checkbox,
     FlatButton,
     RaisedButton,
+    TextField,
 } from 'material-ui';
 
 import {
@@ -22,13 +23,14 @@ import {
     setActiveStep,
     completeStep,
     toggleTodo,
+    addTodo,
 } from '../../actions/roadmap-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
+import { openSnackbar } from '../../actions/snackbar-actions';
 import './Roadmap.css';
 
 // TODO: Add roadmap milestone functionality (as final step with custom icon).
-// TODO: Add roadmap todo functionality.
 // TODO: Add reminder functionality.
 
 const mapStateToProps = (state) => {
@@ -61,12 +63,20 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(toggleTodo(activeStep, toggledTodo));
         },
 
+        addTodo: (activeStep, todoTitle) => {
+            dispatch(addTodo(activeStep, todoTitle));
+        },
+
         openDialog: (props) => {
             dispatch(openDialog(props));
         },
 
         closeDialog: () => {
             dispatch(closeDialog());
+        },
+
+        openSnackbar: (props) => {
+            dispatch(openSnackbar(props));
         },
     };
 };
@@ -104,9 +114,42 @@ const isCompleteButtonDisabled = (todos) => {
 };
 
 const onAddTodoCurry = ({
-    dialogActions,
+    activeStep,
+
+    addTodoProps: {
+        openDialog,
+        closeDialog,
+        updateTextFieldValue,
+        onAddButtonClick,
+    },
 }) => () => {
-    dialogActions.openDialog({});
+    openDialog({
+        title: 'Add Todo',
+        width: '300px',
+
+        actions: [
+            <FlatButton
+                primary={ true }
+                label="Cancel"
+                onClick={ closeDialog }
+            />,
+
+            <RaisedButton
+                style={{ marginLeft: '8px' }}
+                primary={ true }
+                label="Add"
+                onClick={ () => { onAddButtonClick(activeStep) } }
+            />
+        ],
+
+        children: (
+            <TextField
+                onChange={ updateTextFieldValue }
+                hintText="Todo Title"
+                fullWidth={ true }
+            />
+        ),
+    });
 };
 
 const renderSteps = ({
@@ -114,7 +157,7 @@ const renderSteps = ({
     setActiveStep,
     completeStep,
     toggleTodo,
-    dialogActions,
+    addTodoProps,
     primaryColor,
 }) => (
     steps.map(({
@@ -139,12 +182,14 @@ const renderSteps = ({
                     disabled: completed,
                 }) }
                 <FlatButton
+                    disabled={ completed }
                     className="roadmap-step-add-todo-button"
                     label="Add Todo"
                     primary={ true }
                     icon={ <Add /> }
                     onClick={ onAddTodoCurry({
-                        dialogActions,
+                        activeStep: idx,
+                        addTodoProps,
                     }) }
                 />
                 <div className="roadmap-step-buttons">
@@ -161,6 +206,39 @@ const renderSteps = ({
 );
 
 class Roadmap extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            addTodoTextFieldValue: '',
+        };
+    }
+
+    updateAddTodoTextFieldValue = (evt, addTodoTextFieldValue) => {
+        this.setState({
+            addTodoTextFieldValue,
+        });
+    }
+
+    onDialogAddTodoButtonClick = (activeStep) => {
+        const todoTitle = this.state.addTodoTextFieldValue;
+
+        const {
+            addTodo,
+            closeDialog,
+            openSnackbar,
+        } = this.props;
+
+        if (todoTitle) {
+            addTodo(activeStep, todoTitle);
+            closeDialog();
+        } else {
+            openSnackbar({
+                message: "Please enter a title for the todo",
+            });
+        }
+    }
+
     componentDidMount() {
         const {
             getRoadmap,
@@ -201,7 +279,9 @@ class Roadmap extends Component {
                                     toggleTodo,
                                     primaryColor: primary1Color,
 
-                                    dialogActions: {
+                                    addTodoProps: {
+                                        updateTextFieldValue: this.updateAddTodoTextFieldValue,
+                                        onAddButtonClick: this.onDialogAddTodoButtonClick,
                                         openDialog,
                                         closeDialog,
                                     },

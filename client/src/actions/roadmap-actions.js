@@ -2,6 +2,7 @@ import {
     asyncGetRoadmap,
     asyncCompleteStep,
     asyncToggleTodo,
+    asyncAddTodo,
 } from '../api/roadmap-api';
 
 export const getRoadmap = () => {
@@ -47,4 +48,14 @@ export const toggleTodo = (activeStep, toggledTodo) => {
             });
         });
     };
+};
+
+export const addTodo = (activeStep, todoTitle) => (dispatch, getState) => {
+    asyncAddTodo(activeStep, todoTitle).then(() => {
+        dispatch({
+            type: 'ADD_TODO',
+            activeStep,
+            todoTitle,
+        });
+    });
 };

@@ -104,7 +104,7 @@ const Layout = ({
             action={ <span style={{ color: primary1Color }}>Dismiss</span> }
             onActionTouchTap={ closeSnackbar }
             onRequestClose={ closeSnackbar }
-            autoHideDuration={ 5000 }
+            autoHideDuration={ 3000 }
         />
     </div>
 );

@@ -17,3 +17,9 @@ export const asyncToggleTodo = (activeStep, toggledTodo) => {
         resolve();
     }, 0));
 };
+
+export const asyncAddTodo = (activeStep, todoTitle) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
