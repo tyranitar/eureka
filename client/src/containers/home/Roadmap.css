@@ -6,3 +6,11 @@
 .roadmap {
     text-align: left;
 }
+
+.roadmap-step-buttons {
+    margin-top: 16px;
+}
+
+.roadmap-step-checkbox {
+    margin-top: 8px;
+}

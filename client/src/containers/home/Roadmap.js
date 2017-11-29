@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+
+import {
+    Checkbox,
+    RaisedButton,
+} from 'material-ui';
 
 import {
     Step,
@@ -9,7 +15,12 @@ import {
     StepContent,
 } from 'material-ui/Stepper';
 
-import { getRoadmap } from '../../actions/roadmap-actions';
+import {
+    getRoadmap,
+    setActiveStep,
+    completeStep,
+} from '../../actions/roadmap-actions';
+
 import './Roadmap.css';
 
 // TODO: Add roadmap milestone functionality.
@@ -17,10 +28,14 @@ import './Roadmap.css';
 // TODO: Add reminder functionality.
 
 const mapStateToProps = (state) => {
-    const { steps } = state.roadmap;
+    const {
+        steps,
+        activeStep,
+    } = state.roadmap;
 
     return {
         steps,
+        activeStep,
     };
 };
 
@@ -29,19 +44,67 @@ const mapDispatchToProps = (dispatch) => {
         getRoadmap: () => {
             dispatch(getRoadmap());
         },
+
+        setActiveStep: (activeStep) => {
+            dispatch(setActiveStep(activeStep));
+        },
+
+        completeStep: (step) => {
+            dispatch(completeStep(step));
+        },
     };
 };
 
-const renderSteps = (steps) => (
+const renderStepTodos = ({
+    activeStep,
+    todos,
+}) => (
+    todos.map(({
+        title,
+        completed,
+    }, idx) => (
+        <Checkbox
+            className="roadmap-step-checkbox"
+            key={ idx }
+            label={ title }
+            checked={ completed }
+        />
+    ))
+);
+
+const renderSteps = ({
+    steps,
+    setActiveStep,
+    completeStep,
+    primaryColor,
+}) => (
     steps.map(({
         title,
+        description,
+        completed,
+        todos,
     }, idx) => (
-        <Step key={ idx }>
-            <StepButton>
+        <Step
+            key={ idx }
+            completed={ completed }>
+            <StepButton onClick={ setActiveStep.bind(null, idx) }>
                 { title }
             </StepButton>
             <StepContent>
-                <p>Test</p>
+                <p>{ description }</p>
+                <p style={{ color: primaryColor }}>{ 'Todos:' }</p>
+                { renderStepTodos({
+                    activeStep: idx,
+                    todos,
+                }) }
+                <div className="roadmap-step-buttons">
+                    <RaisedButton
+                        disabled={ completed }
+                        label="Complete"
+                        primary={ true }
+                        onClick={ completeStep.bind(null, idx) }
+                    />
+                </div>
             </StepContent>
         </Step>
     ))
@@ -59,6 +122,15 @@ class Roadmap extends Component {
     render() {
         const {
             steps,
+            activeStep,
+            setActiveStep,
+            completeStep,
+
+            muiTheme: {
+                palette: {
+                    primary1Color,
+                },
+            },
         } = this.props;
 
         return (
@@ -67,10 +139,15 @@ class Roadmap extends Component {
                     <Col xs={4}>
                         <div className="roadmap">
                             <Stepper
-                                activeStep={ 0 }
+                                activeStep={ activeStep }
                                 linear={ false }
                                 orientation="vertical">
-                                { renderSteps(steps) }
+                                { renderSteps({
+                                    steps,
+                                    setActiveStep,
+                                    completeStep,
+                                    primaryColor: primary1Color,
+                                }) }
                             </Stepper>
                         </div>
                     </Col>
@@ -84,7 +161,7 @@ class Roadmap extends Component {
     }
 }
 
-export default connect(
+export default muiThemeable()(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Roadmap);
+)(Roadmap));

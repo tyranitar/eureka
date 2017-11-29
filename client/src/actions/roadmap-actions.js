@@ -1,4 +1,7 @@
-import { asyncGetRoadmap } from '../api/roadmap-api';
+import {
+    asyncGetRoadmap,
+    asyncCompleteStep,
+} from '../api/roadmap-api';
 
 export const getRoadmap = () => {
     return (dispatch, getState) => {
@@ -12,5 +15,23 @@ export const setRoadmap = (roadmap) => {
     return {
         type: 'SET_ROADMAP',
         roadmap,
+    };
+};
+
+export const setActiveStep = (activeStep) => {
+    return {
+        type: 'SET_ACTIVE_STEP',
+        activeStep,
+    };
+};
+
+export const completeStep = (completedStep) => {
+    return (dispatch, getState) => {
+        asyncCompleteStep(completedStep).then(() => {
+            dispatch({
+                type: 'COMPLETE_STEP',
+                completedStep,
+            });
+        });
     };
 };
