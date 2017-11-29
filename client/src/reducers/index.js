@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 
 import questionnaire from './questionnaire-reducer';
 import favorites from './favorites-reducer';
+import roadmap from './roadmap-reducer';
 import career from './career-reducer';
 import search from './search-reducer';
 import login from './login-reducer';
@@ -12,6 +13,7 @@ const reducers = combineReducers({
     router: routerReducer,
     questionnaire,
     favorites,
+    roadmap,
     career,
     search,
     login,
