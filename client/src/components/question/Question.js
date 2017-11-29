@@ -7,6 +7,20 @@ import Checkbox from 'material-ui/Checkbox';
 
 import './Question.css';
 
+const renderIntroOptions = ({
+    options,
+}) => {
+    return options.map((option, idx) => (
+        <div
+            className="question-intro-image"
+            key={ idx }
+            style={{
+                backgroundImage: `url('${ option }')`,
+            }}
+        ></div>
+    ));
+};
+
 const renderCheckboxOptions = ({
     options,
     answer,
@@ -55,6 +69,8 @@ const renderRadioOptions = ({
 
 const renderOptions = (type, params) => {
     switch (type) {
+        case 'intro':
+            return renderIntroOptions(params);
         case 'checkbox':
             return renderCheckboxOptions(params);
         case 'radio':
@@ -116,7 +132,7 @@ const Question = ({
                 <RaisedButton
                     className="question-next-button"
                     primary={ true }
-                    label={ isLastQuestion ? 'Submit' : 'Next' }
+                    label={ type === 'intro' ? "Start" : isLastQuestion ? 'Submit' : 'Next' }
                     disabled={ isNextDisabled({ type, answer }) }
                     onClick={ isLastQuestion ? onSubmit : onChangeQuestion.bind(null, 1) }
                 />
