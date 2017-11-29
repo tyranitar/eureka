@@ -14,3 +14,7 @@
 .roadmap-step-checkbox {
     margin-top: 8px;
 }
+
+.roadmap-step-add-todo-button {
+    margin-top: 8px !important;
+}

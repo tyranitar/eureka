@@ -6,6 +6,7 @@ import Add from 'material-ui/svg-icons/content/add';
 
 import {
     Checkbox,
+    FlatButton,
     RaisedButton,
 } from 'material-ui';
 
@@ -121,6 +122,12 @@ const renderSteps = ({
                     toggleTodo,
                     disabled: completed,
                 }) }
+                <FlatButton
+                    className="roadmap-step-add-todo-button"
+                    label="Add Todo"
+                    primary={ true }
+                    icon={ <Add /> }
+                />
                 <div className="roadmap-step-buttons">
                     <RaisedButton
                         disabled={ completed || isCompleteButtonDisabled(todos) }
