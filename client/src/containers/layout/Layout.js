@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import Home from 'material-ui/svg-icons/action/home';
 import Search from 'material-ui/svg-icons/action/search';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import {
     AppBar,
@@ -14,8 +15,10 @@ import {
     MenuItem,
     Divider,
     Dialog,
+    Snackbar,
 } from 'material-ui';
 
+import { closeSnackbar } from '../../actions/snackbar-actions';
 import { closeDialog } from '../../actions/dialog-actions';
 import { logout } from '../../actions/login-actions';
 import './Layout.css';
@@ -23,6 +26,7 @@ import './Layout.css';
 const mapStateToProps = (state) => {
     return {
         dialog: state.dialog,
+        snackbar: state.snackbar,
     };
 };
 
@@ -41,6 +45,10 @@ const mapDispatchToProps = (dispatch) => {
         closeDialog: () => {
             dispatch(closeDialog());
         },
+
+        closeSnackbar: () => {
+            dispatch(closeSnackbar());
+        },
     };
 };
 
@@ -50,6 +58,14 @@ const Layout = ({
     logout,
     dialog,
     closeDialog,
+    snackbar,
+    closeSnackbar,
+
+    muiTheme: {
+        palette: {
+            primary1Color,
+        },
+    },
 }) => (
     <div className="layout">
         <AppBar
@@ -82,7 +98,15 @@ const Layout = ({
             onRequestClose={ closeDialog }>
             { dialog.children }
         </Dialog>
+        <Snackbar
+            open={ snackbar.open }
+            message={ snackbar.message }
+            action={ <span style={{ color: primary1Color }}>Dismiss</span> }
+            onActionTouchTap={ closeSnackbar }
+            onRequestClose={ closeSnackbar }
+            autoHideDuration={ 5000 }
+        />
     </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default muiThemeable()(connect(mapStateToProps, mapDispatchToProps)(Layout));

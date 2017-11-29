@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 
 import questionnaire from './questionnaire-reducer';
 import favorites from './favorites-reducer';
+import snackbar from './snackbar-reducer';
 import roadmap from './roadmap-reducer';
 import career from './career-reducer';
 import dialog from './dialog-reducer';
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     router: routerReducer,
     questionnaire,
     favorites,
+    snackbar,
     roadmap,
     career,
     dialog,
