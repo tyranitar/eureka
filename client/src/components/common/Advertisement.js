@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { grey200 } from 'material-ui/styles/colors'
+import { grey200, grey500 } from 'material-ui/styles/colors'
 
 import './Advertisement.css';
 
@@ -24,6 +24,11 @@ const Advertisement = ({
         </div>
         <div className="advertisement-description">
             { description }
+        </div>
+        <div className="advertisement-footer" style={{
+                color: grey500,
+            }}>
+            Advertisement
         </div>
     </a>
 );
