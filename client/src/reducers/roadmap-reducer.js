@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
 const initialState = {
-    items: [],
+    steps: [],
 };
 
 const handleSetRoadmap = (state, action) => {
     return Object.assign({}, state, _.pick(action.roadmap, [
-        'items',
+        'steps',
     ]));
 };
 
