@@ -211,6 +211,13 @@ class Roadmap extends Component {
         ));
     }
 
+    // TODO: Implement this.
+    onAddStep = () => {
+        this.props.openSnackbar({
+            message: "Add Milestone has not been implemented yet!",
+        });
+    }
+
     render() {
         const {
             activeStep,
@@ -232,7 +239,9 @@ class Roadmap extends Component {
                                 orientation="vertical">
                                 { this.renderSteps() }
                                 <Step>
-                                    <StepButton icon={ <Add color={ primary1Color } /> }>
+                                    <StepButton
+                                        icon={ <Add color={ primary1Color } /> }
+                                        onClick={ this.onAddStep }>
                                         Add Milestone
                                     </StepButton>
                                 </Step>
