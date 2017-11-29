@@ -6,7 +6,13 @@ export const asyncGetRoadmap = () => {
     }, 0));
 };
 
-export const asyncCompleteStep = () => {
+export const asyncCompleteStep = (completedStep) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
+
+export const asyncToggleTodo = (activeStep, toggledTodo) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve();
     }, 0));

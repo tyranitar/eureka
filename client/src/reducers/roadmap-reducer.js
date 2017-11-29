@@ -36,6 +36,30 @@ const handleCompleteStep = (state, action) => {
     });
 };
 
+const handleToggleTodo = (state, action) => {
+    const { activeStep, toggledTodo } = action;
+
+    return Object.assign({}, state, {
+        steps: state.steps.map((step, idx) => {
+            if (idx === activeStep) {
+                return Object.assign({}, step, {
+                    todos: step.todos.map((todo, _idx) => {
+                        if (_idx === toggledTodo) {
+                            return Object.assign({}, todo, {
+                                completed: !todo.completed,
+                            });
+                        }
+
+                        return todo;
+                    }),
+                });
+            }
+
+            return step;
+        }),
+    });
+};
+
 const roadmapReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_ROADMAP':
@@ -44,6 +68,8 @@ const roadmapReducer = (state = initialState, action) => {
             return handleSetActiveStep(state, action);
         case 'COMPLETE_STEP':
             return handleCompleteStep(state, action);
+        case 'TOGGLE_TODO':
+            return handleToggleTodo(state, action);
         default:
             return state;
     }

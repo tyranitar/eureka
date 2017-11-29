@@ -19,11 +19,12 @@ import {
     getRoadmap,
     setActiveStep,
     completeStep,
+    toggleTodo,
 } from '../../actions/roadmap-actions';
 
 import './Roadmap.css';
 
-// TODO: Add roadmap milestone functionality.
+// TODO: Add roadmap milestone functionality (as final step with custom icon).
 // TODO: Add roadmap todo functionality.
 // TODO: Add reminder functionality.
 
@@ -49,8 +50,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setActiveStep(activeStep));
         },
 
-        completeStep: (step) => {
-            dispatch(completeStep(step));
+        completeStep: (completedStep) => {
+            dispatch(completeStep(completedStep));
+        },
+
+        toggleTodo: (activeStep, toggledTodo) => {
+            dispatch(toggleTodo(activeStep, toggledTodo));
         },
     };
 };
@@ -58,6 +63,7 @@ const mapDispatchToProps = (dispatch) => {
 const renderStepTodos = ({
     activeStep,
     todos,
+    toggleTodo,
 }) => (
     todos.map(({
         title,
@@ -68,6 +74,7 @@ const renderStepTodos = ({
             key={ idx }
             label={ title }
             checked={ completed }
+            onCheck={ toggleTodo.bind(null, activeStep, idx) }
         />
     ))
 );
@@ -76,6 +83,7 @@ const renderSteps = ({
     steps,
     setActiveStep,
     completeStep,
+    toggleTodo,
     primaryColor,
 }) => (
     steps.map(({
@@ -96,6 +104,7 @@ const renderSteps = ({
                 { renderStepTodos({
                     activeStep: idx,
                     todos,
+                    toggleTodo,
                 }) }
                 <div className="roadmap-step-buttons">
                     <RaisedButton
@@ -125,6 +134,7 @@ class Roadmap extends Component {
             activeStep,
             setActiveStep,
             completeStep,
+            toggleTodo,
 
             muiTheme: {
                 palette: {
@@ -146,6 +156,7 @@ class Roadmap extends Component {
                                     steps,
                                     setActiveStep,
                                     completeStep,
+                                    toggleTodo,
                                     primaryColor: primary1Color,
                                 }) }
                             </Stepper>

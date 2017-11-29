@@ -1,6 +1,7 @@
 import {
     asyncGetRoadmap,
     asyncCompleteStep,
+    asyncToggleTodo,
 } from '../api/roadmap-api';
 
 export const getRoadmap = () => {
@@ -31,6 +32,18 @@ export const completeStep = (completedStep) => {
             dispatch({
                 type: 'COMPLETE_STEP',
                 completedStep,
+            });
+        });
+    };
+};
+
+export const toggleTodo = (activeStep, toggledTodo) => {
+    return (dispatch, getState) => {
+        asyncToggleTodo(activeStep, toggledTodo).then(() => {
+            dispatch({
+                type: 'TOGGLE_TODO',
+                activeStep,
+                toggledTodo,
             });
         });
     };
