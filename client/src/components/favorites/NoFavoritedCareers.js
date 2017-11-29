@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import SentimentDissatisfied from 'material-ui/svg-icons/social/sentiment-dissatisfied';
+import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
-import './NoResults.css';
+import './NoFavoritedCareers.css';
 
-const NoResults = ({
+const NoFavoritedCareers = ({
     muiTheme: {
         palette: {
             primary1Color,
@@ -16,33 +16,36 @@ const NoResults = ({
 
     onClick,
 }) => (
-    <Paper className="no-results" style={{
+    <Paper className="no-favorited-careers" style={{
             color: accent3Color,
         }}>
-        <div className="no-results-message">
-            <span className="no-results-text">
-                No Results
+        <div className="no-favorited-careers-message">
+            <FavoriteBorder color={ accent3Color } />
+            <span className="no-favorited-careers-text">
+                { "You don't have any favorites yet!" }
             </span>
-            <SentimentDissatisfied color={ accent3Color } />
         </div>
         <br />
         <div>
             <span>
-                { "Perhaps you could try our search suggestions on the right, or check out our " }
+                { "Try going to our " }
             </span>
             <span style={{
                     color: primary1Color,
                     cursor: 'pointer',
                 }}
                 onClick={ onClick }>
-                { "Featured Careers!" }
+                { "Search Page" }
+            </span>
+            <span>
+                { " to find careers you might be interested in!" }
             </span>
         </div>
     </Paper>
 );
 
-NoResults.propTypes = {
+NoFavoritedCareers.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
 
-export default muiThemeable()(NoResults);
+export default muiThemeable()(NoFavoritedCareers);
