@@ -19,13 +19,43 @@ const steps = [{
     description: `Now that you have taken some courses, it is time to reflect on whether you want to continue on your initial academic path.
         You may want to adjust your academic path as you see fit.`,
 
-    todos: [],
+    todos: [{
+        title: "Calculus 11",
+        completed: false,
+    }, {
+        title: "Linear Algebra 11",
+        completed: false,
+    }, {
+        title: "Physics 11",
+        completed: false,
+    }, {
+        title: "Chemistry 11",
+        completed: false,
+    }, {
+        title: "English 11",
+        completed: false,
+    }],
 }, {
     title: 'Grade 12',
     completed: false,
     description: `You are nearing the end of your high school career. It is now time to think about the courses you have taken, and start considering postsecondary education.`,
 
-    todos: [],
+    todos: [{
+        title: "Calculus 12",
+        completed: false,
+    }, {
+        title: "Linear Algebra 12",
+        completed: false,
+    }, {
+        title: "Physics 12",
+        completed: false,
+    }, {
+        title: "Chemistry 12",
+        completed: false,
+    }, {
+        title: "English 12",
+        completed: false,
+    }],
 }];
 
 let activeStep = 0;
