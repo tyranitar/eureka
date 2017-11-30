@@ -68,6 +68,19 @@ const handleAddTodo = (state, action) => {
     });
 };
 
+const handleAddStep = (state, action) => {
+    const { stepTitle, stepDescription } = action;
+
+    return Object.assign({}, state, {
+        steps: state.steps.concat([{
+            title: stepTitle,
+            description: stepDescription,
+            completed: false,
+            todos: [],
+        }]),
+    });
+};
+
 const roadmapReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_ROADMAP':
@@ -80,6 +93,8 @@ const roadmapReducer = (state = initialState, action) => {
             return handleToggleTodo(state, action);
         case 'ADD_TODO':
             return handleAddTodo(state, action);
+        case 'ADD_STEP':
+            return handleAddStep(state, action);
         default:
             return state;
     }

@@ -23,3 +23,9 @@ export const asyncAddTodo = (activeStep, todoTitle) => {
         resolve();
     }, 0));
 };
+
+export const asyncAddStep = (stepTitle, stepDescription) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};

@@ -24,6 +24,7 @@ import {
     completeStep,
     toggleTodo,
     addTodo,
+    addStep,
 } from '../../actions/roadmap-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
@@ -52,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
         completeStep: (completedStep) => dispatch(completeStep(completedStep)),
         toggleTodo: (activeStep, toggledTodo) => dispatch(toggleTodo(activeStep, toggledTodo)),
         addTodo: (activeStep, todoTitle) => dispatch(addTodo(activeStep, todoTitle)),
+        addStep: (stepTitle, stepDescription) => dispatch(addStep(stepTitle, stepDescription)),
         openDialog: (props) => dispatch(openDialog(props)),
         closeDialog: () => dispatch(closeDialog()),
         openSnackbar: (props) => dispatch(openSnackbar(props)),
@@ -64,6 +66,8 @@ class Roadmap extends Component {
 
         this.state = {
             addTodoTextFieldValue: '',
+            addStepTitleTextFieldValue: '',
+            addStepDescriptionTextFieldValue: '',
         };
     }
 
@@ -215,10 +219,96 @@ class Roadmap extends Component {
         ));
     }
 
+    updateAddStepTitleTextFieldValue = (evt, addStepTitleTextFieldValue) => {
+        this.setState({
+            addStepTitleTextFieldValue,
+        });
+    }
+
+    updateAddStepDescriptionTextFieldValue = (evt, addStepDescriptionTextFieldValue) => {
+        this.setState({
+            addStepDescriptionTextFieldValue,
+        });
+    }
+
+    onDialogAddStepButtonClick = () => {
+        const {
+            addStep,
+            closeDialog,
+            openSnackbar,
+        } = this.props;
+
+        const {
+            addStepTitleTextFieldValue,
+            addStepDescriptionTextFieldValue,
+        } = this.state;
+
+        if (!addStepTitleTextFieldValue) {
+            openSnackbar({
+                message: "Please provide a milestone title",
+            });
+
+            return;
+        }
+
+        if (!addStepDescriptionTextFieldValue) {
+            openSnackbar({
+                message: "Please provide a milestone description",
+            });
+
+            return;
+        }
+
+        addStep(addStepTitleTextFieldValue, addStepDescriptionTextFieldValue);
+        closeDialog();
+    }
+
     // TODO: Implement this.
     onAddStep = () => {
-        this.props.openSnackbar({
-            message: "Add Milestone has not been implemented yet!",
+        const {
+            openDialog,
+            closeDialog,
+        } = this.props;
+
+        this.setState({
+            addStepTitleTextFieldValue: '',
+            addStepDescriptionTextFieldValue: '',
+        });
+
+        openDialog({
+            title: 'Add Milestone',
+            width: '300px',
+
+            actions: [
+                <FlatButton
+                    primary={ true }
+                    label="Cancel"
+                    onClick={ closeDialog }
+                />,
+
+                <RaisedButton
+                    style={{ marginLeft: '8px' }}
+                    primary={ true }
+                    label="Add"
+                    onClick={ this.onDialogAddStepButtonClick }
+                />
+            ],
+
+            children: (
+                <div>
+                    <TextField
+                        onChange={ this.updateAddStepTitleTextFieldValue }
+                        hintText="Milestone Title"
+                        fullWidth={ true }
+                        />
+                    <TextField
+                        onChange={ this.updateAddStepDescriptionTextFieldValue }
+                        hintText="Milestone Description"
+                        fullWidth={ true }
+                        multiLine={ true }
+                        />
+                </div>
+            ),
         });
     }
 
