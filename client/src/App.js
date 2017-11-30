@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(
     reducers,
-    applyMiddleware.apply(null, middleware),
+    applyMiddleware(...middleware),
 );
 
 class App extends Component {
