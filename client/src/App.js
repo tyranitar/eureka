@@ -18,17 +18,18 @@ import './App.css';
 
 const history = createHistory();
 
-const loggerMiddleware = createLogger();
-const myRouterMiddleware = routerMiddleware(history);
+const middleware = [
+    thunkMiddleware,
+    routerMiddleware(history),
+];
+
+if (process.env.NODE_ENV === 'development') {
+    middleware.push(createLogger());
+}
 
 const store = createStore(
     reducers,
-
-    applyMiddleware(
-        thunkMiddleware,
-        loggerMiddleware,
-        myRouterMiddleware,
-    ),
+    applyMiddleware.apply(null, middleware),
 );
 
 class App extends Component {
