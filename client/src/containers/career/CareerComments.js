@@ -24,10 +24,11 @@ import { openSnackbar } from '../../actions/snackbar-actions';
 import './CareerComments.css';
 
 const mapStateToProps = (state) => {
-    const { comments } = state.career;
+    const { comments, details } = state.career;
 
     return {
         comments,
+        details,
     };
 };
 
@@ -56,6 +57,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const renderComments = ({
     comments,
+    details,
     onLikeButtonClick,
     onShareButtonClick,
 
@@ -78,14 +80,15 @@ const renderComments = ({
                         }}
                     />
             } disabled={ true }>
-                <div className="career-comment-username" style={{
-                        color: primary1Color,
-                    }}>
-                    { comment.user.name }
+                <div className="career-comment-username">
+                    <span style={{ color: primary1Color }}>
+                        { comment.user.name }
+                    </span>
+                    { comment.user.yearsInField > 1 && <span style={{ color: accent3Color }}>
+                        { ` (worked as a ${details.title} for ${comment.user.yearsInField} years)` }
+                    </span> }
                 </div>
-                <div className="career-comment-created-at" style={{
-                        color: accent3Color,
-                    }}>
+                <div className="career-comment-created-at" style={{ color: accent3Color }}>
                     { comment.createdAt.toLocaleDateString() }
                 </div>
                 <div className="career-comment-content">
@@ -144,6 +147,7 @@ class CareerComments extends Component {
     render() {
         const {
             comments,
+            details,
             onLikeButtonClick,
             onShareButtonClick,
         } = this.props;
@@ -169,6 +173,7 @@ class CareerComments extends Component {
                 <div className="career-comments">
                     { renderComments({
                         comments,
+                        details,
                         onLikeButtonClick,
                         onShareButtonClick,
                         palette: this.props.muiTheme.palette,
