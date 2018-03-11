@@ -9,76 +9,69 @@ import {
 } from '../api/career-api';
 
 export const getCareerDetails = (careerId) => {
-    return (dispatch, getState) => {
-        asyncGetCareerDetails(careerId).then((careerDetails) => {
-            dispatch(setCareerDetails(careerDetails));
-        });
+    return async (dispatch, getState) => {
+        const careerDetails = await asyncGetCareerDetails(careerId);
+        dispatch(setCareerDetails(careerDetails));
     };
 };
 
 export const getCareerEducationPaths = (careerId) => {
-    return (dispatch, getState) => {
-        asyncGetCareerEducationPaths(careerId).then((careerEducationPaths) => {
-            dispatch(setCareerEducationPaths(careerEducationPaths));
-        });
+    return async (dispatch, getState) => {
+        const careerEducationPaths = await asyncGetCareerEducationPaths(careerId);
+        dispatch(setCareerEducationPaths(careerEducationPaths));
     };
 };
 
 export const getCareerComments = (careerId) => {
-    return (dispatch, getState) => {
-        asyncGetCareerComments(careerId).then((careerComments) => {
-            dispatch(setCareerComments(careerComments));
-        });
+    return async (dispatch, getState) => {
+        const careerComments = await asyncGetCareerComments(careerId);
+        dispatch(setCareerComments(careerComments));
     };
 };
 
 export const getCareerPointOfContact = (careerId) => {
-    return (dispatch, getState) => {
-        asyncGetCareerPointOfContact(careerId).then((careerPointOfContact) => {
-            dispatch(setCareerPointOfContact(careerPointOfContact));
-        });
+    return async (dispatch, getState) => {
+        const careerPointOfContact = await asyncGetCareerPointOfContact(careerId);
+        dispatch(setCareerPointOfContact(careerPointOfContact));
     };
 };
 
 export const getCareerAdvertisements = (careerId) => {
-    return (dispatch, getState) => {
-        asyncGetCareerAdvertisements(careerId).then((careerAdvertisements) => {
-            dispatch(setCareerAdvertisements(careerAdvertisements));
-        });
+    return async (dispatch, getState) => {
+        const careerAdvertisements = await asyncGetCareerAdvertisements(careerId);
+        dispatch(setCareerAdvertisements(careerAdvertisements));
     };
 };
 
 export const toggleCareerCommentLike = (commentId) => {
-    return (dispatch, getState) => {
-        asyncToggleCareerCommentLike(commentId).then(() => {
-            dispatch(setCareerComments(getState().career.comments.map((comment) => {
-                if (comment.id === commentId) {
-                    return Object.assign({}, comment, {
-                        liked: !comment.liked,
-                    });
-                }
+    return async (dispatch, getState) => {
+        await asyncToggleCareerCommentLike(commentId);
+        dispatch(setCareerComments(getState().career.comments.map((comment) => {
+            if (comment.id === commentId) {
+                return Object.assign({}, comment, {
+                    liked: !comment.liked,
+                });
+            }
 
-                return comment;
-            })));
-        });
+            return comment;
+        })));
     };
 };
 
 export const addCareerComment = (careerId, comment) => {
-    return (dispatch, getState) => {
-        asyncAddCareerComment(careerId, comment).then(() => {
-            const { comments } = getState().career;
+    return async (dispatch, getState) => {
+        await asyncAddCareerComment(careerId, comment);
+        const { comments } = getState().career;
 
-            dispatch(setCareerComments(comments.concat({
-                user: {
-                    name: 'You',
-                },
+        dispatch(setCareerComments(comments.concat({
+            user: {
+                name: 'You',
+            },
 
-                createdAt: new Date(),
-                id: comments.length,
-                content: comment,
-            })));
-        });
+            createdAt: new Date(),
+            id: comments.length,
+            content: comment,
+        })));
     };
 };
 
