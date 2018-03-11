@@ -49,27 +49,23 @@ export const setSearchResults = (results) => {
 };
 
 export const getAutoCompleteResults = (searchString) => {
-    return (dispatch, getState) => {
-        asyncGetAutoCompleteResults(searchString).then((results) => {
-            dispatch(setAutoCompleteResults(results));
-        });
+    return async (dispatch, getState) => {
+        const results = await asyncGetAutoCompleteResults(searchString);
+        dispatch(setAutoCompleteResults(results));
     };
 };
 
 export const getSearchFilters = () => {
-    return (dispatch, getState) => {
-        asyncGetSearchFilters().then(() => {
-            //
-        });
+    return async (dispatch, getState) => {
+        await asyncGetSearchFilters();
     };
 };
 
 export const getSearchResults = (query) => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         dispatch(beginSearch());
 
-        asyncGetSearchResults(query || getState().search.query).then((results) => {
-            dispatch(setSearchResults(results));
-        });
+        const results = await asyncGetSearchResults(query || getState().search.query);
+        dispatch(setSearchResults(results));
     };
 };

@@ -1,10 +1,9 @@
 import { asyncGetNews } from '../api/news-api';
 
 export const getNews = () => {
-    return (dispatch, getState) => {
-        asyncGetNews().then((news) => {
-            dispatch(setNews(news));
-        });
+    return async (dispatch, getState) => {
+        const news = await asyncGetNews()
+        dispatch(setNews(news));
     };
 };
 
