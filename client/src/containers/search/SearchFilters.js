@@ -20,6 +20,7 @@ import {
     updateSearchQueryOutlook,
     updateSearchQueryEducation,
     setSubjectFilters,
+    removeSubjectFilter,
 } from '../../actions/search-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
@@ -74,11 +75,11 @@ const mapDispatchToProps = (dispatch) => {
         setSubjectFilters: (subjects) => {
             dispatch(setSubjectFilters(subjects));
         },
-    };
-};
 
-const renderSubjectChips = () => {
-    return [];
+        removeSubjectFilter: (subject) => {
+            dispatch(removeSubjectFilter(subject));
+        },
+    };
 };
 
 class SearchFilters extends Component {
@@ -152,6 +153,30 @@ class SearchFilters extends Component {
     onAddSubject = () => {
         this.props.setSubjectFilters(this.subjects);
         this.props.closeDialog();
+    }
+
+    removeSubjectFilter = (subject) => {
+        this.props.removeSubjectFilter(subject);
+    }
+
+    renderSubjectChips = () => {
+        const {
+            query: {
+                subjects,
+            },
+        } = this.props;
+
+        return Object.keys(subjects).filter((subject) => subjects[subject]).map((subject, idx) => {
+            return (
+                <div
+                    key={idx}
+                    className="search-filters-subject-chip">
+                    <Chip onRequestDelete={ this.removeSubjectFilter.bind(this, subject) }>
+                        { subject }
+                    </Chip>
+                </div>
+            );
+        });
     }
 
     render() {
@@ -252,7 +277,7 @@ class SearchFilters extends Component {
                     <div className="search-filters-section-title">
                         Related Subjects
                     </div>
-                    { renderSubjectChips() }
+                    { this.renderSubjectChips() }
                     <div className="search-filters-section-action" style={{ color: primary1Color }} onClick={ this.onAddSubjectClick }>
                         Add subject +
                     </div>

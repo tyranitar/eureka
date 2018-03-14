@@ -62,6 +62,13 @@ export const setSubjectFilters = (subjects) => {
     };
 };
 
+export const removeSubjectFilter = (subject) => {
+    return {
+        type: 'REMOVE_SUBJECT_FILTER',
+        subject,
+    };
+};
+
 export const getAutoCompleteResults = (searchString) => {
     return async (dispatch, getState) => {
         const results = await asyncGetAutoCompleteResults(searchString);

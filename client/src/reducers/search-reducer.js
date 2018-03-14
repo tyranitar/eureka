@@ -102,6 +102,18 @@ const handleSetSubjectFilters = (state, action) => {
     });
 };
 
+const handleRemoveSubjectFilter = (state, action) => {
+    const { subject } = action;
+
+    return _.merge({}, state, {
+        query: {
+            subjects: {
+                [subject]: false
+            },
+        },
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_SEARCH_QUERY':
@@ -120,6 +132,8 @@ const reducer = (state = initialState, action) => {
             return handleSetSearchFilters(state, action);
         case 'SET_SUBJECT_FILTERS':
             return handleSetSubjectFilters(state, action);
+        case 'REMOVE_SUBJECT_FILTER':
+            return handleRemoveSubjectFilter(state, action);
         default:
             return state;
     }
