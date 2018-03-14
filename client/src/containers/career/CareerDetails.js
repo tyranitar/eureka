@@ -42,6 +42,7 @@ import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
 import AnyChart from '../../components/common/AnyChart';
 import Advertisement from '../../components/common/Advertisement';
+import { getPublicUrl } from '../../utils/common';
 import './CareerDetails.css';
 
 const mapStateToProps = (state) => {
@@ -287,7 +288,7 @@ class CareerDetails extends Component {
 
             setTargetCareer(id);
             openDialog({
-                title: "You have a new target career!",
+                title: "You set a new target career!",
                 width: '400px',
                 actions: [
                     <RaisedButton
@@ -297,6 +298,17 @@ class CareerDetails extends Component {
                         onClick={ closeDialog }
                     />,
                 ],
+                children: (
+                    <div>
+                        <span>{ "This is great news! We'll email you about courses you can take right now and postsecondary opportunities that can propel you towards your new goal!" }</span>
+                        <div
+                            className="career-details-set-target-career-image"
+                            style={{
+                                backgroundImage: `url(${ getPublicUrl('/images/target/adam.gif') })`, // TODO: Make this dynamic.
+                            }}>
+                        </div>
+                    </div>
+                ),
             })
         } else {
             const {
