@@ -4,7 +4,6 @@ const initialState = {
     firstSearchPerformed: false,
     searching: false,
     autoCompleteResults: [],
-    filters: [],
     results: [],
 
     query: {
@@ -23,6 +22,10 @@ const initialState = {
             'Bachelor\'s': true,
             'Master\'s': true,
             'PhD': true,
+        },
+
+        subjects: {
+            //
         },
     },
 };
@@ -79,6 +82,26 @@ const handleSetSearchResults = (state, action) => {
     });
 };
 
+const handleSetSearchFilters = (state, action) => {
+    const { filters } = action;
+
+    return _.merge({}, state, {
+        query: {
+            subjects: filters.subjects,
+        },
+    });
+};
+
+const handleSetSubjectFilters = (state, action) => {
+    const { subjects } = action;
+
+    return _.merge({}, state, {
+        query: {
+            subjects,
+        },
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_SEARCH_QUERY':
@@ -93,6 +116,10 @@ const reducer = (state = initialState, action) => {
             return handleBeginSearch(state, action);
         case 'SET_SEARCH_RESULTS':
             return handleSetSearchResults(state, action);
+        case 'SET_SEARCH_FILTERS':
+            return handleSetSearchFilters(state, action);
+        case 'SET_SUBJECT_FILTERS':
+            return handleSetSubjectFilters(state, action);
         default:
             return state;
     }

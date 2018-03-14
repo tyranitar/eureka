@@ -48,6 +48,20 @@ export const setSearchResults = (results) => {
     };
 };
 
+export const setSearchFilters = (filters) => {
+    return {
+        type: 'SET_SEARCH_FILTERS',
+        filters,
+    };
+};
+
+export const setSubjectFilters = (subjects) => {
+    return {
+        type: 'SET_SUBJECT_FILTERS',
+        subjects,
+    };
+};
+
 export const getAutoCompleteResults = (searchString) => {
     return async (dispatch, getState) => {
         const results = await asyncGetAutoCompleteResults(searchString);
@@ -57,7 +71,8 @@ export const getAutoCompleteResults = (searchString) => {
 
 export const getSearchFilters = () => {
     return async (dispatch, getState) => {
-        await asyncGetSearchFilters();
+        const filters = await asyncGetSearchFilters();
+        dispatch(setSearchFilters(filters));
     };
 };
 

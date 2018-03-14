@@ -33,6 +33,10 @@ const store = createStore(
 );
 
 class App extends Component {
+    componentDidMount() {
+        // TODO: Get login information here.
+    }
+
     render() {
         return (
             <MuiThemeProvider>
