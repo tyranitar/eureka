@@ -163,11 +163,11 @@ class CareerComments extends Component {
         return (
             <div>
                 <div>
-                    { 'Comments ' }
+                    { 'Comments' }
                     <span style={{
                             color: accent3Color,
                         }}>
-                        { `(${ comments.length })` }
+                        { ` (${ comments.length })` }
                     </span>
                 </div>
                 <div className="career-comments">
