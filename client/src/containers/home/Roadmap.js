@@ -27,6 +27,7 @@ import {
     toggleTodo,
     addTodo,
     addStep,
+    removeTodo,
 } from '../../actions/roadmap-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
@@ -59,6 +60,7 @@ const mapDispatchToProps = (dispatch) => {
         openDialog: (props) => dispatch(openDialog(props)),
         closeDialog: () => dispatch(closeDialog()),
         openSnackbar: (props) => dispatch(openSnackbar(props)),
+        removeTodo: (activeStep, removedTodo) => dispatch(removeTodo(activeStep, removedTodo)),
     };
 };
 
@@ -182,6 +184,7 @@ class Roadmap extends Component {
                 </div>
                 <div className="roadmap-step-checkbox-remove">
                     <IconButton
+                        onClick={ () => { this.props.removeTodo(step, idx) } }
                         iconStyle={{ fill: primary3Color }}
                         style={{
                             width: '24px',

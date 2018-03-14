@@ -29,3 +29,9 @@ export const asyncAddStep = (stepTitle, stepDescription) => {
         resolve();
     }, 0));
 };
+
+export const asyncRemoveTodo = (activeStep, removedTodo) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
