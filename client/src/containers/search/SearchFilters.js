@@ -131,7 +131,7 @@ class SearchFilters extends Component {
 
         openDialog({
             title: "Add related subject",
-            width: '250px',
+            width: '300px',
             actions: [
                 <FlatButton
                     label="Cancel"

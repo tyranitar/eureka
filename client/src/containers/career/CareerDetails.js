@@ -31,6 +31,8 @@ import {
     getCareerEducationPaths,
     getCareerPointOfContact,
     getCareerAdvertisements,
+    setTargetCareer,
+    unsetTargetCareer,
 } from '../../actions/career-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
@@ -48,6 +50,7 @@ const mapStateToProps = (state) => {
         educationPaths,
         pointOfContact,
         advertisements,
+        targetCareerId,
     } = state.career;
 
     return {
@@ -55,6 +58,7 @@ const mapStateToProps = (state) => {
         educationPaths,
         pointOfContact,
         advertisements,
+        targetCareerId,
     };
 };
 
@@ -109,33 +113,10 @@ const mapDispatchToProps = (dispatch) => {
         openSnackbar: (props) => {
             dispatch(openSnackbar(props));
         },
-    };
-};
 
-const renderActions = (onShareButtonClick) => {
-    return (
-        <div className="career-details-actions">
-            <Checkbox
-                className="career-details-action"
-                checkedIcon={ <Favorite /> }
-                uncheckedIcon={ <FavoriteBorder /> }
-                iconStyle={{ fill: red500 }}
-            />
-            <Checkbox
-                className="career-details-action"
-                checkedIcon={ <GpsFixed /> }
-                uncheckedIcon={ <GpsNotFixed /> }
-                iconStyle={{ fill: blue500 }}
-            />
-            <IconButton
-                style={{
-                    marginLeft: '-12px',
-                }}
-                onClick={ onShareButtonClick }>
-                <Share color={ cyan500 } />
-            </IconButton>
-        </div>
-    );
+        setTargetCareer: (careerId) => dispatch(setTargetCareer(careerId)),
+        unsetTargetCareer: () => dispatch(unsetTargetCareer()),
+    };
 };
 
 const renderAdvertisements = (advertisements) => (
@@ -217,6 +198,7 @@ class CareerDetails extends Component {
             getCareerEducationPaths,
             getCareerPointOfContact,
             getCareerAdvertisements,
+            // TODO: Check whether career is favorited or targetted.
         } = this.props;
 
         getCareerDetails(careerId);
@@ -292,6 +274,79 @@ class CareerDetails extends Component {
         });
     }
 
+    onSetTargetCareer = (evt, checked) => {
+        if (checked) {
+            const {
+                openDialog,
+                closeDialog,
+                setTargetCareer,
+                details: {
+                    id,
+                },
+            } = this.props;
+
+            setTargetCareer(id);
+            openDialog({
+                title: "You have a new target career!",
+                width: '400px',
+                actions: [
+                    <RaisedButton
+                        style={{ marginLeft: '8px' }}
+                        label="Okay"
+                        primary={ true }
+                        onClick={ closeDialog }
+                    />,
+                ],
+            })
+        } else {
+            const {
+                openSnackbar,
+                unsetTargetCareer,
+            } = this.props;
+
+            unsetTargetCareer();
+            openSnackbar({
+                message: "This career is no longer your target.",
+            });
+        }
+    }
+
+    renderActions = () => {
+        const {
+            onShareButtonClick,
+            targetCareerId,
+            details: {
+                id,
+            },
+        } = this.props;
+
+        return (
+            <div className="career-details-actions">
+                <Checkbox
+                    className="career-details-action"
+                    checkedIcon={ <Favorite /> }
+                    uncheckedIcon={ <FavoriteBorder /> }
+                    iconStyle={{ fill: red500 }}
+                />
+                <Checkbox
+                    className="career-details-action"
+                    checkedIcon={ <GpsFixed /> }
+                    uncheckedIcon={ <GpsNotFixed /> }
+                    iconStyle={{ fill: blue500 }}
+                    checked={ id === targetCareerId }
+                    onCheck={ this.onSetTargetCareer }
+                />
+                <IconButton
+                    style={{
+                        marginLeft: '-12px',
+                    }}
+                    onClick={ onShareButtonClick }>
+                    <Share color={ cyan500 } />
+                </IconButton>
+            </div>
+        );
+    }
+
     render() {
         const {
             details: {
@@ -307,7 +362,6 @@ class CareerDetails extends Component {
             advertisements,
             educationPaths,
             onInstitutionClick,
-            onShareButtonClick,
 
             muiTheme: {
                 palette: {
@@ -327,7 +381,7 @@ class CareerDetails extends Component {
                         </div>
                     </Col>
                     <Col xsOffset={1} xs={3}>
-                        { renderActions(onShareButtonClick) }
+                        { this.renderActions() }
                     </Col>
                 </Row>
                 <Row className="career-details-row">

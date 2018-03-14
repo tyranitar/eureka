@@ -6,6 +6,8 @@ import {
     asyncGetCareerAdvertisements,
     asyncToggleCareerCommentLike,
     asyncAddCareerComment,
+    asyncSetTargetCareer,
+    asyncUnsetTargetCareer,
 } from '../api/career-api';
 
 export const getCareerDetails = (careerId) => {
@@ -72,6 +74,33 @@ export const addCareerComment = (careerId, comment) => {
             id: comments.length,
             content: comment,
         })));
+    };
+};
+
+export const addTargetCareer = (careerId) => {
+    return {
+        type: 'ADD_TARGET_CAREER',
+        careerId,
+    };
+};
+
+export const removeTargetCareer = () => {
+    return {
+        type: 'REMOVE_TARGET_CAREER',
+    };
+};
+
+export const setTargetCareer = (careerId) => {
+    return async (dispatch, getState) => {
+        await asyncSetTargetCareer(careerId);
+        dispatch(addTargetCareer(careerId));
+    };
+};
+
+export const unsetTargetCareer = () => {
+    return async (dispatch, getState) => {
+        await asyncUnsetTargetCareer();
+        dispatch(removeTargetCareer());
     };
 };
 

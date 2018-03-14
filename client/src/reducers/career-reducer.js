@@ -15,6 +15,8 @@ const initialState = {
     pointOfContact: {
         name: '',
     },
+
+    targetCareerId: null,
 };
 
 const handleSetCareerDetails = (state, action) => {
@@ -53,6 +55,18 @@ const handleSetCareerAdvertisements = (state, action) => {
     });
 };
 
+const handleAddTargetCareer = (state, action) => {
+    return Object.assign({}, state, {
+        targetCareerId: action.careerId,
+    });
+};
+
+const handleRemoveTargetCareer = (state, action) => {
+    return Object.assign({}, state, {
+        targetCareerId: null,
+    });
+};
+
 const careerReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_CAREER_DETAILS':
@@ -67,6 +81,10 @@ const careerReducer = (state = initialState, action) => {
             return handleSetCareerPointOfContact(state, action);
         case 'SET_CAREER_ADVERTISEMENTS':
             return handleSetCareerAdvertisements(state, action);
+        case 'ADD_TARGET_CAREER':
+            return handleAddTargetCareer(state, action);
+        case 'REMOVE_TARGET_CAREER':
+            return handleRemoveTargetCareer(state, action);
         default:
             return state;
     }

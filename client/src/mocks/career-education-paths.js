@@ -20,7 +20,7 @@ export default _.sampleSize([{
     institutions: _.sampleSize(universities, 3),
 }, {
     type: 'University Degree',
-    title: 'Software Engineering',
+    title: 'Graphic Design',
 
     institutions: _.sampleSize(universities, 3),
 }, {

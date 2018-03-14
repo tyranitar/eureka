@@ -33,6 +33,18 @@ export const asyncGetCareerDetails = (careerId) => {
     }, 0));
 };
 
+export const asyncSetTargetCareer = (careerId) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
+
+export const asyncUnsetTargetCareer = () => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};
+
 export const asyncGetCareerEducationPaths = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(careerEducationPaths);
