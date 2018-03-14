@@ -28,6 +28,7 @@ import {
     addTodo,
     addStep,
     removeTodo,
+    removeStep,
 } from '../../actions/roadmap-actions';
 
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
@@ -61,6 +62,7 @@ const mapDispatchToProps = (dispatch) => {
         closeDialog: () => dispatch(closeDialog()),
         openSnackbar: (props) => dispatch(openSnackbar(props)),
         removeTodo: (activeStep, removedTodo) => dispatch(removeTodo(activeStep, removedTodo)),
+        removeStep: (removedStep) => dispatch(removeStep(removedStep)),
     };
 };
 
@@ -198,11 +200,48 @@ class Roadmap extends Component {
         ))
     }
 
+    onRemoveStep = (activeStep) => {
+        const {
+            steps,
+            openDialog,
+            closeDialog,
+            removeStep,
+        } = this.props;
+
+        openDialog({
+            title: 'Remove Milestone',
+            width: '300px',
+            children: (
+                <span>
+                    { `Are you sure you want to remove the milestone ${ steps[activeStep].title }?` }
+                </span>
+            ),
+            actions: [
+                <FlatButton
+                    primary={ true }
+                    label="Cancel"
+                    onClick={ closeDialog }
+                />,
+
+                <RaisedButton
+                    style={{ marginLeft: '8px' }}
+                    primary={ true }
+                    label="Remove"
+                    onClick={ () => {
+                        removeStep(activeStep);
+                        closeDialog();
+                    } }
+                />
+            ],
+        });
+    }
+
     renderSteps = () => {
         const {
             steps,
             setActiveStep,
             completeStep,
+            removeStep,
             muiTheme: {
                 palette: {
                     primary1Color,
@@ -240,6 +279,11 @@ class Roadmap extends Component {
                             label="Complete"
                             primary={ true }
                             onClick={ completeStep.bind(null, idx) }
+                        />
+                        <FlatButton
+                            label="Remove"
+                            secondary={ true }
+                            onClick={ this.onRemoveStep.bind(this, idx) }
                         />
                     </div>
                 </StepContent>

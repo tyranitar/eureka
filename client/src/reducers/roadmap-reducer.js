@@ -97,6 +97,14 @@ const handleRemoveTodo = (state, action) => {
     });
 };
 
+const handleRemoveStep = (state, action) => {
+    const { removedStep } = action;
+
+    return Object.assign({}, state, {
+        steps: state.steps.filter((step, idx) => idx !== removedStep ),
+    });
+};
+
 const roadmapReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_ROADMAP':
@@ -113,6 +121,8 @@ const roadmapReducer = (state = initialState, action) => {
             return handleAddStep(state, action);
         case 'REMOVE_TODO':
             return handleRemoveTodo(state, action);
+        case 'REMOVE_STEP':
+            return handleRemoveStep(state, action);
         default:
             return state;
     }

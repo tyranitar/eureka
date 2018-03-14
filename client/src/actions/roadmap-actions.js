@@ -5,6 +5,7 @@ import {
     asyncAddTodo,
     asyncAddStep,
     asyncRemoveTodo,
+    asyncRemoveStep,
 } from '../api/roadmap-api';
 
 export const getRoadmap = () => {
@@ -73,5 +74,13 @@ export const removeTodo = (activeStep, removedTodo) => async (dispatch, getState
         type: 'REMOVE_TODO',
         activeStep,
         removedTodo,
+    });
+};
+
+export const removeStep = (removedStep) => async (dispatch, getState) => {
+    await asyncRemoveStep(removedStep);
+    dispatch({
+        type: 'REMOVE_STEP',
+        removedStep,
     });
 };

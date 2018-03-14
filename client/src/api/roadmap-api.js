@@ -35,3 +35,9 @@ export const asyncRemoveTodo = (activeStep, removedTodo) => {
         resolve();
     }, 0));
 };
+
+export const asyncRemoveStep = (removedStep) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve();
+    }, 0));
+};

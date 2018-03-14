@@ -11,6 +11,10 @@
     margin-top: 16px;
 }
 
+.roadmap-step-buttons > *:not(:first-child) {
+    margin-left: 16px !important;
+}
+
 .roadmap-step-checkbox-container {
     position: relative;
     margin-top: 8px;
