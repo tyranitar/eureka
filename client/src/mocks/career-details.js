@@ -30,7 +30,6 @@ const countries = [
     'United States',
     'Canada',
     'Japan',
-    'China',
     'South Korea',
 ];
 
@@ -220,7 +219,7 @@ export const getCharts = (career) => {
         },
     }, {
         type: 'bubble',
-        hidden: true,
+        // hidden: true,
 
         data: {
             datasets: countries.map((country, idx) => ({

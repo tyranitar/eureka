@@ -353,7 +353,7 @@ class CareerDetails extends Component {
                     }) }
                     { renderCharts({
                         title: 'Alignment with Your Profile',
-                        charts: charts.slice(3, 5),
+                        charts: charts.slice(3, 6),
                         icon: <AccountCircle color={ primary1Color } />,
                     }) }
                 </div>
