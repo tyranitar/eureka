@@ -17,7 +17,7 @@ class Home extends Component {
                     <Row className="home-row" center="xs">
                         <Col xs={12} xl={8}>
                             <Paper>
-                                <Tabs value={0}>
+                                <Tabs>
                                     <Tab label="News" value={0}>
                                         <News />
                                     </Tab>

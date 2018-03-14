@@ -241,7 +241,6 @@ class Roadmap extends Component {
             steps,
             setActiveStep,
             completeStep,
-            removeStep,
             muiTheme: {
                 palette: {
                     primary1Color,
