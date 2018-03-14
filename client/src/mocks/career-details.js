@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import subjects from './subjects';
 
 import {
     red500,
@@ -23,17 +24,7 @@ const educationMap = {
     'PhD': 2,
 };
 
-const skills = [
-    'Math',
-    'Physics',
-    'Chemistry',
-    'Biology',
-    'Communication',
-    'Visual Arts',
-    'Statistics',
-    'Economics',
-    'History',
-];
+const skills = subjects; // TODO: Consider changing this.
 
 const countries = [
     'United States',
