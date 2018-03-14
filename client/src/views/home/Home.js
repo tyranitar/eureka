@@ -17,14 +17,14 @@ class Home extends Component {
                     <Row className="home-row" center="xs">
                         <Col xs={12} xl={8}>
                             <Paper>
-                                <Tabs>
-                                    <Tab label="News">
+                                <Tabs value={2}>
+                                    <Tab label="News" value={0}>
                                         <News />
                                     </Tab>
-                                    <Tab label="Favorites">
+                                    <Tab label="Favorites" value={1}>
                                         <Favorites />
                                     </Tab>
-                                    <Tab label="Roadmap">
+                                    <Tab label="Roadmap" value={2}>
                                         <Roadmap />
                                     </Tab>
                                 </Tabs>

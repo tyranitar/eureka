@@ -11,8 +11,16 @@
     margin-top: 16px;
 }
 
-.roadmap-step-checkbox {
+.roadmap-step-checkbox-container {
+    position: relative;
     margin-top: 8px;
+    padding-right: 24px;
+}
+
+.roadmap-step-checkbox-remove {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .roadmap-step-add-todo-button {

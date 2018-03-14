@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Add from 'material-ui/svg-icons/content/add';
+import Close from 'material-ui/svg-icons/navigation/close';
 
 import {
     Checkbox,
     FlatButton,
     RaisedButton,
     TextField,
+    IconButton,
 } from 'material-ui';
 
 import {
@@ -154,21 +156,44 @@ class Roadmap extends Component {
         return ret;
     }
 
-    renderStepTodos = (step, todos, disabled) => (
-        todos.map(({
+    renderStepTodos = (step, todos, disabled) => {
+        const {
+            muiTheme: {
+                palette: {
+                    primary3Color,
+                },
+            },
+        } = this.props;
+
+        return todos.map(({
             title,
             completed,
         }, idx) => (
-            <Checkbox
-                className="roadmap-step-checkbox"
+            <div
                 key={ idx }
-                label={ title }
-                checked={ completed }
-                onCheck={ () => { this.props.toggleTodo(step, idx) } }
-                disabled={ disabled }
-            />
+                className="roadmap-step-checkbox-container">
+                <div>
+                    <Checkbox
+                        label={ title }
+                        checked={ completed }
+                        onCheck={ () => { this.props.toggleTodo(step, idx) } }
+                        disabled={ disabled }
+                    />
+                </div>
+                <div className="roadmap-step-checkbox-remove">
+                    <IconButton
+                        iconStyle={{ fill: primary3Color }}
+                        style={{
+                            width: '24px',
+                            height: '24px',
+                            padding: '0px',
+                        }}>
+                        <Close />
+                    </IconButton>
+                </div>
+            </div>
         ))
-    )
+    }
 
     renderSteps = () => {
         const {
