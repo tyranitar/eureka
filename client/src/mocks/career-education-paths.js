@@ -3,24 +3,44 @@ import _ from 'lodash';
 import universities from './universities';
 import institutions from './institutions';
 
-export default [{
+export default _.sampleSize([{
     type: 'University Degree',
-    title: 'University Degree A',
+    title: 'Systems Design Engineering',
+
+    institutions: _.sampleSize(universities, 3),
+}, {
+    type: 'University Degree',
+    title: 'Computer Science',
+
+    institutions: _.sampleSize(universities, 3),
+}, {
+    type: 'University Degree',
+    title: 'Data Science',
+
+    institutions: _.sampleSize(universities, 3),
+}, {
+    type: 'University Degree',
+    title: 'Software Engineering',
 
     institutions: _.sampleSize(universities, 3),
 }, {
     type: 'Apprenticeship',
-    title: 'Apprenticeship A',
+    title: 'Digital Media',
 
     institutions: _.sampleSize(institutions, 3),
-}, {
-    type: 'University Degree',
-    title: 'University Degree B',
-
-    institutions: _.sampleSize(universities, 3),
 }, {
     type: 'Apprenticeship',
-    title: 'Apprenticeship B',
+    title: 'Accounting',
 
     institutions: _.sampleSize(institutions, 3),
-}];
+}, {
+    type: 'Apprenticeship',
+    title: 'Telecommunications',
+
+    institutions: _.sampleSize(institutions, 3),
+}, {
+    type: 'Apprenticeship',
+    title: 'Logistics',
+
+    institutions: _.sampleSize(institutions, 3),
+}], 4);
