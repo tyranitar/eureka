@@ -54,7 +54,9 @@ export const asyncGetSearchResults = ({
         const multiplier = descending ? -1 : 1;
         let count = 10;
 
-        searchResults.sort((a, b) => {
+        const searchResultsClone = searchResults.slice();
+
+        searchResultsClone.sort((a, b) => {
             let ret = 0;
 
             if (a[sortBy] < b[sortBy]) {
@@ -66,7 +68,7 @@ export const asyncGetSearchResults = ({
             return ret * multiplier;
         });
 
-        searchResults.some((result) => {
+        searchResultsClone.some((result) => {
             if (filter(searchString, result.title) &&
                 result.salary >= minSalary &&
                 outlook[result.outlook] &&
