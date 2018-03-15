@@ -1,3 +1,9 @@
+// Template for targetCareer.
+const defaultTargetCareer = {
+    id: null,
+    title: null,
+};
+
 const initialState = {
     advertisements: [],
     educationPaths: [],
@@ -16,7 +22,7 @@ const initialState = {
         name: '',
     },
 
-    targetCareerId: null,
+    targetCareer: defaultTargetCareer,
 };
 
 const handleSetCareerDetails = (state, action) => {
@@ -57,13 +63,13 @@ const handleSetCareerAdvertisements = (state, action) => {
 
 const handleAddTargetCareer = (state, action) => {
     return Object.assign({}, state, {
-        targetCareerId: action.careerId,
+        targetCareer: action.career,
     });
 };
 
 const handleRemoveTargetCareer = (state, action) => {
     return Object.assign({}, state, {
-        targetCareerId: null,
+        targetCareer: defaultTargetCareer,
     });
 };
 

@@ -77,10 +77,10 @@ export const addCareerComment = (careerId, comment) => {
     };
 };
 
-export const addTargetCareer = (careerId) => {
+export const addTargetCareer = (career) => {
     return {
         type: 'ADD_TARGET_CAREER',
-        careerId,
+        career,
     };
 };
 
@@ -90,10 +90,10 @@ export const removeTargetCareer = () => {
     };
 };
 
-export const setTargetCareer = (careerId) => {
+export const setTargetCareer = (career) => {
     return async (dispatch, getState) => {
-        await asyncSetTargetCareer(careerId);
-        dispatch(addTargetCareer(careerId));
+        await asyncSetTargetCareer(career.id);
+        dispatch(addTargetCareer(career));
     };
 };
 

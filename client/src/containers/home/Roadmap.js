@@ -4,6 +4,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Add from 'material-ui/svg-icons/content/add';
 import Close from 'material-ui/svg-icons/navigation/close';
+import GpsFixed from 'material-ui/svg-icons/device/gps-fixed';
 
 import {
     Checkbox,
@@ -21,6 +22,10 @@ import {
 } from 'material-ui/Stepper';
 
 import {
+    blue500,
+} from 'material-ui/styles/colors'
+
+import {
     getRoadmap,
     setActiveStep,
     completeStep,
@@ -35,7 +40,6 @@ import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import { openSnackbar } from '../../actions/snackbar-actions';
 import './Roadmap.css';
 
-// TODO: Add roadmap milestone functionality (as final step with custom icon).
 // TODO: Add reminder functionality.
 
 const mapStateToProps = (state) => {
@@ -44,9 +48,14 @@ const mapStateToProps = (state) => {
         activeStep,
     } = state.roadmap;
 
+    const {
+        targetCareer,
+    } = state.career;
+
     return {
         steps,
         activeStep,
+        targetCareer,
     };
 };
 
@@ -334,7 +343,6 @@ class Roadmap extends Component {
         closeDialog();
     }
 
-    // TODO: Implement this.
     onAddStep = () => {
         const {
             openDialog,
@@ -383,14 +391,43 @@ class Roadmap extends Component {
         });
     }
 
-    render() {
+    renderStepperFooter = () => {
         const {
-            activeStep,
+            targetCareer,
             muiTheme: {
                 palette: {
                     primary1Color,
                 },
             },
+        } = this.props;
+
+        const ret = [
+            <Step key={0}>
+                <StepButton
+                    icon={ <Add color={ primary1Color } /> }
+                    onClick={ this.onAddStep }>
+                    Add Milestone
+                </StepButton>
+            </Step>
+        ];
+
+        if (targetCareer.id !== null) {
+            ret.push(
+                <Step key={1}>
+                    <StepButton
+                        icon={ <GpsFixed color={ blue500 } /> }>
+                        { targetCareer.title }
+                    </StepButton>
+                </Step>
+            );
+        }
+
+        return ret;
+    }
+
+    render() {
+        const {
+            activeStep,
         } = this.props;
 
         return (
@@ -403,13 +440,7 @@ class Roadmap extends Component {
                                 linear={ false }
                                 orientation="vertical">
                                 { this.renderSteps() }
-                                <Step>
-                                    <StepButton
-                                        icon={ <Add color={ primary1Color } /> }
-                                        onClick={ this.onAddStep }>
-                                        Add Milestone
-                                    </StepButton>
-                                </Step>
+                                { this.renderStepperFooter() }
                             </Stepper>
                         </div>
                     </Col>

@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
         educationPaths,
         pointOfContact,
         advertisements,
-        targetCareerId,
+        targetCareer,
     } = state.career;
 
     return {
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
         educationPaths,
         pointOfContact,
         advertisements,
-        targetCareerId,
+        targetCareer,
     };
 };
 
@@ -115,7 +115,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(openSnackbar(props));
         },
 
-        setTargetCareer: (careerId) => dispatch(setTargetCareer(careerId)),
+        setTargetCareer: (career) => dispatch(setTargetCareer(career)),
         unsetTargetCareer: () => dispatch(unsetTargetCareer()),
     };
 };
@@ -283,10 +283,11 @@ class CareerDetails extends Component {
                 setTargetCareer,
                 details: {
                     id,
+                    title,
                 },
             } = this.props;
 
-            setTargetCareer(id);
+            setTargetCareer({ id, title });
             openDialog({
                 title: "You set a new target career!",
                 width: '400px',
@@ -326,7 +327,7 @@ class CareerDetails extends Component {
     renderActions = () => {
         const {
             onShareButtonClick,
-            targetCareerId,
+            targetCareer,
             details: {
                 id,
             },
@@ -345,7 +346,7 @@ class CareerDetails extends Component {
                     checkedIcon={ <GpsFixed /> }
                     uncheckedIcon={ <GpsNotFixed /> }
                     iconStyle={{ fill: blue500 }}
-                    checked={ id === targetCareerId }
+                    checked={ id === targetCareer.id }
                     onCheck={ this.onSetTargetCareer }
                 />
                 <IconButton
