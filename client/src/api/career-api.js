@@ -7,6 +7,7 @@ import { getCharts } from '../mocks/career-details';
 import advertisements from '../mocks/advertisements';
 import loremIpsum from '../mocks/lorem-ipsum';
 import users from '../mocks/users';
+import videos from '../mocks/career-videos';
 
 export const asyncGetCareerDetails = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
@@ -66,6 +67,12 @@ export const asyncGetCareerPointOfContact = (careerId) => {
 export const asyncGetCareerAdvertisements = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         resolve(_.sampleSize(advertisements, 1));
+    }, 0));
+};
+
+export const asyncGetCareerVideos = (careerId) => {
+    return new Promise(setTimeout.bind(null, (resolve, reject) => {
+        resolve(_.sampleSize(videos, 5));
     }, 0));
 };
 

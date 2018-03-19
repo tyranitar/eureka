@@ -35,14 +35,22 @@
     margin-top: 32px;
 }
 
+.career-details-videos-container {
+    margin-top: 16px;
+}
+
 .career-details-charts-card {
     margin-top: 16px;
 }
 
-.career-details-charts-title {
+.career-details-charts-title, .career-details-videos-title {
     vertical-align: top;
     line-height: 26px;
     margin-left: 16px;
+}
+
+.career-details-videos {
+    overflow: hidden;
 }
 
 .career-details-charts {

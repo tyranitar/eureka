@@ -4,6 +4,7 @@ import {
     asyncGetCareerComments,
     asyncGetCareerPointOfContact,
     asyncGetCareerAdvertisements,
+    asyncGetCareerVideos,
     asyncToggleCareerCommentLike,
     asyncAddCareerComment,
     asyncSetTargetCareer,
@@ -42,6 +43,20 @@ export const getCareerAdvertisements = (careerId) => {
     return async (dispatch, getState) => {
         const careerAdvertisements = await asyncGetCareerAdvertisements(careerId);
         dispatch(setCareerAdvertisements(careerAdvertisements));
+    };
+};
+
+export const getCareerVideos = (careerId) => {
+    return async (dispatch, getState) => {
+        const careerVideos = await asyncGetCareerVideos(careerId);
+        dispatch(setCareerVideos(careerVideos));
+    };
+};
+
+export const setCareerVideos = (careerVideos) => {
+    return {
+        type: 'SET_CAREER_VIDEOS',
+        careerVideos,
     };
 };
 

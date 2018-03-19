@@ -9,6 +9,7 @@ import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Share from 'material-ui/svg-icons/social/share';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Equalizer from 'material-ui/svg-icons/av/equalizer';
+import OndemandVideo from 'material-ui/svg-icons/notification/ondemand-video';
 import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 
 import {
@@ -31,6 +32,7 @@ import {
     getCareerEducationPaths,
     getCareerPointOfContact,
     getCareerAdvertisements,
+    getCareerVideos,
     setTargetCareer,
     unsetTargetCareer,
 } from '../../actions/career-actions';
@@ -40,6 +42,7 @@ import { openSnackbar } from '../../actions/snackbar-actions';
 import { sendMessageToUser } from '../../actions/user-actions';
 import EducationPath from '../../components/career/EducationPath';
 import PointOfContact from '../../components/career/PointOfContact';
+import VideoList from '../../components/career/VideoList';
 import AnyChart from '../../components/common/AnyChart';
 import Advertisement from '../../components/common/Advertisement';
 import { getPublicUrl } from '../../utils/common';
@@ -52,6 +55,7 @@ const mapStateToProps = (state) => {
         pointOfContact,
         advertisements,
         targetCareer,
+        videos,
     } = state.career;
 
     return {
@@ -60,6 +64,7 @@ const mapStateToProps = (state) => {
         pointOfContact,
         advertisements,
         targetCareer,
+        videos,
     };
 };
 
@@ -117,6 +122,7 @@ const mapDispatchToProps = (dispatch) => {
 
         setTargetCareer: (career) => dispatch(setTargetCareer(career)),
         unsetTargetCareer: () => dispatch(unsetTargetCareer()),
+        getCareerVideos: (careerId) => dispatch(getCareerVideos(careerId)),
     };
 };
 
@@ -149,6 +155,25 @@ const renderCharts = ({ title, charts, icon }) => {
                         );
                     }) }
                 </Row>
+            </CardMedia>
+        </Card>
+    );
+};
+
+// TODO: Convert all these functions into class methods.
+const renderVideos = ({ videos, icon, title }) => {
+    return (
+        <Card>
+            <CardHeader
+                title={ <div>
+                    { icon }
+                    <span className="career-details-videos-title">{ title }</span>
+                </div> }
+                actAsExpander={ true }
+                showExpandableButton={ true }
+            />
+            <CardMedia expandable={ true } className="career-details-videos">
+                <VideoList videos={ videos } />
             </CardMedia>
         </Card>
     );
@@ -199,6 +224,7 @@ class CareerDetails extends Component {
             getCareerEducationPaths,
             getCareerPointOfContact,
             getCareerAdvertisements,
+            getCareerVideos,
             // TODO: Check whether career is favorited or targetted.
         } = this.props;
 
@@ -206,6 +232,7 @@ class CareerDetails extends Component {
         getCareerEducationPaths(careerId);
         getCareerPointOfContact(careerId);
         getCareerAdvertisements(careerId);
+        getCareerVideos(careerId);
     }
 
     updateSendMessageTextFieldValue = (evt, sendMessageTextFieldValue) => {
@@ -375,6 +402,7 @@ class CareerDetails extends Component {
             advertisements,
             educationPaths,
             onInstitutionClick,
+            videos,
 
             muiTheme: {
                 palette: {
@@ -422,6 +450,13 @@ class CareerDetails extends Component {
                         title: 'Alignment with Your Profile',
                         charts: charts.slice(3, 6),
                         icon: <AccountCircle color={ primary1Color } />,
+                    }) }
+                </div>
+                <div className="career-details-videos-container">
+                    { renderVideos({
+                        videos,
+                        icon: <OndemandVideo color={ primary1Color } />,
+                        title: 'Recommended Videos',
                     }) }
                 </div>
                 { renderEducationPaths(educationPaths, onInstitutionClick) }

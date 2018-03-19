@@ -1,5 +1,5 @@
 {
-  "name": "capstone",
+  "name": "eureka",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tyron-j/capstone.git"
+    "url": "git+https://github.com/tyron-j/eureka.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tyron-j/capstone/issues"
+    "url": "https://github.com/tyron-j/eureka/issues"
   },
-  "homepage": "https://github.com/tyron-j/capstone#readme",
+  "homepage": "https://github.com/tyron-j/eureka#readme",
   "dependencies": {}
 }

@@ -23,6 +23,7 @@ const initialState = {
     },
 
     targetCareer: defaultTargetCareer,
+    videos: [],
 };
 
 const handleSetCareerDetails = (state, action) => {
@@ -73,6 +74,12 @@ const handleRemoveTargetCareer = (state, action) => {
     });
 };
 
+const handleSetCareerVideos = (state, action) => {
+    return Object.assign({}, state, {
+        videos: action.careerVideos,
+    });
+};
+
 const careerReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_CAREER_DETAILS':
@@ -91,6 +98,8 @@ const careerReducer = (state = initialState, action) => {
             return handleAddTargetCareer(state, action);
         case 'REMOVE_TARGET_CAREER':
             return handleRemoveTargetCareer(state, action);
+        case 'SET_CAREER_VIDEOS':
+            return handleSetCareerVideos(state, action);
         default:
             return state;
     }

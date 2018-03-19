@@ -12,7 +12,7 @@ function* idMaker() {
 const idGenerator = idMaker();
 
 const generateChartId = () => {
-    return `capstone-chart-${ idGenerator.next().value }`;
+    return `eureka-chart-${ idGenerator.next().value }`;
 };
 
 class AnyChart extends Component {

@@ -81,7 +81,7 @@ class LoginCard extends Component {
                         </IconButton>
                     </CardText>
                     <CardTitle className="login-card-title" style={{ color: this.props.muiTheme.palette.primary1Color }}>
-                        Capstone
+                        Eureka
                     </CardTitle>
                     <CardText className="login-card-text">
                         <TextField

@@ -69,7 +69,7 @@ const Layout = ({
 }) => (
     <div className="layout">
         <AppBar
-            title="Capstone"
+            title="Eureka"
 
             iconElementLeft={
                 <IconButton onClick={ pushPath('/') }>
