@@ -191,7 +191,7 @@ export const getCharts = (career) => {
                 backgroundColor: [lightBlue500, pink400],
 
                 data: (() => {
-                    const numFemales = _.random(0, 100);
+                    const numFemales = _.random(25, 75);
                     const numMales = 100 - numFemales;
 
                     return [numFemales / 100, numMales / 100];

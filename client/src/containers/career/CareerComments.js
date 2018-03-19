@@ -163,7 +163,8 @@ class CareerComments extends Component {
         return (
             <div>
                 <div>
-                    { 'Comments' }
+                    { /* 'Comments' */ }
+                    { 'Insights from Industry Professionals' }
                     <span style={{
                             color: accent3Color,
                         }}>

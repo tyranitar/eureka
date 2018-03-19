@@ -23,6 +23,7 @@ export const asyncGetCareerDetails = (careerId) => {
 
         const careerDetails = Object.assign({}, career, {
             description: [
+                'Typical Day',
                 description,
                 ..._.sampleSize(loremIpsumCopy, 2),
             ].join('\n\n'),
