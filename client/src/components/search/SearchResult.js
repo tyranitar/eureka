@@ -67,10 +67,14 @@ const SearchResult = ({
 }) => (
     <Paper className="search-result">
         <div className="search-result-band" style={{
-            backgroundColor: featured ? accent1Color : primary1Color,
+            // backgroundColor: featured ? accent1Color : primary1Color,
+            backgroundColor: primary1Color,
         }}></div>
         <div className="search-result-title" onClick={ onClick.bind(null, id) }>
             { title }
+            <span style={{ color: primary1Color }}>
+                { featured ? " (Featured)" : "" }
+            </span>
         </div>
         <div className="search-result-actions">
             <Checkbox
