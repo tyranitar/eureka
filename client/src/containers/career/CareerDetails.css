@@ -85,3 +85,17 @@
     line-height: 26px;
     margin-left: 8px;
 }
+
+.career-details-institution-required-course {
+    position: relative;
+    vertical-align: top;
+    line-height: 26px;
+    margin-left: 24px;
+    margin-top: 8px;
+}
+
+.career-details-institution-add-todo {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

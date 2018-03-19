@@ -11,6 +11,8 @@ import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Equalizer from 'material-ui/svg-icons/av/equalizer';
 import OndemandVideo from 'material-ui/svg-icons/notification/ondemand-video';
 import Place from 'material-ui/svg-icons/maps/place';
+import Layers from 'material-ui/svg-icons/maps/layers';
+import Add from 'material-ui/svg-icons/content/add';
 import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 
 import {
@@ -359,6 +361,24 @@ class CareerDetails extends Component {
         );
     }
 
+    // TODO: Implement this.
+    onAddTodo = (course) => {
+        const { openSnackbar } = this.props;
+
+        openSnackbar({
+            message: `Added ${ course } as a todo!`,
+        });
+    }
+
+    // TODO: Implement this.
+    onAddMilestone = (educationPath, institution) => {
+        const { openSnackbar } = this.props;
+
+        openSnackbar({
+            message: `Added the program as a milestone!`,
+        });
+    }
+
     renderEducationPaths = () => {
         const {
             educationPaths,
@@ -378,47 +398,76 @@ class CareerDetails extends Component {
 
         const educationPathMapper = (educationPath, idx) => (
             <div key={ idx } className="career-details-education-path">
-                <EducationPath { ...educationPath } onInstitutionClick={ ({
+                <EducationPath { ...educationPath } onInstitutionClick={ (institution) => {
+                    const {
                         name,
                         imageUrl,
                         admissionAverage,
                         location,
-                    }) => {
+                        courses,
+                    } = institution;
+
                     openDialog({
                         title: `${ educationPath.title } at ${ name }`,
                         width: '600px',
 
                         children: (
-                            <Row>
-                                <Col xs={6}>
-                                    <div className="career-details-institution-image" style={{
-                                            backgroundImage: `url(${ imageUrl })`,
-                                        }}>
-                                    </div>
-                                    <div className="career-details-institution-data">
-                                        <div>
-                                            <Place color={ primary1Color } />
-                                            <div className="career-details-institution-datum">
-                                                { 'Location:' }
-                                            </div>
-                                            <span className="career-details-institution-datum" style={{ color: primary1Color }}>
-                                                { location }
-                                            </span>
+                            <div>
+                                <Row>
+                                    <Col xs={7}>
+                                        <div className="career-details-institution-image" style={{
+                                                backgroundImage: `url(${ imageUrl })`,
+                                            }}>
                                         </div>
+                                    </Col>
+                                    <Col xs={5}>
                                         <div>
-                                            <Equalizer color={ primary1Color } />
+                                            <Layers color={ primary1Color } />
                                             <div className="career-details-institution-datum">
-                                                { 'Admission Average:' }
+                                                { 'Required Courses:' }
                                             </div>
-                                            <span className="career-details-institution-datum" style={{ color: primary1Color }}>
-                                                { `${ admissionAverage }%` }
-                                            </span>
+                                            { courses.map((course, idx) => (
+                                                <div className="career-details-institution-required-course" key={ idx }>
+                                                    <div className="career-details-institution-datum">
+                                                        { course }
+                                                    </div>
+                                                    <div className="career-details-institution-add-todo">
+                                                        <IconButton
+                                                            onClick={ this.onAddTodo.bind(this, course) }
+                                                            style={{
+                                                                width: '24px',
+                                                                height: '24px',
+                                                                padding: '0px',
+                                                            }}>
+                                                            <Add color={ primary1Color } />
+                                                        </IconButton>
+                                                    </div>
+                                                </div>
+                                            )) }
                                         </div>
-                                    </div>
-                                </Col>
-                                <Col xs={6}>
-                                </Col>
-                            </Row>
+                                    </Col>
+                                </Row>
+                                <Row className="career-details-institution-data">
+                                    <Col xs={7}>
+                                        <Place color={ primary1Color } />
+                                        <div className="career-details-institution-datum">
+                                            { 'Location:' }
+                                        </div>
+                                        <span className="career-details-institution-datum" style={{ color: primary1Color }}>
+                                            { location }
+                                        </span>
+                                    </Col>
+                                    <Col xs={5}>
+                                        <Equalizer color={ primary1Color } />
+                                        <div className="career-details-institution-datum">
+                                            { 'Admission Average:' }
+                                        </div>
+                                        <span className="career-details-institution-datum" style={{ color: primary1Color }}>
+                                            { `${ admissionAverage }%` }
+                                        </span>
+                                    </Col>
+                                </Row>
+                            </div>
                         ),
 
                         actions: [
@@ -432,7 +481,10 @@ class CareerDetails extends Component {
                                 style={{ marginLeft: '8px' }}
                                 label="Add Milestone"
                                 primary={ true }
-                                onClick={ () => {} }
+                                onClick={ () => {
+                                    this.onAddMilestone(educationPath, institution);
+                                    closeDialog();
+                                } }
                             />,
                         ],
                     });

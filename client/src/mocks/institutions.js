@@ -2,6 +2,7 @@ import loremIpsum from './lorem-ipsum';
 import _ from 'lodash';
 
 import { getPublicUrl } from '../utils/common';
+import courses from './courses';
 
 export default [{
     name: 'British Columbia Institute of Technology',
@@ -30,4 +31,5 @@ export default [{
 }].map((institution) => (Object.assign({}, institution, {
     description: _.sample(loremIpsum),
     admissionAverage: _.random(90, 99),
+    courses: _.sampleSize(courses, 5),
 })));

@@ -40,6 +40,7 @@ const renderInstitutions = ({
             description,
             admissionAverage,
             location,
+            courses,
         }, idx) => (
             <ListItem
                 key={ idx }
@@ -51,6 +52,7 @@ const renderInstitutions = ({
                     imageUrl,
                     admissionAverage,
                     location,
+                    courses,
                 }) }>
                 <Row>
                     <Col xs={3}>
