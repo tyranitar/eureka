@@ -10,6 +10,7 @@ import Share from 'material-ui/svg-icons/social/share';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Equalizer from 'material-ui/svg-icons/av/equalizer';
 import OndemandVideo from 'material-ui/svg-icons/notification/ondemand-video';
+import Place from 'material-ui/svg-icons/maps/place';
 import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 
 import {
@@ -269,7 +270,7 @@ class CareerDetails extends Component {
                     fullWidth={ true }
                     multiLine={ true }
                 />
-            )
+            ),
         });
     }
 
@@ -361,7 +362,15 @@ class CareerDetails extends Component {
     renderEducationPaths = () => {
         const {
             educationPaths,
-            onInstitutionClick,
+            openDialog,
+            closeDialog,
+            // onInstitutionClick,
+
+            muiTheme: {
+                palette: {
+                    primary1Color,
+                },
+            },
         } = this.props;
 
         const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
@@ -369,7 +378,65 @@ class CareerDetails extends Component {
 
         const educationPathMapper = (educationPath, idx) => (
             <div key={ idx } className="career-details-education-path">
-                <EducationPath { ...educationPath } onInstitutionClick={ onInstitutionClick } />
+                <EducationPath { ...educationPath } onInstitutionClick={ ({
+                        name,
+                        imageUrl,
+                        admissionAverage,
+                        location,
+                    }) => {
+                    openDialog({
+                        title: `${ educationPath.title } at ${ name }`,
+                        width: '600px',
+
+                        children: (
+                            <Row>
+                                <Col xs={6}>
+                                    <div className="career-details-institution-image" style={{
+                                            backgroundImage: `url(${ imageUrl })`,
+                                        }}>
+                                    </div>
+                                    <div className="career-details-institution-data">
+                                        <div>
+                                            <Place color={ primary1Color } />
+                                            <div className="career-details-institution-datum">
+                                                { 'Location:' }
+                                            </div>
+                                            <span className="career-details-institution-datum" style={{ color: primary1Color }}>
+                                                { location }
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <Equalizer color={ primary1Color } />
+                                            <div className="career-details-institution-datum">
+                                                { 'Admission Average:' }
+                                            </div>
+                                            <span className="career-details-institution-datum" style={{ color: primary1Color }}>
+                                                { `${ admissionAverage }%` }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col xs={6}>
+                                </Col>
+                            </Row>
+                        ),
+
+                        actions: [
+                            <FlatButton
+                                label="Close"
+                                primary={ true }
+                                onClick={ closeDialog }
+                            />,
+
+                            <RaisedButton
+                                style={{ marginLeft: '8px' }}
+                                label="Add Milestone"
+                                primary={ true }
+                                onClick={ () => {} }
+                            />,
+                        ],
+                    });
+                } } />
             </div>
         );
 

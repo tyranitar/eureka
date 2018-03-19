@@ -38,13 +38,20 @@ const renderInstitutions = ({
             imageUrl,
             name,
             description,
+            admissionAverage,
+            location,
         }, idx) => (
             <ListItem
                 key={ idx }
                 innerDivStyle={{
                     padding: '8px',
                 }}
-                onClick={ onInstitutionClick }>
+                onClick={ onInstitutionClick.bind(null, {
+                    name,
+                    imageUrl,
+                    admissionAverage,
+                    location,
+                }) }>
                 <Row>
                     <Col xs={3}>
                         <div className="education-path-institution-image" style={{
