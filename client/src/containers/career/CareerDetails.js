@@ -179,35 +179,6 @@ const renderVideos = ({ videos, icon, title }) => {
     );
 };
 
-const renderEducationPaths = (educationPaths, onInstitutionClick) => {
-    const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
-    const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
-
-    const educationPathMapper = (educationPath, idx) => (
-        <div key={ idx } className="career-details-education-path">
-            <EducationPath { ...educationPath } onInstitutionClick={ onInstitutionClick } />
-        </div>
-    );
-
-    return (
-        <div className="career-details-education">
-            <div className="career-details-education-title">
-                Suggested Education Paths
-            </div>
-            <div>
-                <Row>
-                    <Col xs={6}>
-                        { evenEducationPaths.map(educationPathMapper) }
-                    </Col>
-                    <Col xs={6}>
-                        { oddEducationPaths.map(educationPathMapper) }
-                    </Col>
-                </Row>
-            </div>
-        </div>
-    );
-};
-
 class CareerDetails extends Component {
     constructor(props) {
         super(props);
@@ -387,6 +358,40 @@ class CareerDetails extends Component {
         );
     }
 
+    renderEducationPaths = () => {
+        const {
+            educationPaths,
+            onInstitutionClick,
+        } = this.props;
+
+        const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
+        const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
+
+        const educationPathMapper = (educationPath, idx) => (
+            <div key={ idx } className="career-details-education-path">
+                <EducationPath { ...educationPath } onInstitutionClick={ onInstitutionClick } />
+            </div>
+        );
+
+        return (
+            <div className="career-details-education">
+                <div className="career-details-education-title">
+                    Suggested Education Paths
+                </div>
+                <div>
+                    <Row>
+                        <Col xs={6}>
+                            { evenEducationPaths.map(educationPathMapper) }
+                        </Col>
+                        <Col xs={6}>
+                            { oddEducationPaths.map(educationPathMapper) }
+                        </Col>
+                    </Row>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         const {
             details: {
@@ -400,8 +405,6 @@ class CareerDetails extends Component {
 
             pointOfContact,
             advertisements,
-            educationPaths,
-            onInstitutionClick,
             videos,
 
             muiTheme: {
@@ -459,7 +462,7 @@ class CareerDetails extends Component {
                         title: 'Recommended Videos',
                     }) }
                 </div>
-                { renderEducationPaths(educationPaths, onInstitutionClick) }
+                { this.renderEducationPaths() }
             </div>
         );
     }
