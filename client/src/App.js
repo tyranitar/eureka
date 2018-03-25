@@ -13,6 +13,8 @@ import Search from './views/search/Search';
 import Career from './views/career/Career';
 import Login from './views/login/Login';
 import Questionnaire from './views/questionnaire/Questionnaire';
+import Report from './views/parent/Report';
+import Comparison from './views/parent/Comparison';
 import reducers from './reducers';
 import './App.css';
 
@@ -49,6 +51,8 @@ class App extends Component {
                             <Route exact path="/login" component={ Login } />
                             <Route exact path="/signup" component={ Login } />
                             <Route exact path="/questionnaire" component={ Questionnaire } />
+                            <Route exact path="/parent/report/:reportId" component={ Report } />
+                            <Route exact path="/parent/comparison" component={ Comparison } />
                         </div>
                     </ConnectedRouter>
                 </Provider>
