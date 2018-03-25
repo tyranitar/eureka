@@ -90,6 +90,7 @@ class SearchFilters extends Component {
         openDialog({
             title: "Add related subject",
             width: '300px',
+            children: this.renderSubjectCheckboxes(),
             actions: [
                 <FlatButton
                     label="Cancel"
@@ -103,7 +104,6 @@ class SearchFilters extends Component {
                     onClick={ this.onAddSubject }
                 />,
             ],
-            children: this.renderSubjectCheckboxes(),
         });
     }
 

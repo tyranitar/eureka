@@ -188,6 +188,14 @@ class CareerDetails extends Component {
         openDialog({
             title: `Message ${ pointOfContact.name }`,
             width: '500px',
+            children: (
+                <TextField
+                    onChange={ this.updateSendMessageTextFieldValue }
+                    hintText="Type your message here."
+                    fullWidth={ true }
+                    multiLine={ true }
+                />
+            ),
             actions: [
                 <FlatButton
                     label="Cancel"
@@ -201,14 +209,6 @@ class CareerDetails extends Component {
                     onClick={ this.onSendMessageButtonClick }
                 />,
             ],
-            children: (
-                <TextField
-                    onChange={ this.updateSendMessageTextFieldValue }
-                    hintText="Type your message here."
-                    fullWidth={ true }
-                    multiLine={ true }
-                />
-            ),
         });
     }
 
@@ -227,14 +227,6 @@ class CareerDetails extends Component {
             openDialog({
                 title: "You set a new target career!",
                 width: '400px',
-                actions: [
-                    <RaisedButton
-                        style={{ marginLeft: '8px' }}
-                        label="Okay"
-                        primary={ true }
-                        onClick={ closeDialog }
-                    />,
-                ],
                 children: (
                     <div>
                         <span>{ "This is great news! We'll email you about courses you can take right now and postsecondary opportunities that can propel you towards your new goal!" }</span>
@@ -246,6 +238,14 @@ class CareerDetails extends Component {
                         </div>
                     </div>
                 ),
+                actions: [
+                    <RaisedButton
+                        style={{ marginLeft: '8px' }}
+                        label="Okay"
+                        primary={ true }
+                        onClick={ closeDialog }
+                    />,
+                ],
             })
         } else {
             const {

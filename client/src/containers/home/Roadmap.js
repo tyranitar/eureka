@@ -108,6 +108,13 @@ class Roadmap extends Component {
         openDialog({
             title: 'Add Todo',
             width: '300px',
+            children: (
+                <TextField
+                    onChange={ this.updateAddTodoTextFieldValue }
+                    hintText="Todo Title"
+                    fullWidth={ true }
+                />
+            ),
             actions: [
                 <FlatButton
                     primary={ true }
@@ -121,13 +128,6 @@ class Roadmap extends Component {
                     onClick={ () => this.onDialogAddTodoButtonClick(step) }
                 />
             ],
-            children: (
-                <TextField
-                    onChange={ this.updateAddTodoTextFieldValue }
-                    hintText="Todo Title"
-                    fullWidth={ true }
-                />
-            ),
         });
     }
 
@@ -308,19 +308,6 @@ class Roadmap extends Component {
         openDialog({
             title: 'Add Milestone',
             width: '300px',
-            actions: [
-                <FlatButton
-                    primary={ true }
-                    label="Cancel"
-                    onClick={ closeDialog }
-                />,
-                <RaisedButton
-                    style={{ marginLeft: '8px' }}
-                    primary={ true }
-                    label="Add"
-                    onClick={ this.onDialogAddStepButtonClick }
-                />
-            ],
             children: (
                 <div>
                     <TextField
@@ -336,6 +323,19 @@ class Roadmap extends Component {
                         />
                 </div>
             ),
+            actions: [
+                <FlatButton
+                    primary={ true }
+                    label="Cancel"
+                    onClick={ closeDialog }
+                />,
+                <RaisedButton
+                    style={{ marginLeft: '8px' }}
+                    primary={ true }
+                    label="Add"
+                    onClick={ this.onDialogAddStepButtonClick }
+                />
+            ],
         });
     }
 
