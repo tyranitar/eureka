@@ -4,7 +4,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import FilterList from 'material-ui/svg-icons/content/filter-list';
 import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
 import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward';
-
 import {
     SelectField,
     MenuItem,
@@ -22,70 +21,32 @@ import {
     setSubjectFilters,
     removeSubjectFilter,
 } from '../../actions/search-actions';
-
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import { getSearchFilters } from '../../actions/search-actions';
-
 import './SearchFilters.css';
 
 const mapStateToProps = (state) => {
     const { query } = state.search;
-
-    return {
-        query,
-    };
+    return { query };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateQuery: (field, value) => {
-            dispatch(updateSearchQuery(field, value));
-        },
-
-        updateQueryCurry: (field, value) => {
-            return () => {
-                dispatch(updateSearchQuery(field, value));
-            };
-        },
-
-        updateQueryOutlookCurry: (field, value) => {
-            return () => {
-                dispatch(updateSearchQueryOutlook(field, value));
-            };
-        },
-
-        updateQueryEducationCurry: (field, value) => {
-            return () => {
-                dispatch(updateSearchQueryEducation(field, value));
-            };
-        },
-
-        openDialog: (props) => {
-            dispatch(openDialog(props));
-        },
-
-        closeDialog: () => {
-            dispatch(closeDialog());
-        },
-
-        getSearchFilters: () => {
-            dispatch(getSearchFilters());
-        },
-
-        setSubjectFilters: (subjects) => {
-            dispatch(setSubjectFilters(subjects));
-        },
-
-        removeSubjectFilter: (subject) => {
-            dispatch(removeSubjectFilter(subject));
-        },
+        updateQuery: (field, value) => dispatch(updateSearchQuery(field, value)),
+        updateQueryCurry: (field, value) => () => dispatch(updateSearchQuery(field, value)),
+        updateQueryOutlookCurry: (field, value) => () => dispatch(updateSearchQueryOutlook(field, value)),
+        updateQueryEducationCurry: (field, value) => () => dispatch(updateSearchQueryEducation(field, value)),
+        openDialog: (props) => dispatch(openDialog(props)),
+        closeDialog: () => dispatch(closeDialog()),
+        getSearchFilters: () => dispatch(getSearchFilters()),
+        setSubjectFilters: (subjects) => dispatch(setSubjectFilters(subjects)),
+        removeSubjectFilter: (subject) => dispatch(removeSubjectFilter(subject)),
     };
 };
 
 class SearchFilters extends Component {
     constructor(props) {
         super(props);
-
         this.subjects = {};
     }
 
@@ -105,17 +66,16 @@ class SearchFilters extends Component {
                 },
             },
         } = this.props;
-
-        return Object.keys(this.subjects).map((subject, idx) => {
-            return <Checkbox
+        return Object.keys(this.subjects).map((subject, idx) => (
+            <Checkbox
                 key={ idx }
                 iconStyle={{ fill: primary1Color }}
                 className="search-filters-checkbox"
                 label={ subject }
                 defaultChecked={ this.subjects[subject] }
                 onCheck={ this.checkSubject.bind(this, subject) }
-            />;
-        });
+            />
+        ));
     }
 
     onAddSubjectClick = () => {
@@ -126,9 +86,7 @@ class SearchFilters extends Component {
             openDialog,
             closeDialog,
         } = this.props;
-
         this.subjects = Object.assign({}, subjects);
-
         openDialog({
             title: "Add related subject",
             width: '300px',
@@ -138,7 +96,6 @@ class SearchFilters extends Component {
                     primary={ true }
                     onClick={ closeDialog }
                 />,
-
                 <RaisedButton
                     style={{ marginLeft: '8px' }}
                     label="ADD"
@@ -165,18 +122,15 @@ class SearchFilters extends Component {
                 subjects,
             },
         } = this.props;
-
-        return Object.keys(subjects).filter((subject) => subjects[subject]).map((subject, idx) => {
-            return (
-                <div
-                    key={idx}
-                    className="search-filters-subject-chip">
-                    <Chip onRequestDelete={ this.removeSubjectFilter.bind(this, subject) }>
-                        { subject }
-                    </Chip>
-                </div>
-            );
-        });
+        return Object.keys(subjects).filter((subject) => subjects[subject]).map((subject, idx) => (
+            <div
+                key={idx}
+                className="search-filters-subject-chip">
+                <Chip onRequestDelete={ this.removeSubjectFilter.bind(this, subject) }>
+                    { subject }
+                </Chip>
+            </div>
+        ));
     }
 
     render() {
@@ -189,20 +143,17 @@ class SearchFilters extends Component {
                 // outlook,
                 education,
             },
-
             muiTheme: {
                 palette: {
                     primary1Color,
                     // alternateTextColor,
                 },
             },
-
             updateQuery,
             updateQueryCurry,
             // updateQueryOutlookCurry,
             updateQueryEducationCurry,
         } = this.props;
-
         return (
             <div className="search-filters">
                 <div className="search-filters-header">
@@ -217,14 +168,10 @@ class SearchFilters extends Component {
                     </div>
                     <SelectField
                         fullWidth={ true }
-                        labelStyle={{
-                            color: primary1Color,
-                        }}
-                        selectedMenuItemStyle={{
-                            color: primary1Color,
-                        }}
+                        labelStyle={{ color: primary1Color }}
+                        selectedMenuItemStyle={{ color: primary1Color }}
                         value={sortBy}
-                        onChange={ (evt, idx, val) => { updateQuery('sortBy', val); } }>
+                        onChange={ (evt, idx, val) => updateQuery('sortBy', val) }>
                         <MenuItem value={'title'} primaryText="Title" />
                         <MenuItem value={'salary'} primaryText="Salary" />
                         <MenuItem value={'outlook'} primaryText="Outlook" />
@@ -238,7 +185,6 @@ class SearchFilters extends Component {
                         label={ descending ? 'Descending' : 'Ascending' }
                         onCheck={ updateQueryCurry('descending', !descending) }
                     />
-
                     <div className="search-filters-section-title">
                         Expected Salary
                     </div>
@@ -251,13 +197,12 @@ class SearchFilters extends Component {
                         step={ 5000 }
                         max={ 150000 }
                         value={ minSalary }
-                        onChange={ (evt, val) => { updateQuery('minSalary', val); } }
+                        onChange={ (evt, val) => updateQuery('minSalary', val) }
                     />
                     <div className="search-filters-slider-label">
                         <span>{ 'At least ' }</span>
                         <span style={{ color: primary1Color }}>{ `$${minSalary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')}` }</span>
                     </div>
-
                     {
                     // <div className="search-filters-section-title">
                     //     Employment Outlook
@@ -266,14 +211,12 @@ class SearchFilters extends Component {
                     // <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Okay Outlook" checked={ outlook['Okay Outlook'] } onCheck={ updateQueryOutlookCurry('Okay Outlook', !outlook['Okay Outlook']) } />
                     // <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Poor Outlook" checked={ outlook['Poor Outlook'] } onCheck={ updateQueryOutlookCurry('Poor Outlook', !outlook['Poor Outlook']) } />
                     }
-
                     <div className="search-filters-section-title">
                         Required Education
                     </div>
                     <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Bachelor's" checked={ education['Bachelor\'s'] } onCheck={ updateQueryEducationCurry('Bachelor\'s', !education['Bachelor\'s']) } />
                     <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="Master's" checked={ education['Master\'s'] } onCheck={ updateQueryEducationCurry('Master\'s', !education['Master\'s']) } />
                     <Checkbox iconStyle={{ fill: primary1Color }} className="search-filters-checkbox" label="PhD" checked={ education['PhD'] } onCheck={ updateQueryEducationCurry('PhD', !education['PhD']) } />
-
                     <div className="search-filters-section-title">
                         Related Subjects
                     </div>

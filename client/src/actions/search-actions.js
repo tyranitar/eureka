@@ -86,7 +86,6 @@ export const getSearchFilters = () => {
 export const getSearchResults = (query) => {
     return async (dispatch, getState) => {
         dispatch(beginSearch());
-
         const results = await asyncGetSearchResults(query || getState().search.query);
         dispatch(setSearchResults(results));
     };

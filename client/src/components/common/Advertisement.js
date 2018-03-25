@@ -13,9 +13,7 @@ const Advertisement = ({
     <a className="advertisement"
         href={ href }
         target="_blank"
-        style={{
-            backgroundColor: grey200,
-        }}
+        style={{ backgroundColor: grey200 }}
         onClick={ onClick }>
         <div className="advertisement-image" style={{
             backgroundImage: `url('${ imageUrl }')`,
@@ -25,9 +23,7 @@ const Advertisement = ({
         <div className="advertisement-description">
             { description }
         </div>
-        <div className="advertisement-footer" style={{
-                color: grey500,
-            }}>
+        <div className="advertisement-footer" style={{ color: grey500 }}>
             Advertisement
         </div>
     </a>

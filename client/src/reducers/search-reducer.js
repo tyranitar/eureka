@@ -5,28 +5,22 @@ const initialState = {
     searching: false,
     autoCompleteResults: [],
     results: [],
-
     query: {
         searchString: '',
         sortBy: 'title',
         descending: false,
         minSalary: 50000,
-
         outlook: {
             'Good Outlook': true,
             'Okay Outlook': true,
             'Poor Outlook': true,
         },
-
         education: {
             'Bachelor\'s': true,
             'Master\'s': true,
             'PhD': true,
         },
-
-        subjects: {
-            //
-        },
+        subjects: {},
     },
 };
 
@@ -60,7 +54,6 @@ const handleUpdateSearchQueryEducation = (state, action) => {
 
 const handleSetAutoCompleteResults = (state, action) => {
     const { autoCompleteResults } = action;
-
     return Object.assign({}, state, {
         autoCompleteResults,
     });
@@ -75,7 +68,6 @@ const handleBeginSearch = (state, action) => {
 
 const handleSetSearchResults = (state, action) => {
     const { results } = action;
-
     return Object.assign({}, state, {
         searching: false,
         results,
@@ -84,7 +76,6 @@ const handleSetSearchResults = (state, action) => {
 
 const handleSetSearchFilters = (state, action) => {
     const { filters } = action;
-
     return _.merge({}, state, {
         query: {
             subjects: filters.subjects,
@@ -94,7 +85,6 @@ const handleSetSearchFilters = (state, action) => {
 
 const handleSetSubjectFilters = (state, action) => {
     const { subjects } = action;
-
     return _.merge({}, state, {
         query: {
             subjects,
@@ -104,7 +94,6 @@ const handleSetSubjectFilters = (state, action) => {
 
 const handleRemoveSubjectFilter = (state, action) => {
     const { subject } = action;
-
     return _.merge({}, state, {
         query: {
             subjects: {

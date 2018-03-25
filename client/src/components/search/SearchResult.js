@@ -10,7 +10,6 @@ import WbSunny from 'material-ui/svg-icons/image/wb-sunny';
 import Flare from 'material-ui/svg-icons/image/flare';
 import WbCloudy from 'material-ui/svg-icons/image/wb-cloudy';
 import School from 'material-ui/svg-icons/social/school';
-
 import {
     red500,
     lightGreen500,
@@ -51,7 +50,6 @@ const SearchResult = ({
         featured,
         id,
     },
-
     muiTheme: {
         palette: {
             primary1Color,
@@ -62,7 +60,6 @@ const SearchResult = ({
             accent3Color,
         },
     },
-
     onClick,
 }) => (
     <Paper className="search-result">
@@ -122,7 +119,6 @@ SearchResult.propTypes = {
         featured: PropTypes.bool.isRequired,
         id: PropTypes.number.isRequired,
     }),
-
     onClick: PropTypes.func.isRequired,
 };
 

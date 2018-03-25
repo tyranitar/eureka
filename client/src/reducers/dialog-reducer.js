@@ -13,7 +13,6 @@ const handleOpenDialog = (state, action) => {
         actions,
         children,
     } = action;
-
     return Object.assign({}, state, {
         open: true,
         width,

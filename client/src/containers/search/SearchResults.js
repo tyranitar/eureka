@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-
-import {
-    LinearProgress,
-} from 'material-ui';
+import { LinearProgress } from 'material-ui';
 
 import { getSearchResults } from '../../actions/search-actions';
 import SearchResult from '../../components/search/SearchResult';
@@ -13,7 +10,6 @@ import NoResults from '../../components/search/NoResults';
 
 const mapStateToProps = (state) => {
     const { firstSearchPerformed, searching, results } = state.search;
-
     return {
         firstSearchPerformed,
         searching,
@@ -23,44 +19,31 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: (careerId) => {
-            dispatch(push(`/career/${ careerId }`));
-        },
-
-        showFeaturedCareers: () => {
-            dispatch(getSearchResults({ featured: true }));
-        },
+        onClick: (careerId) => dispatch(push(`/career/${ careerId }`)),
+        showFeaturedCareers: () => dispatch(getSearchResults({ featured: true })),
     };
 };
 
 const mapResultsToSearchResults = (results, onClick) => {
-    return results.map((result, idx) => {
-        return (
-            <SearchResult
-                result={ result }
-                key={ idx }
-                onClick={ onClick }
-            />
-        );
-    });
+    return results.map((result, idx) => (
+        <SearchResult
+            result={ result }
+            key={ idx }
+            onClick={ onClick }
+        />
+    ));
 };
 
 const renderBanner = (showFeaturedCareers) => {
-    return (
-        <SearchBanner onClick={ showFeaturedCareers } />
-    );
+    return <SearchBanner onClick={ showFeaturedCareers } />;
 };
 
 const renderNoResults = (showFeaturedCareers) => {
-    return (
-        <NoResults onClick={ showFeaturedCareers } />
-    );
+    return <NoResults onClick={ showFeaturedCareers } />;
 };
 
 const renderSpinner = () => {
-    return (
-        <LinearProgress mode="indeterminate" />
-    );
+    return <LinearProgress mode="indeterminate" />;
 };
 
 const renderResults = ({ firstSearchPerformed, searching, results, onClick, showFeaturedCareers }) => {
@@ -73,15 +56,12 @@ const renderResults = ({ firstSearchPerformed, searching, results, onClick, show
     //     education: 'Bachelor\'s',
     //     favorited: true,
     // }], onClick);
-
     if (searching) {
         return renderSpinner();
     }
-
     if (firstSearchPerformed) {
         return results.length ? mapResultsToSearchResults(results, onClick) : renderNoResults(showFeaturedCareers);
     }
-
     return renderBanner(showFeaturedCareers);
 };
 

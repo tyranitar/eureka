@@ -8,24 +8,14 @@ import { getFavorites } from '../../actions/favorites-actions';
 import './Favorites.css'
 
 const mapStateToProps = (state) => {
-    const {
-        careers,
-    } = state.favorites;
-
-    return {
-        careers,
-    };
+    const { careers } = state.favorites;
+    return { careers };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getFavorites: () => {
-            dispatch(getFavorites());
-        },
-
-        navigateToSearchView: () => {
-            dispatch(push('/search'));
-        },
+        getFavorites: () => dispatch(getFavorites()),
+        navigateToSearchView: () => dispatch(push('/search')),
     };
 };
 
@@ -35,7 +25,6 @@ const renderNoFavoritedCareers = (navigateToSearchView) => (
 
 const renderFavoritedCareers = (careers, navigateToSearchView) => {
     if (!careers.length) return renderNoFavoritedCareers(navigateToSearchView);
-
     // TODO: Implement this.
 };
 
@@ -44,7 +33,6 @@ class Favorites extends Component {
         const {
             getFavorites,
         } = this.props;
-
         getFavorites();
     }
 
@@ -53,7 +41,6 @@ class Favorites extends Component {
             careers,
             navigateToSearchView,
         } = this.props;
-
         return (
             <div className="favorites-container">
                 <Row center="xs">

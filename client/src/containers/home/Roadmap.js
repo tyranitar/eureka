@@ -5,7 +5,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import Add from 'material-ui/svg-icons/content/add';
 import Close from 'material-ui/svg-icons/navigation/close';
 import GpsFixed from 'material-ui/svg-icons/device/gps-fixed';
-
 import {
     Checkbox,
     FlatButton,
@@ -13,17 +12,13 @@ import {
     TextField,
     IconButton,
 } from 'material-ui';
-
 import {
     Step,
     Stepper,
     StepButton,
     StepContent,
 } from 'material-ui/Stepper';
-
-import {
-    blue500,
-} from 'material-ui/styles/colors'
+import { blue500 } from 'material-ui/styles/colors'
 
 import {
     getRoadmap,
@@ -35,7 +30,6 @@ import {
     removeTodo,
     removeStep,
 } from '../../actions/roadmap-actions';
-
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import { openSnackbar } from '../../actions/snackbar-actions';
 import './Roadmap.css';
@@ -47,11 +41,7 @@ const mapStateToProps = (state) => {
         steps,
         activeStep,
     } = state.roadmap;
-
-    const {
-        targetCareer,
-    } = state.career;
-
+    const { targetCareer } = state.career;
     return {
         steps,
         activeStep,
@@ -78,7 +68,6 @@ const mapDispatchToProps = (dispatch) => {
 class Roadmap extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             addTodoTextFieldValue: '',
             addStepTitleTextFieldValue: '',
@@ -87,35 +76,26 @@ class Roadmap extends Component {
     }
 
     componentDidMount() {
-        const {
-            getRoadmap,
-        } = this.props;
-
+        const { getRoadmap } = this.props;
         getRoadmap();
     }
 
     updateAddTodoTextFieldValue = (evt, addTodoTextFieldValue) => {
-        this.setState({
-            addTodoTextFieldValue,
-        });
+        this.setState({ addTodoTextFieldValue });
     }
 
     onDialogAddTodoButtonClick = (activeStep) => {
         const todoTitle = this.state.addTodoTextFieldValue;
-
         const {
             addTodo,
             closeDialog,
             openSnackbar,
         } = this.props;
-
         if (todoTitle) {
             addTodo(activeStep, todoTitle);
             closeDialog();
         } else {
-            openSnackbar({
-                message: "Please enter a title for the todo",
-            });
+            openSnackbar({ message: "Please enter a title for the todo" });
         }
     }
 
@@ -124,30 +104,23 @@ class Roadmap extends Component {
             openDialog,
             closeDialog,
         } = this.props;
-
-        this.setState({
-            addTodoTextFieldValue: '',
-        });
-
+        this.setState({ addTodoTextFieldValue: '' });
         openDialog({
             title: 'Add Todo',
             width: '300px',
-
             actions: [
                 <FlatButton
                     primary={ true }
                     label="Cancel"
                     onClick={ closeDialog }
                 />,
-
                 <RaisedButton
                     style={{ marginLeft: '8px' }}
                     primary={ true }
                     label="Add"
-                    onClick={ () => { this.onDialogAddTodoButtonClick(step) } }
+                    onClick={ () => this.onDialogAddTodoButtonClick(step) }
                 />
             ],
-
             children: (
                 <TextField
                     onChange={ this.updateAddTodoTextFieldValue }
@@ -160,12 +133,10 @@ class Roadmap extends Component {
 
     isCompleteButtonDisabled = (todos) => {
         let ret = false;
-
         todos.some((todo) => {
             ret = !todo.completed;
             return ret;
         });
-
         return ret;
     }
 
@@ -177,7 +148,6 @@ class Roadmap extends Component {
                 },
             },
         } = this.props;
-
         return todos.map(({
             title,
             completed,
@@ -189,13 +159,13 @@ class Roadmap extends Component {
                     <Checkbox
                         label={ title }
                         checked={ completed }
-                        onCheck={ () => { this.props.toggleTodo(step, idx) } }
+                        onCheck={ () => this.props.toggleTodo(step, idx) }
                         disabled={ disabled }
                     />
                 </div>
                 <div className="roadmap-step-checkbox-remove">
                     <IconButton
-                        onClick={ () => { this.props.removeTodo(step, idx) } }
+                        onClick={ () => this.props.removeTodo(step, idx) }
                         iconStyle={{ fill: primary3Color }}
                         style={{
                             width: '24px',
@@ -216,7 +186,6 @@ class Roadmap extends Component {
             closeDialog,
             removeStep,
         } = this.props;
-
         openDialog({
             title: 'Remove Milestone',
             width: '300px',
@@ -231,7 +200,6 @@ class Roadmap extends Component {
                     label="Cancel"
                     onClick={ closeDialog }
                 />,
-
                 <RaisedButton
                     style={{ marginLeft: '8px' }}
                     primary={ true }
@@ -256,7 +224,6 @@ class Roadmap extends Component {
                 },
             },
         } = this.props;
-
         return steps.map(({
             title,
             description,
@@ -300,15 +267,11 @@ class Roadmap extends Component {
     }
 
     updateAddStepTitleTextFieldValue = (evt, addStepTitleTextFieldValue) => {
-        this.setState({
-            addStepTitleTextFieldValue,
-        });
+        this.setState({ addStepTitleTextFieldValue });
     }
 
     updateAddStepDescriptionTextFieldValue = (evt, addStepDescriptionTextFieldValue) => {
-        this.setState({
-            addStepDescriptionTextFieldValue,
-        });
+        this.setState({ addStepDescriptionTextFieldValue });
     }
 
     onDialogAddStepButtonClick = () => {
@@ -317,28 +280,18 @@ class Roadmap extends Component {
             closeDialog,
             openSnackbar,
         } = this.props;
-
         const {
             addStepTitleTextFieldValue,
             addStepDescriptionTextFieldValue,
         } = this.state;
-
         if (!addStepTitleTextFieldValue) {
-            openSnackbar({
-                message: "Please provide a milestone title",
-            });
-
+            openSnackbar({ message: "Please provide a milestone title" });
             return;
         }
-
         if (!addStepDescriptionTextFieldValue) {
-            openSnackbar({
-                message: "Please provide a milestone description",
-            });
-
+            openSnackbar({ message: "Please provide a milestone description" });
             return;
         }
-
         addStep(addStepTitleTextFieldValue, addStepDescriptionTextFieldValue);
         closeDialog();
     }
@@ -348,23 +301,19 @@ class Roadmap extends Component {
             openDialog,
             closeDialog,
         } = this.props;
-
         this.setState({
             addStepTitleTextFieldValue: '',
             addStepDescriptionTextFieldValue: '',
         });
-
         openDialog({
             title: 'Add Milestone',
             width: '300px',
-
             actions: [
                 <FlatButton
                     primary={ true }
                     label="Cancel"
                     onClick={ closeDialog }
                 />,
-
                 <RaisedButton
                     style={{ marginLeft: '8px' }}
                     primary={ true }
@@ -372,7 +321,6 @@ class Roadmap extends Component {
                     onClick={ this.onDialogAddStepButtonClick }
                 />
             ],
-
             children: (
                 <div>
                     <TextField
@@ -400,7 +348,6 @@ class Roadmap extends Component {
                 },
             },
         } = this.props;
-
         const ret = [
             <Step key={0}>
                 <StepButton
@@ -410,7 +357,6 @@ class Roadmap extends Component {
                 </StepButton>
             </Step>
         ];
-
         if (targetCareer.id !== null) {
             ret.push(
                 <Step key={1}>
@@ -421,15 +367,11 @@ class Roadmap extends Component {
                 </Step>
             );
         }
-
         return ret;
     }
 
     render() {
-        const {
-            activeStep,
-        } = this.props;
-
+        const { activeStep } = this.props;
         return (
             <div className="roadmap-container">
                 <Row center="xs">

@@ -7,10 +7,7 @@ import Build from 'material-ui/svg-icons/action/build';
 import Help from 'material-ui/svg-icons/action/help';
 import { Row, Col } from 'react-flexbox-grid';
 import Business from 'material-ui/svg-icons/communication/business';
-
-import {
-    ListItem,
-} from 'material-ui';
+import { ListItem } from 'material-ui';
 
 import './EducationPath.css'
 
@@ -44,9 +41,7 @@ const renderInstitutions = ({
         }, idx) => (
             <ListItem
                 key={ idx }
-                innerDivStyle={{
-                    padding: '8px',
-                }}
+                innerDivStyle={{ padding: '8px' }}
                 onClick={ onInstitutionClick.bind(null, {
                     name,
                     imageUrl,
@@ -70,9 +65,7 @@ const renderInstitutions = ({
                             <div className="education-path-institution-title">
                                 { name }
                             </div>
-                            <div className="education-path-institution-description" style={{
-                                    color: descriptionColor,
-                                }}>
+                            <div className="education-path-institution-description" style={{ color: descriptionColor }}>
                                 { description }
                             </div>
                         </div>
@@ -88,7 +81,6 @@ const EducationPath = ({
     title,
     institutions,
     onInstitutionClick,
-
     muiTheme: {
         palette: {
             primary1Color,
@@ -122,7 +114,6 @@ const EducationPath = ({
 EducationPath.propTypes = {
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-
     institutions: PropTypes.arrayOf(PropTypes.shape({
         imageUrl: PropTypes.string,
         name: PropTypes.string.isRequired,

@@ -6,7 +6,6 @@ import { selectAnswer, changeQuestion } from '../../actions/questionnaire-action
 
 const mapStateToProps = (state) => {
     const { questionnaire } = state;
-
     return {
         questionIdx: questionnaire.questionIdx,
         isLastQuestion: questionnaire.questionIdx === questionnaire.questions.length - 1,
@@ -16,17 +15,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSelectAnswer: (answer) => {
-            dispatch(selectAnswer(answer));
-        },
-
-        onChangeQuestion: (direction) => {
-            dispatch(changeQuestion(direction));
-        },
-
-        onSubmit: () => {
-            dispatch(push('/search')); // TODO: Change this to completeQuestionnaire();
-        },
+        onSelectAnswer: (answer) => dispatch(selectAnswer(answer)),
+        onChangeQuestion: (direction) => dispatch(changeQuestion(direction)),
+        // TODO: Change this to completeQuestionnaire();
+        onSubmit: () => dispatch(push('/search')),
     };
 };
 

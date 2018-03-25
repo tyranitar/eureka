@@ -3,14 +3,11 @@ const initialState = {
 };
 
 const handleSetFavorites = (state, action) => {
-    const {
-        careers,
-    } = action.favorites;
-
+    const { careers } = action.favorites;
     return Object.assign({}, state, {
         careers,
     });
-}
+};
 
 const favoritesReducer = (state = initialState, action) => {
     switch (action.type) {

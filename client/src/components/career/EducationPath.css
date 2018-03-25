@@ -7,7 +7,6 @@
 .education-path-institution-image {
     padding-top: 62%;
     position: relative;
-
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -22,7 +21,6 @@
 .education-path-institution-title {
     font-size: 18px;
     line-height: 20px;
-
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -30,7 +28,6 @@
 
 .education-path-institution-description {
     margin-top: 8px;
-
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

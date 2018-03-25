@@ -13,12 +13,9 @@ const NoFavoritedCareers = ({
             accent3Color,
         },
     },
-
     onClick,
 }) => (
-    <Paper className="no-favorited-careers" style={{
-            color: accent3Color,
-        }}>
+    <Paper className="no-favorited-careers" style={{ color: accent3Color }}>
         <div className="no-favorited-careers-message">
             <FavoriteBorder color={ accent3Color } />
             <span className="no-favorited-careers-text">

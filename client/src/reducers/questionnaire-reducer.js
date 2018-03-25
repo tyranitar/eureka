@@ -14,7 +14,6 @@ const updateAnswer = (question, answer) => {
                 if (idx === answer) {
                     return !val;
                 }
-
                 return val;
             });
         case 'radio':
@@ -26,7 +25,6 @@ const updateAnswer = (question, answer) => {
 
 const handleSelectAnswer = (state, action) => {
     const { questions, questionIdx } = state;
-
     return Object.assign({}, state, {
         questions: questions.map((question, idx) => {
             if (idx === questionIdx) {
@@ -34,7 +32,6 @@ const handleSelectAnswer = (state, action) => {
                     answer: updateAnswer(question, action.answer),
                 });
             }
-
             return question;
         }),
     });

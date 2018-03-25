@@ -14,7 +14,6 @@ import Place from 'material-ui/svg-icons/maps/place';
 import Layers from 'material-ui/svg-icons/maps/layers';
 import Add from 'material-ui/svg-icons/content/add';
 import { Card, CardHeader, CardMedia } from 'material-ui/Card';
-
 import {
     Checkbox,
     IconButton,
@@ -22,7 +21,6 @@ import {
     RaisedButton,
     TextField,
 } from 'material-ui';
-
 import {
     red500,
     blue500,
@@ -39,7 +37,6 @@ import {
     setTargetCareer,
     unsetTargetCareer,
 } from '../../actions/career-actions';
-
 import { openDialog, closeDialog } from '../../actions/dialog-actions';
 import { openSnackbar } from '../../actions/snackbar-actions';
 import { sendMessageToUser } from '../../actions/user-actions';
@@ -60,7 +57,6 @@ const mapStateToProps = (state) => {
         targetCareer,
         videos,
     } = state.career;
-
     return {
         details,
         educationPaths,
@@ -73,56 +69,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCareerDetails: (careerId) => {
-            dispatch(getCareerDetails(careerId));
-        },
-
-        resetCareerDetails: () => {
-            dispatch(resetCareerDetails());
-        },
-
-        getCareerEducationPaths: (careerId) => {
-            dispatch(getCareerEducationPaths(careerId));
-        },
-
-        getCareerPointOfContact: (careerId) => {
-            dispatch(getCareerPointOfContact(careerId));
-        },
-
-        getCareerAdvertisements: (careerId) => {
-            dispatch(getCareerAdvertisements(careerId));
-        },
-
-        sendMessageToUser: (user, message) => {
-            dispatch(sendMessageToUser(user, message));
-        },
-
+        getCareerDetails: (careerId) => dispatch(getCareerDetails(careerId)),
+        resetCareerDetails: () => dispatch(resetCareerDetails()),
+        getCareerEducationPaths: (careerId) => dispatch(getCareerEducationPaths(careerId)),
+        getCareerPointOfContact: (careerId) => dispatch(getCareerPointOfContact(careerId)),
+        getCareerAdvertisements: (careerId) => dispatch(getCareerAdvertisements(careerId)),
+        sendMessageToUser: (user, message) => dispatch(sendMessageToUser(user, message)),
         // TODO: Implement this.
-        onInstitutionClick: () => {
-            dispatch(openSnackbar({
-                message: "Institution Page has not been implemented yet!",
-            }));
-        },
-
+        onInstitutionClick: () => dispatch(openSnackbar({ message: "Institution Page has not been implemented yet!" })),
         // TODO: Implement this.
-        onShareButtonClick: () => {
-            dispatch(openSnackbar({
-                message: "Share Career has not been implemented yet!",
-            }));
-        },
-
-        openDialog: (props) => {
-            dispatch(openDialog(props));
-        },
-
-        closeDialog: () => {
-            dispatch(closeDialog());
-        },
-
-        openSnackbar: (props) => {
-            dispatch(openSnackbar(props));
-        },
-
+        onShareButtonClick: () => dispatch(openSnackbar({ message: "Share Career has not been implemented yet!" })),
+        openDialog: (props) => dispatch(openDialog(props)),
+        closeDialog: () => dispatch(closeDialog()),
+        openSnackbar: (props) => dispatch(openSnackbar(props)),
         setTargetCareer: (career) => dispatch(setTargetCareer(career)),
         unsetTargetCareer: () => dispatch(unsetTargetCareer()),
         getCareerVideos: (careerId) => dispatch(getCareerVideos(careerId)),
@@ -137,58 +96,49 @@ const renderAdvertisements = (advertisements) => (
     ))
 );
 
-const renderCharts = ({ title, charts, icon }) => {
-    return (
-        <Card className="career-details-charts-card">
-            <CardHeader
-                title={ <div>
-                    { icon }
-                    <span className="career-details-charts-title">{ title }</span>
-                </div> }
-                actAsExpander={ true }
-                showExpandableButton={ true }
-            />
-            <CardMedia expandable={ true } className="career-details-charts">
-                <Row>
-                    { charts.map((chart, idx) => {
-                        return (
-                            <Col key={ idx } xs={4}>
-                                <AnyChart { ...chart } />
-                            </Col>
-                        );
-                    }) }
-                </Row>
-            </CardMedia>
-        </Card>
-    );
-};
+const renderCharts = ({ title, charts, icon }) => (
+    <Card className="career-details-charts-card">
+        <CardHeader
+            title={ <div>
+                { icon }
+                <span className="career-details-charts-title">{ title }</span>
+            </div> }
+            actAsExpander={ true }
+            showExpandableButton={ true }
+        />
+        <CardMedia expandable={ true } className="career-details-charts">
+            <Row>
+                { charts.map((chart, idx) => (
+                    <Col key={ idx } xs={4}>
+                        <AnyChart { ...chart } />
+                    </Col>
+                )) }
+            </Row>
+        </CardMedia>
+    </Card>
+);
 
 // TODO: Convert all these functions into class methods.
-const renderVideos = ({ videos, icon, title }) => {
-    return (
-        <Card>
-            <CardHeader
-                title={ <div>
-                    { icon }
-                    <span className="career-details-videos-title">{ title }</span>
-                </div> }
-                actAsExpander={ true }
-                showExpandableButton={ true }
-            />
-            <CardMedia expandable={ true } className="career-details-videos">
-                <VideoList videos={ videos } />
-            </CardMedia>
-        </Card>
-    );
-};
+const renderVideos = ({ videos, icon, title }) => (
+    <Card>
+        <CardHeader
+            title={ <div>
+                { icon }
+                <span className="career-details-videos-title">{ title }</span>
+            </div> }
+            actAsExpander={ true }
+            showExpandableButton={ true }
+        />
+        <CardMedia expandable={ true } className="career-details-videos">
+            <VideoList videos={ videos } />
+        </CardMedia>
+    </Card>
+);
 
 class CareerDetails extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            sendMessageTextFieldValue: "",
-        };
+        this.state = { sendMessageTextFieldValue: "" };
     }
 
     componentDidMount() {
@@ -201,7 +151,6 @@ class CareerDetails extends Component {
             getCareerVideos,
             // TODO: Check whether career is favorited or targetted.
         } = this.props;
-
         getCareerDetails(careerId);
         getCareerEducationPaths(careerId);
         getCareerPointOfContact(careerId);
@@ -210,28 +159,22 @@ class CareerDetails extends Component {
     }
 
     updateSendMessageTextFieldValue = (evt, sendMessageTextFieldValue) => {
-        this.setState({
-            sendMessageTextFieldValue,
-        });
+        this.setState({ sendMessageTextFieldValue });
     }
 
     onSendMessageButtonClick = () => {
         const message = this.state.sendMessageTextFieldValue;
-
         const {
             closeDialog,
             openSnackbar,
             pointOfContact,
             sendMessageToUser,
         } = this.props;
-
         if (message) {
             sendMessageToUser(pointOfContact, message);
             closeDialog();
         } else {
-            openSnackbar({
-                message: "You may not send a blank message",
-            });
+            openSnackbar({ message: "You may not send a blank message" });
         }
     }
 
@@ -241,22 +184,16 @@ class CareerDetails extends Component {
             closeDialog,
             pointOfContact,
         } = this.props;
-
-        this.setState({
-            sendMessageTextFieldValue: "",
-        });
-
+        this.setState({ sendMessageTextFieldValue: "" });
         openDialog({
             title: `Message ${ pointOfContact.name }`,
             width: '500px',
-
             actions: [
                 <FlatButton
                     label="Cancel"
                     primary={ true }
                     onClick={ closeDialog }
                 />,
-
                 <RaisedButton
                     style={{ marginLeft: '8px' }}
                     label="Send"
@@ -264,7 +201,6 @@ class CareerDetails extends Component {
                     onClick={ this.onSendMessageButtonClick }
                 />,
             ],
-
             children: (
                 <TextField
                     onChange={ this.updateSendMessageTextFieldValue }
@@ -287,7 +223,6 @@ class CareerDetails extends Component {
                     title,
                 },
             } = this.props;
-
             setTargetCareer({ id, title });
             openDialog({
                 title: "You set a new target career!",
@@ -305,8 +240,8 @@ class CareerDetails extends Component {
                         <span>{ "This is great news! We'll email you about courses you can take right now and postsecondary opportunities that can propel you towards your new goal!" }</span>
                         <div
                             className="career-details-set-target-career-image"
-                            style={{
-                                backgroundImage: `url(${ getPublicUrl('/images/target/adam.gif') })`, // TODO: Make this dynamic.
+                            style={{ // TODO: Make this dynamic.
+                                backgroundImage: `url(${ getPublicUrl('/images/target/adam.gif') })`,
                             }}>
                         </div>
                     </div>
@@ -317,11 +252,8 @@ class CareerDetails extends Component {
                 openSnackbar,
                 unsetTargetCareer,
             } = this.props;
-
             unsetTargetCareer();
-            openSnackbar({
-                message: "This career is no longer your target.",
-            });
+            openSnackbar({ message: "This career is no longer your target." });
         }
     }
 
@@ -333,7 +265,6 @@ class CareerDetails extends Component {
                 id,
             },
         } = this.props;
-
         return (
             <div className="career-details-actions">
                 <Checkbox
@@ -351,9 +282,7 @@ class CareerDetails extends Component {
                     onCheck={ this.onSetTargetCareer }
                 />
                 <IconButton
-                    style={{
-                        marginLeft: '-12px',
-                    }}
+                    style={{ marginLeft: '-12px' }}
                     onClick={ onShareButtonClick }>
                     <Share color={ cyan500 } />
                 </IconButton>
@@ -364,19 +293,13 @@ class CareerDetails extends Component {
     // TODO: Implement this.
     onAddTodo = (course) => {
         const { openSnackbar } = this.props;
-
-        openSnackbar({
-            message: `Added ${ course } as a todo!`,
-        });
+        openSnackbar({ message: `Added ${ course } as a todo!` });
     }
 
     // TODO: Implement this.
     onAddMilestone = (educationPath, institution) => {
         const { openSnackbar } = this.props;
-
-        openSnackbar({
-            message: `Added the program as a milestone!`,
-        });
+        openSnackbar({ message: `Added the program as a milestone!` });
     }
 
     renderEducationPaths = () => {
@@ -384,18 +307,14 @@ class CareerDetails extends Component {
             educationPaths,
             openDialog,
             closeDialog,
-            // onInstitutionClick,
-
             muiTheme: {
                 palette: {
                     primary1Color,
                 },
             },
         } = this.props;
-
-        const evenEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 0));
-        const oddEducationPaths = educationPaths.filter((educationPath, idx) => (idx % 2 === 1));
-
+        const evenEducationPaths = educationPaths.filter((educationPath, idx) => idx % 2 === 0);
+        const oddEducationPaths = educationPaths.filter((educationPath, idx) => idx % 2 === 1);
         const educationPathMapper = (educationPath, idx) => (
             <div key={ idx } className="career-details-education-path">
                 <EducationPath { ...educationPath } onInstitutionClick={ (institution) => {
@@ -406,18 +325,14 @@ class CareerDetails extends Component {
                         location,
                         courses,
                     } = institution;
-
                     openDialog({
                         title: `${ educationPath.title } at ${ name }`,
                         width: '600px',
-
                         children: (
                             <div>
                                 <Row>
                                     <Col xs={7}>
-                                        <div className="career-details-institution-image" style={{
-                                                backgroundImage: `url(${ imageUrl })`,
-                                            }}>
+                                        <div className="career-details-institution-image" style={{ backgroundImage: `url(${ imageUrl })` }}>
                                         </div>
                                     </Col>
                                     <Col xs={5}>
@@ -469,14 +384,12 @@ class CareerDetails extends Component {
                                 </Row>
                             </div>
                         ),
-
                         actions: [
                             <FlatButton
                                 label="Close"
                                 primary={ true }
                                 onClick={ closeDialog }
                             />,
-
                             <RaisedButton
                                 style={{ marginLeft: '8px' }}
                                 label="Add Milestone"
@@ -491,7 +404,6 @@ class CareerDetails extends Component {
                 } } />
             </div>
         );
-
         return (
             <div className="career-details-education">
                 <div className="career-details-education-title">
@@ -521,25 +433,20 @@ class CareerDetails extends Component {
                 // featured,
                 // id,
             },
-
             pointOfContact,
             advertisements,
             videos,
-
             muiTheme: {
                 palette: {
                     primary1Color,
                 },
             },
         } = this.props;
-
         return (
             <div>
                 <Row className="career-details-row">
                     <Col xs={8}>
-                        <div className="career-details-title" style={{
-                                color: primary1Color,
-                            }}>
+                        <div className="career-details-title" style={{ color: primary1Color }}>
                             { title }
                         </div>
                     </Col>

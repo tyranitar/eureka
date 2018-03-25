@@ -4,8 +4,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import Share from 'material-ui/svg-icons/social/share';
 import Person from 'material-ui/svg-icons/social/person';
-import { blue500, grey300, cyan500, } from 'material-ui/styles/colors';
-
+import { blue500, grey300, cyan500 } from 'material-ui/styles/colors';
 import {
     ListItem,
     Avatar,
@@ -19,13 +18,14 @@ import {
     toggleCareerCommentLike,
     addCareerComment,
 } from '../../actions/career-actions';
-
 import { openSnackbar } from '../../actions/snackbar-actions';
 import './CareerComments.css';
 
 const mapStateToProps = (state) => {
-    const { comments, details } = state.career;
-
+    const {
+        comments,
+        details,
+    } = state.career;
     return {
         comments,
         details,
@@ -34,24 +34,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCareerComments: (careerId) => {
-            dispatch(getCareerComments(careerId));
-        },
-
-        onLikeButtonClick: (commentId) => {
-            dispatch(toggleCareerCommentLike(commentId));
-        },
-
-        addCareerComment: (careerId, comment) => {
-            dispatch(addCareerComment(careerId, comment));
-        },
-
+        getCareerComments: (careerId) => dispatch(getCareerComments(careerId)),
+        onLikeButtonClick: (commentId) => dispatch(toggleCareerCommentLike(commentId)),
+        addCareerComment: (careerId, comment) => dispatch(addCareerComment(careerId, comment)),
         // TODO: Implement this.
-        onShareButtonClick: () => {
-            dispatch(openSnackbar({
-                message: "Share Comment has not been implemented yet!",
-            }));
-        },
+        onShareButtonClick: () => dispatch(openSnackbar({ message: "Share Comment has not been implemented yet!" })),
     };
 };
 
@@ -60,7 +47,6 @@ const renderComments = ({
     details,
     onLikeButtonClick,
     onShareButtonClick,
-
     palette: {
         primary1Color,
         accent3Color,
@@ -75,9 +61,7 @@ const renderComments = ({
                         backgroundColor={ primary1Color }
                         color={ alternateTextColor }
                         src={ comment.user.imageUrl }
-                        style={{
-                            marginTop: '12px',
-                        }}
+                        style={{ marginTop: '12px' }}
                     />
             } disabled={ true }>
                 <div className="career-comment-username">
@@ -110,10 +94,7 @@ const renderComments = ({
 class CareerComments extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            commentFieldValue: '',
-        };
+        this.state = { commentFieldValue: '' };
     }
 
     componentDidMount() {
@@ -121,14 +102,11 @@ class CareerComments extends Component {
             careerId,
             getCareerComments,
         } = this.props;
-
         getCareerComments(careerId);
     }
 
     onCommentFieldChange = (evt) => {
-        this.setState({
-            commentFieldValue: evt.target.value,
-        });
+        this.setState({ commentFieldValue: evt.target.value });
     }
 
     onCommentButtonClick() {
@@ -136,12 +114,8 @@ class CareerComments extends Component {
             careerId,
             addCareerComment,
         } = this.props;
-
         addCareerComment(careerId, this.state.commentFieldValue);
-
-        this.setState({
-            commentFieldValue: '',
-        });
+        this.setState({ commentFieldValue: '' });
     }
 
     render() {
@@ -151,7 +125,6 @@ class CareerComments extends Component {
             onLikeButtonClick,
             onShareButtonClick,
         } = this.props;
-
         const {
             palette: {
                 primary1Color,
@@ -159,15 +132,12 @@ class CareerComments extends Component {
                 alternateTextColor,
             },
         } = this.props.muiTheme;
-
         return (
             <div>
                 <div>
                     { /* 'Comments' */ }
                     { 'Insights from Industry Professionals' }
-                    <span style={{
-                            color: accent3Color,
-                        }}>
+                    <span style={{ color: accent3Color }}>
                         { ` (${ comments.length })` }
                     </span>
                 </div>
@@ -192,9 +162,7 @@ class CareerComments extends Component {
                     <TextField
                         hintText="Share your thoughts!"
                         fullWidth={ true }
-                        style={{
-                            marginTop: '-16px',
-                        }}
+                        style={{ marginTop: '-16px' }}
                         value={ this.state.commentFieldValue }
                         onChange={ this.onCommentFieldChange }
                     />

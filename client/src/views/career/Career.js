@@ -1,9 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
-import {
-    Paper,
-} from 'material-ui';
+import { Paper } from 'material-ui';
 
 import CareerDetails from '../../containers/career/CareerDetails';
 import CareerComments from '../../containers/career/CareerComments';

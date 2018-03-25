@@ -14,10 +14,8 @@ const renderIntroOptions = ({
         <div
             className="question-intro-image"
             key={ idx }
-            style={{
-                backgroundImage: `url('${ option }')`,
-            }}
-        ></div>
+            style={{ backgroundImage: `url('${ option }')` }}>
+        </div>
     ));
 };
 
@@ -26,17 +24,15 @@ const renderCheckboxOptions = ({
     answer,
     onSelectAnswer,
 }) => {
-    return options.map((option, idx) => {
-        return (
-            <Checkbox
-                className="question-option"
-                key={ idx }
-                label={ option }
-                checked={ answer && answer[idx] }
-                onCheck={ onSelectAnswer.bind(null, idx) }
-            />
-        );
-    });
+    return options.map((option, idx) => (
+        <Checkbox
+            className="question-option"
+            key={ idx }
+            label={ option }
+            checked={ answer && answer[idx] }
+            onCheck={ onSelectAnswer.bind(null, idx) }
+        />
+    ));
 };
 
 const renderRadioOptions = ({
@@ -45,23 +41,19 @@ const renderRadioOptions = ({
     answer,
     onSelectAnswer,
 }) => {
-    const children = options.map((option, idx) => {
-        return (
-            <RadioButton
-                className="question-option"
-                key={ idx }
-                value={ idx }
-                label={ option }
-                onClick={ onSelectAnswer.bind(null, idx) }
-            />
-        );
-    });
-
+    const children = options.map((option, idx) => (
+        <RadioButton
+            className="question-option"
+            key={ idx }
+            value={ idx }
+            label={ option }
+            onClick={ onSelectAnswer.bind(null, idx) }
+        />
+    ));
     return (
         <RadioButtonGroup
             name={ questionIdx.toString() }
-            valueSelected={ answer }
-        >
+            valueSelected={ answer }>
             { children }
         </RadioButtonGroup>
     );
@@ -97,14 +89,12 @@ const isNextDisabled = ({
 const Question = ({
     questionIdx,
     isLastQuestion,
-
     question: {
         type,
         text,
         options,
         answer,
     },
-
     onChangeQuestion,
     onSelectAnswer,
     onSubmit,
@@ -144,18 +134,15 @@ const Question = ({
 Question.propTypes = {
     questionIdx: PropTypes.number.isRequired,
     isLastQuestion: PropTypes.bool.isRequired,
-
     question: PropTypes.shape({
         type: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-
         answer: PropTypes.oneOfType([
             PropTypes.number.isRequired,
             PropTypes.arrayOf(PropTypes.bool.isRequired).isRequired,
         ]),
     }),
-
     onChangeQuestion: PropTypes.func.isRequired,
     onSelectAnswer: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,

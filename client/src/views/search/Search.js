@@ -21,7 +21,6 @@ class Search extends Component {
                             </Paper>
                         </Col>
                     </Row>
-
                     <Row className="search-row" center="xs">
                         <Col xs={3} xl={2}>
                             <Paper>

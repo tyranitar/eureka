@@ -13,12 +13,9 @@ const NoResults = ({
             accent3Color,
         },
     },
-
     onClick,
 }) => (
-    <Paper className="no-results" style={{
-            color: accent3Color,
-        }}>
+    <Paper className="no-results" style={{ color: accent3Color }}>
         <div className="no-results-message">
             <span className="no-results-text">
                 No Results

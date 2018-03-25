@@ -69,7 +69,6 @@ export const toggleCareerCommentLike = (commentId) => {
                     liked: !comment.liked,
                 });
             }
-
             return comment;
         })));
     };
@@ -79,12 +78,8 @@ export const addCareerComment = (careerId, comment) => {
     return async (dispatch, getState) => {
         await asyncAddCareerComment(careerId, comment);
         const { comments } = getState().career;
-
         dispatch(setCareerComments(comments.concat({
-            user: {
-                name: 'You',
-            },
-
+            user: { name: 'You' },
             createdAt: new Date(),
             id: comments.length,
             content: comment,

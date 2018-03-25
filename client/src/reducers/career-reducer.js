@@ -8,7 +8,6 @@ const initialState = {
     advertisements: [],
     educationPaths: [],
     comments: [],
-
     details: {
         title: '',
         description: '',
@@ -17,11 +16,9 @@ const initialState = {
         featured: false,
         id: 0,
     },
-
     pointOfContact: {
         name: '',
     },
-
     targetCareer: defaultTargetCareer,
     videos: [],
 };

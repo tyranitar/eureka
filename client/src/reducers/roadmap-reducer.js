@@ -21,11 +21,9 @@ const handleSetActiveStep = (state, action) => {
 const handleCompleteStep = (state, action) => {
     const { completedStep } = action;
     const updatedSteps = state.steps.slice();
-
     updatedSteps[completedStep] = Object.assign({}, updatedSteps[completedStep], {
         completed: true,
     });
-
     return Object.assign({}, state, {
         steps: updatedSteps,
         activeStep: Math.min(state.activeStep + 1, state.steps.length - 1),
@@ -36,15 +34,12 @@ const handleToggleTodo = (state, action) => {
     const { activeStep, toggledTodo } = action;
     const updatedSteps = state.steps.slice();
     const updatedTodos = updatedSteps[activeStep].todos.slice();
-
     updatedTodos[toggledTodo] = Object.assign({}, updatedTodos[toggledTodo], {
         completed: !updatedTodos[toggledTodo].completed,
     });
-
     updatedSteps[activeStep] = Object.assign({}, updatedSteps[activeStep], {
         todos: updatedTodos,
     });
-
     return Object.assign({}, state, {
         steps: updatedSteps,
     });
@@ -53,16 +48,13 @@ const handleToggleTodo = (state, action) => {
 const handleAddTodo = (state, action) => {
     const { activeStep, todoTitle } = action;
     const updatedSteps = state.steps.slice();
-
     const updatedTodos = updatedSteps[activeStep].todos.concat([{
         title: todoTitle,
         completed: false,
     }]);
-
     updatedSteps[activeStep] = Object.assign({}, updatedSteps[activeStep], {
         todos: updatedTodos,
     });
-
     return Object.assign({}, state, {
         steps: updatedSteps,
     });
@@ -70,7 +62,6 @@ const handleAddTodo = (state, action) => {
 
 const handleAddStep = (state, action) => {
     const { stepTitle, stepDescription } = action;
-
     return Object.assign({}, state, {
         steps: state.steps.concat([{
             title: stepTitle,
@@ -83,7 +74,6 @@ const handleAddStep = (state, action) => {
 
 const handleRemoveTodo = (state, action) => {
     const { activeStep, removedTodo } = action;
-
     return Object.assign({}, state, {
         steps: state.steps.map((step, idx) => {
             if (activeStep === idx) {
@@ -91,7 +81,6 @@ const handleRemoveTodo = (state, action) => {
                     todos: step.todos.filter((todo, idx) => idx !== removedTodo),
                 });
             }
-
             return step;
         }),
     });
@@ -99,7 +88,6 @@ const handleRemoveTodo = (state, action) => {
 
 const handleRemoveStep = (state, action) => {
     const { removedStep } = action;
-
     return Object.assign({}, state, {
         steps: state.steps.filter((step, idx) => idx !== removedStep ),
     });

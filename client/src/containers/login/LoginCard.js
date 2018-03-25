@@ -4,8 +4,8 @@ import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import { TextField, IconButton, RaisedButton } from 'material-ui';
 import Fingerprint from 'material-ui/svg-icons/action/fingerprint';
 import { connect } from 'react-redux';
-import { setErrorMessage } from '../../actions/login-actions';
 
+import { setErrorMessage } from '../../actions/login-actions';
 import { login, signup } from '../../actions/login-actions';
 import './LoginCard.css';
 
@@ -19,7 +19,6 @@ const getIconButtonProps = (primaryColor) => {
             border: `5px solid ${primaryColor}`,
             borderRadius: '50%',
         },
-
         iconStyle: {
             width: '100px',
             height: '100px',
@@ -30,10 +29,7 @@ const getIconButtonProps = (primaryColor) => {
 
 const mapStateToProps = (state) => {
     const { login } = state;
-
-    return {
-        errorMessages: login.errorMessages,
-    };
+    return { errorMessages: login.errorMessages };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -42,11 +38,9 @@ const mapDispatchToProps = (dispatch) => {
             if (!email) {
                 dispatch(setErrorMessage('email', "This field is required"));
             }
-
             if (!password) {
                 dispatch(setErrorMessage('password', "This field is required"));
             }
-
             if (email && password) {
                 dispatch((isLogin ? login : signup)({ email, password }));
             }
@@ -65,13 +59,11 @@ class LoginCard extends Component {
 
     onClick() {
         const { email, password } = this.refs;
-
         this.props.onClick(email.getValue(), password.getValue(), this.isLogin());
     }
 
     render() {
         const isLogin = this.isLogin();
-
         return (
             <div>
                 <Card className="login-card">

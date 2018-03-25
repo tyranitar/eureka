@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Person from 'material-ui/svg-icons/social/person';
-
 import {
     Paper,
     ListItem,
     Avatar,
 } from 'material-ui';
-
 import {
     cyan500,
     grey500,
@@ -15,15 +13,13 @@ import {
 
 import './PointOfContact.css';
 
-const renderAvatar = (imageUrl) => {
-    return (
-        <Avatar
-            src={ imageUrl }
-            icon={ <Person /> }
-            backgroundColor={ cyan500 }
-        />
-    );
-};
+const renderAvatar = (imageUrl) => (
+    <Avatar
+        src={ imageUrl }
+        icon={ <Person /> }
+        backgroundColor={ cyan500 }
+    />
+);
 
 const PointOfContact = ({
     title,

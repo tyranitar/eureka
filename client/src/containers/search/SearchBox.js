@@ -10,12 +10,10 @@ import {
     getAutoCompleteResults,
     getSearchResults
 } from '../../actions/search-actions';
-
 import './SearchBox.css';
 
 const mapStateToProps = (state) => {
     const { query, autoCompleteResults } = state.search;
-
     return {
         autoComplete: {
             searchText: query.searchString,
@@ -28,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
     const debounced = _.debounce((searchString) => {
         dispatch(getAutoCompleteResults(searchString));
     }, 250);
-
     return {
         onUpdateInput: (searchString) => {
             debounced(searchString);
@@ -47,9 +44,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const menuProps = {
-    desktop: true,
-};
+const menuProps = { desktop: true };
 
 const SearchBox = ({
     autoComplete,
@@ -62,7 +57,6 @@ const SearchBox = ({
         <IconButton iconStyle={{ fill: muiTheme.palette.primary1Color }}>
             <Search />
         </IconButton>
-
         <AutoComplete
             { ...autoComplete }
             hintText="Search"
@@ -72,7 +66,6 @@ const SearchBox = ({
             menuProps={ menuProps }
             filter={ () => (true) }
         />
-
         <RaisedButton
             className="search-box-button"
             label="Search"

@@ -3,34 +3,28 @@ import _ from 'lodash';
 
 import careerEducationPaths from '../mocks/career-education-paths';
 import { getCareerComments } from '../mocks/career-comments';
-import { getCharts } from '../mocks/career-details';
 import advertisements from '../mocks/advertisements';
+import { getCharts } from '../mocks/career-details';
 import loremIpsum from '../mocks/lorem-ipsum';
-import users from '../mocks/users';
 import videos from '../mocks/career-videos';
+import users from '../mocks/users';
 
 export const asyncGetCareerDetails = (careerId) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         const career = careers[careerId];
-
         const { description } = career;
-
         const loremIpsumCopy = loremIpsum.slice();
-
         if (loremIpsumCopy.includes(description)) {
             loremIpsumCopy.splice(loremIpsumCopy.indexOf(description), 1);
         }
-
         const careerDetails = Object.assign({}, career, {
             description: [
                 'Typical Day',
                 description,
                 ..._.sampleSize(loremIpsumCopy, 2),
             ].join('\n\n'),
-
             charts: getCharts(career),
         });
-
         resolve(careerDetails);
     }, 0));
 };

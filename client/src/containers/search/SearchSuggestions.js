@@ -9,9 +9,7 @@ import suggestions from '../../mocks/search-suggestions';
 import './SearchSuggestions.css';
 
 const mapStateToProps = (state) => {
-    return {
-        //
-    };
+    return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -32,9 +30,7 @@ const mapToSearchSuggestion = ({
     <div
         key={ idx }
         className="search-suggestion"
-        style={{
-            color,
-        }}
+        style={{ color }}
         onClick={ onClick.bind(null, search) }>
         <ChevronRight color={ color } />
         { search }
@@ -60,7 +56,6 @@ const SearchSuggestions = ({
             alternateTextColor,
         },
     },
-
     onClick,
 }) => (
     <div className="search-suggestions">
@@ -75,12 +70,10 @@ const SearchSuggestions = ({
                 { 'Recommended for You' }
             </div>
             { renderRecommendedSearches(onClick, primary1Color) }
-
             <div className="search-suggestions-section-title">
                 Your Recent Searches
             </div>
             { renderRecentSearches(onClick, primary1Color) }
-
             <div className="search-suggestions-section-title">
                 Trending Searches
             </div>

@@ -13,7 +13,6 @@ const SearchBanner = ({
             alternateTextColor,
         },
     },
-
     onClick,
 }) => (
     <Paper className="search-banner" onClick={ onClick }>
@@ -22,7 +21,6 @@ const SearchBanner = ({
         }}></div>
         <div
             className="search-banner-text"
-
             style={{
                 color: alternateTextColor,
                 backgroundColor: primary1Color,

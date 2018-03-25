@@ -7,7 +7,6 @@ import Home from 'material-ui/svg-icons/action/home';
 import Search from 'material-ui/svg-icons/action/search';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-
 import {
     AppBar,
     IconButton,
@@ -32,23 +31,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        pushPath: (path) => {
-            return () => {
-                dispatch(push(path));
-            };
-        },
-
-        logout: () => {
-            dispatch(logout());
-        },
-
-        closeDialog: () => {
-            dispatch(closeDialog());
-        },
-
-        closeSnackbar: () => {
-            dispatch(closeSnackbar());
-        },
+        pushPath: (path) => () => dispatch(push(path)),
+        logout: () => dispatch(logout()),
+        closeDialog: () => dispatch(closeDialog()),
+        closeSnackbar: () => dispatch(closeSnackbar()),
     };
 };
 
@@ -60,7 +46,6 @@ const Layout = ({
     closeDialog,
     snackbar,
     closeSnackbar,
-
     muiTheme: {
         palette: {
             primary1Color,
@@ -70,13 +55,11 @@ const Layout = ({
     <div className="layout">
         <AppBar
             title="Eureka"
-
             iconElementLeft={
                 <IconButton onClick={ pushPath('/') }>
                     <Fingerprint />
                 </IconButton>
             }
-
             iconElementRight={
                 <IconMenu
                         iconButtonElement={ <IconButton><Menu /></IconButton> }

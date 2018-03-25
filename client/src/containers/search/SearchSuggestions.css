@@ -4,7 +4,6 @@
 
 .search-suggestions-header {
     padding: 16px;
-
     display: flex;
     align-items: center;
 }
@@ -25,7 +24,6 @@
 .search-suggestion {
     margin-top: 8px;
     cursor: pointer;
-
     display: flex;
     align-items: center;
 }

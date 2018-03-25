@@ -14,7 +14,6 @@ const mapStateToProps = (state) => {
         articles,
         advertisements,
     } = state.news;
-
     return {
         careers,
         articles,
@@ -24,9 +23,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getNews: () => {
-            dispatch(getNews());
-        }
+        getNews: () => dispatch(getNews()),
     };
 };
 
@@ -56,14 +53,12 @@ class News extends Component {
             careers,
             articles,
             advertisements,
-
             muiTheme: {
                 palette: {
                     primary1Color,
                 },
             },
         } = this.props;
-
         return (
             <div className="news-container">
                 <div className="news-row-title" style={{ color: primary1Color }}>

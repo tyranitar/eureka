@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {
     Card,
     CardMedia,
     CardTitle,
-    // CardText,
 } from 'material-ui/Card';
 
 import './NewsItem.css';
@@ -19,9 +17,10 @@ const NewsItem = ({
     <a className="news-item" href={ href } target="_blank">
         <Card >
             <CardMedia>
-                <div className="news-item-image" style={{
-                    backgroundImage: `url('${ imageUrl }')`,
-                }}></div>
+                <div
+                    className="news-item-image"
+                    style={{ backgroundImage: `url('${ imageUrl }')` }}>
+                </div>
             </CardMedia>
             <div>
                 <CardTitle title={ title } subtitle={ subtitle } />

@@ -10,20 +10,16 @@ const filter = AutoComplete.fuzzyFilter;
 export const asyncGetAutoCompleteResults = (searchString) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
         const results = [];
-
         if (searchString) {
             let count = 5;
-
             autoCompleteResults.some((result) => {
                 if (filter(searchString, result)) {
                     results.push(result);
                     count -= 1;
                 }
-
                 return !count;
             });
         }
-
         resolve(results);
     }, 0));
 };
@@ -41,7 +37,6 @@ export const asyncGetSearchResults = ({
     minSalary,
     outlook,
     education,
-
     featured, // NOTE: `featured` is not part of the query state.
 }) => {
     return new Promise(setTimeout.bind(null, (resolve, reject) => {
@@ -49,25 +44,19 @@ export const asyncGetSearchResults = ({
             resolve(searchResults.filter((result) => (result.featured)));
             return;
         }
-
         const results = [];
         const multiplier = descending ? -1 : 1;
         let count = 10;
-
         const searchResultsClone = searchResults.slice();
-
         searchResultsClone.sort((a, b) => {
             let ret = 0;
-
             if (a[sortBy] < b[sortBy]) {
                 ret =  -1;
             } else if (a[sortBy] > b[sortBy]) {
                 ret = 1;
             }
-
             return ret * multiplier;
         });
-
         searchResultsClone.some((result) => {
             if (filter(searchString, result.title) &&
                 result.salary >= minSalary &&
@@ -76,13 +65,10 @@ export const asyncGetSearchResults = ({
                 results.push(_.merge({}, result, {
                     title: result.title,
                 }));
-
                 count -= 1;
             }
-
             return !count;
         });
-
         resolve(results);
     }, 1000));
 };
