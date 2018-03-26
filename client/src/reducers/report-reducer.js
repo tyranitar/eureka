@@ -1,5 +1,5 @@
 const initialState = {
-    title: '',
+    studentName: '',
     careerTitle: '',
     createdAt: null,
     charts: [],
@@ -9,7 +9,7 @@ const initialState = {
 
 const handleSetReport = (state, action) => {
     const {
-        title,
+        studentName,
         careerTitle,
         createdAt,
         charts,
@@ -17,7 +17,7 @@ const handleSetReport = (state, action) => {
         educationPlans,
     } = action.report;
     return Object.assign({}, state, {
-        title,
+        studentName,
         careerTitle,
         createdAt,
         charts,

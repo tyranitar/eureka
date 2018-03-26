@@ -1,6 +1,6 @@
 .report-title {
     text-align: center;
-    font-size: 32px;
+    font-size: 48px;
 }
 
 .report-career-title {
@@ -17,6 +17,66 @@
     margin-top: 16px;
     text-align: center;
     font-size: 16px;
+}
+
+.report-education-plans {
+    margin-top: 32px;
+}
+
+.report-education-plans-title {
+    text-align: center;
+    font-size: 32px;
+}
+
+.report-education-plan-title {
+    font-size: 24px;
+}
+
+.report-education-plan {
+    margin-top: 32px;
+}
+
+.report-education-plan-image {
+    padding-top: 60%;
+    margin-top: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.report-education-plan-data {
+    margin-top: 16px;
+}
+
+.report-education-plan-datum {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 26px;
+    margin-left: 8px;
+}
+
+.report-education-plan-moneys {
+    margin-top: 16px;
+}
+
+.report-education-plan-money:not(:first-child) {
+    margin-top: 8px;
+}
+
+.report-education-plan-money-amount {
+    float: right;
+}
+
+.report-education-plan-courses {
+    margin-top: 16px;
+}
+
+.report-education-plan-course:not(:first-child) {
+    margin-top: 8px;
+}
+
+.report-education-plan-course-status {
+    float: right;
 }
 
 .report-created-at {
