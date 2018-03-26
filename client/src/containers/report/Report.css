@@ -1,0 +1,26 @@
+.report-title {
+    text-align: center;
+    font-size: 32px;
+}
+
+.report-career-title {
+    margin-top: 8px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.report-charts {
+    margin-top: 32px;
+}
+
+.report-chart-title {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.report-created-at {
+    margin-top: 32px;
+    font-size: 16px;
+    text-align: center;
+}

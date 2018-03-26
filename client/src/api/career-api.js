@@ -1,10 +1,10 @@
-import careers from '../mocks/search-results';
 import _ from 'lodash';
 
 import careerEducationPaths from '../mocks/career-education-paths';
 import { getCareerComments } from '../mocks/career-comments';
 import advertisements from '../mocks/advertisements';
 import { getCharts } from '../mocks/career-details';
+import careers from '../mocks/search-results';
 import loremIpsum from '../mocks/lorem-ipsum';
 import videos from '../mocks/career-videos';
 import users from '../mocks/users';

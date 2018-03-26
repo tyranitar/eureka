@@ -5,7 +5,11 @@ const initialState = {
 };
 
 const handleSetNews = (state, action) => {
-    const { careers, articles, advertisements } = action.news;
+    const {
+        careers,
+        articles,
+        advertisements,
+    } = action.news;
     return Object.assign({}, state, {
         careers,
         articles,
